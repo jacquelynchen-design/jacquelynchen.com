@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Product design case study",
+  "type": "object",
+  "required": ["title", "slug", "summary", "sections", "demo", "recovery_status"],
+  "properties": {
+    "title": {"type": "string"},
+    "slug": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "summary": {"type": "string"},
+    "locale": {"type": "string"},
+    "role": {"type": ["string", "null"]},
+    "duration": {"type": ["string", "null"]},
+    "team": {"type": "array", "items": {"type": "string"}},
+    "skills": {"type": "array", "items": {"type": "string"}},
+    "tools": {"type": "array", "items": {"type": "string"}},
+    "external_url": {"type": ["string", "null"], "format": "uri"},
+    "sections": {
+      "type": "object",
+      "required": ["problem", "process", "delivery", "takeaways"],
+      "properties": {
+        "problem": {"$ref": "#/$defs/section"},
+        "process": {"$ref": "#/$defs/section"},
+        "delivery": {"$ref": "#/$defs/section"},
+        "takeaways": {"$ref": "#/$defs/section"}
+      }
+    },
+    "demo": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {"enum": ["none", "figma", "scrollable-screens"]},
+        "url": {"type": ["string", "null"]},
+        "screens": {"type": "array", "items": {"type": "string"}},
+        "height": {"type": ["integer", "null"]}
+      }
+    },
+    "recovery_status": {"enum": ["substantial", "partial", "summary-only"]},
+    "source_urls": {"type": "array", "items": {"type": "string", "format": "uri"}}
+  },
+  "$defs": {
+    "section": {
+      "type": "object",
+      "required": ["enabled"],
+      "properties": {"enabled": {"type": "boolean"}, "label": {"type": "string"}}
+    }
+  }
+}
+
