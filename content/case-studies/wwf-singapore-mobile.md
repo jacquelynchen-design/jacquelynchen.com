@@ -13,6 +13,13 @@ team:
 skills: [User research, Heuristic analysis, Information architecture, Wireframing, Prototyping, Usability testing, Content strategy]
 tools: [Figma]
 external_url: null
+persona:
+  label: Environmentally engaged mobile visitor
+  basis: research-derived
+  context: "Uses a phone to learn about an environmental concern, from initial curiosity through active participation."
+  goals: ["Reach trustworthy information about a specific issue", "Understand practical relevance and possible next steps"]
+  needs: ["Clear information architecture and digestible content", "Invitations to act that do not overwhelm learning"]
+  pressures: ["Large amounts of content compete for limited mobile attention", "Aggressive action prompts can reduce trust and engagement"]
 sections:
   problem: {enabled: true, label: Problem}
   process: {enabled: true, label: Process}
@@ -29,6 +36,10 @@ Users needed a clearer way to reach information about the environmental issues t
 
 ## Process
 
+### Persona — Environmentally engaged mobile visitor
+
+This research-derived persona represents users with different levels of environmental engagement who primarily access the experience by phone. They want to reach a concern they care about, learn without navigating the organisation’s internal structure and choose their own level of action.
+
 The team interviewed environmentally engaged users, performed heuristic and competitive analysis, created personas and user flows, ran a design studio, reworked the sitemap using a 30-participant card sort, and iterated wireframes and UI components through usability testing.
 
 The first test produced a SUS score of 75.5. Feedback led the team to reduce the emphasis on pledge, donation, and volunteering prompts, and to reframe trivia as contextual “Did You Know” cards. The second test reached a SUS score of 86.
@@ -40,4 +51,3 @@ The redesigned experience groups content around focused environmental concerns, 
 ## Takeaways
 
 A tight two-week scope made prioritization, transparent documentation, and team alignment essential. Future work included completing secondary pages, researching business and CSR audiences, expanding to desktop, and continuing iterative testing.
-
