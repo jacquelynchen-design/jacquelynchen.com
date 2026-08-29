@@ -9,6 +9,13 @@ team: []
 skills: [Service design, Strategic planning, Brand strategy, Visual identity]
 tools: []
 external_url: null
+persona:
+  label: Conscious lifestyle shopper
+  basis: provisional
+  context: "Seeks well-made products and services whose provenance and social or environmental value are credible."
+  goals: ["Discover distinctive products and experiences", "Make purchases aligned with personal values"]
+  needs: ["Clear evidence of quality, provenance and ethical intent", "A premium experience that does not feel superficial"]
+  pressures: ["Ethical claims require trust and transparency", "Premium positioning raises expectations for service and execution"]
 sections:
   problem: {enabled: true, label: Problem}
   process: {enabled: true, label: Process}
@@ -25,9 +32,12 @@ The Manor was conceived as a multi-service lifestyle store at Fort Canning Park,
 
 ## Process
 
+### Provisional persona — Conscious lifestyle shopper
+
+The recovered material supports an audience hypothesis rather than a research-validated persona. This shopper values product provenance and responsible consumption while still expecting the curation and craft associated with a premium experience.
+
 Phase one used service-design thinking and strategic-planning tools to identify a gap in Fort Canning’s existing offerings and define the business and branding brief.
 
 ## Delivery
 
 Phase two translated the brand’s values into a visual identity. The result balances honesty and straightforwardness with the carefully executed service and premium products expected by its audience.
-
