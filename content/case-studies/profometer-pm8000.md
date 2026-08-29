@@ -12,6 +12,13 @@ team:
 skills: [User research, Usability testing, Interaction design, Data visualisation, iPadOS UI]
 tools: []
 external_url: null
+persona:
+  label: Inspecteur de structures
+  basis: research-derived
+  context: "Utilise le scanner et l’application iPad sur le terrain pour examiner les armatures dans le béton, puis interpréter et exporter les résultats."
+  goals: ["Localiser les armatures et comprendre les anomalies", "Vérifier les mesures avant de les intégrer à un rapport"]
+  needs: ["Des données spécialisées rendues lisibles sans perdre leur précision", "Des interactions adaptées au terrain et à l’iPad"]
+  pressures: ["Les décisions peuvent concerner l’intégrité d’une structure", "Les obstacles physiques et les signaux imparfaits compliquent les scans"]
 sections:
   problem: {enabled: true, label: Problem}
   process: {enabled: true, label: Process}
@@ -28,6 +35,10 @@ Le Profometer PM8000 Pro localise les barres d’armature dans le béton et mesu
 
 ## Process
 
+### Persona — Inspecteur de structures
+
+Cette persona est issue des entretiens et tests menés avec des inspecteurs, ingénieurs et spécialistes. Sur le terrain, l’inspecteur doit comprendre des mesures complexes, repérer les anomalies et conserver assez de confiance dans les données pour produire un rapport fiable.
+
 Le travail a combiné recherche, entretiens et tests d’utilisabilité avec des ingénieurs, experts en statistiques, inspecteurs et développeurs. Il fallait acquérir assez de connaissance métier pour représenter correctement les seuils, anomalies, forces de signal et valeurs statistiques.
 
 ## Delivery
@@ -37,4 +48,3 @@ L’application iPad prend en charge les scans linéaires et de surface. Elle pe
 ## Takeaways
 
 La collaboration étroite avec les spécialistes a permis de rendre un domaine très technique plus accessible. Le projet a aussi renforcé l’importance de la connaissance métier lorsque l’interface doit soutenir des décisions liées à l’intégrité de bâtiments et structures.
-
