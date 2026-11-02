@@ -1,0 +1,125 @@
+{
+  "sections": [
+    "Vue d’ensemble",
+    "Problématique",
+    "Choix de conception",
+    "Résultat",
+    "Résultats"
+  ],
+  "lead": "Transformer les données du béton en informations utiles à l’inspection.",
+  "intro": "Le Profometer PM8000 Pro localise les armatures dans le béton et mesure leur diamètre ainsi que leur enrobage, limitant le besoin de percer une structure pour l’inspecter. J’ai travaillé sur son application iPad pour traduire les mesures de l’appareil en visualisations et en interactions qui aident les inspecteurs à analyser leurs scans et à préparer leurs rapports.",
+  "roleTitle": "Mon rôle",
+  "role": "Recherche et conception UX en phase initiale et intermédiaire de développement produit : entretiens utilisateurs, tests d’utilisabilité, design d’interaction, visualisation de données et interfaces iPadOS.",
+  "teamTitle": "Équipe",
+  "team": [
+    "Sandra • responsable UX",
+    "Jacquelyn • recherche et stratégie de design — recherche et conception UX",
+    "Andrew • développement."
+  ],
+  "challengeTitle": "Un scan n’est utile que si l’inspecteur peut l’interpréter",
+  "challenge": "Imaginons un inspecteur chargé d’évaluer une partie d’un bâtiment historique présentant de possibles dommages structurels. Il effectue un scan sur place, analyse les mesures et s’appuie sur les résultats pour rédiger un rapport et recommander les prochaines étapes.\n\nNotre défi était de rendre des données techniques exploitables tout au long de ce parcours. Les inspecteurs devaient repérer un enrobage insuffisant, examiner les mesures douteuses et sélectionner les données pertinentes pour leurs rapports. L’interface devait aussi tenir compte des surfaces réelles, notamment des obstacles qui interrompent un scan.",
+  "process": [
+    {
+      "title": "Comprendre le domaine avant de concevoir les vues",
+      "body": "Nous avons échangé avec des inspecteurs, des ingénieurs, des spécialistes des statistiques et des développeurs pour comprendre les mesures et leur utilisation. La recherche et les entretiens nous ont aidés à relier les limites techniques de l’appareil aux décisions que les inspecteurs devaient prendre.\n\nCette compréhension a guidé un ensemble de vues liées : le scan, la force du signal et les résumés statistiques. Chacune répond à une question différente sur les mêmes données.",
+      "images": []
+    },
+    {
+      "title": "Faire ressortir les zones préoccupantes dans un scan linéaire",
+      "body": "Un scan linéaire enregistre les mesures dans une seule direction. L’interface passe d’un état vide aux mesures en direct, puis à une vue de révision où les utilisateurs peuvent définir un seuil d’enrobage. Les mesures inférieures au seuil apparaissent en rouge pour attirer l’attention sur les zones à examiner.\n\nLes inspecteurs peuvent pincer l’écran pour ajuster la quantité de données affichée. Des balayages verticaux à deux doigts révèlent la force du signal et les statistiques, tout en restant dans le parcours du scan.",
+      "images": [
+        5
+      ]
+    },
+    {
+      "title": "Permettre d’examiner et d’exclure les mesures peu fiables",
+      "body": "Une valeur faible doit être interprétée : une anomalie ou un objet dans le mur peut rendre une mesure inadaptée au rapport. La vue de force du signal apporte des informations complémentaires pour évaluer une mesure douteuse.\n\nLes utilisateurs peuvent sélectionner un ou plusieurs points et les exclure du jeu de données et des statistiques. Les points exclus restent visibles en gris dans le scan et peuvent être réintégrés. Cette interaction permet une analyse nuancée des valeurs faibles.",
+      "images": [
+        15,
+        12
+      ]
+    },
+    {
+      "title": "Relier les mesures individuelles à une vue statistique",
+      "body": "Les inspecteurs ont aussi besoin de comprendre le scan dans son ensemble. Les vues statistiques présentent les moyennes ainsi que les valeurs minimales et maximales. Une autre vue affiche une courbe de distribution cumulative.\n\nConcevoir ces vues a nécessité de comprendre les statistiques sous-jacentes pour présenter des valeurs que les inspecteurs puissent lire et utiliser dans leurs rapports.",
+      "images": [
+        18
+      ]
+    },
+    {
+      "title": "Préparer les scans de surface et faciliter leur lecture",
+      "body": "Les scans de surface combinent des passages horizontaux et verticaux pour décrire une zone plus large. Avant de commencer, les utilisateurs doivent définir des paramètres comme l’espacement entre les lignes de scan.\n\nUne fois le scan terminé, une carte thermique révèle les variations d’enrobage sur la surface. Les utilisateurs peuvent définir des seuils et masquer la grille pour se concentrer sur cette carte. Les mêmes mesures peuvent ainsi être examinées par ligne ou à l’échelle de la surface.",
+      "images": [
+        21,
+        24
+      ]
+    },
+    {
+      "title": "Faire évoluer la sélection à partir des tests utilisateurs",
+      "body": "Les tests d’utilisabilité ont montré que les inspecteurs ont parfois besoin des données d’une seule direction ou d’une région précise pour leur rapport. Un scan de surface terminé devait donc offrir davantage de contrôle qu’un export complet.\n\nNous avons proposé de sélectionner un scan à partir de son numéro sur l’axe X ou Y, puis de sélectionner tous les scans de cette direction si nécessaire. Cette interaction permet de passer d’une vue dense à une sélection ciblée pour l’export.",
+      "images": [
+        28
+      ]
+    },
+    {
+      "title": "Tenir compte des zones impossibles à scanner",
+      "body": "Les piliers et les éléments décoratifs peuvent interrompre un scan. Ces interruptions doivent être représentées, car la zone ignorée occupe toujours une distance réelle sur le mur.\n\nL’interaction de distance de saut permet de toucher le curseur de la sonde et de saisir la largeur de l’obstacle. Si cette largeur n’a pas encore été mesurée, l’utilisateur peut laisser la distance à zéro, puis revenir au marqueur après le scan pour la renseigner. Un appui long supprime un saut saisi par erreur. Le parcours permet ainsi de poursuivre le scan et de compléter la mesure ensuite.",
+      "images": [
+        32,
+        35,
+        36
+      ]
+    }
+  ],
+  "outcomeTitle": "Un parcours continu, de la mesure à l’analyse",
+  "outcome": "Le travail de conception a couvert les scans linéaires et de surface, la révision du signal, les statistiques, l’exclusion de données, la sélection pour l’export et les distances de saut. Ces interactions permettent de passer de l’état global d’une surface aux mesures qui nécessitent une attention particulière.\n\nL’équipe a reçu des retours qualitatifs positifs de la part des clients. La collaboration avec les spécialistes nous a permis de transformer un sujet technique complexe en solutions utiles et intuitives pour les utilisateurs du produit.",
+  "reflectionTitle": "La clarté repose sur la compréhension des données",
+  "takeaways": [
+    [
+      "La connaissance du domaine fait partie du design",
+      "Le principal défi était de comprendre suffisamment la technologie et les statistiques pour prendre de bonnes décisions de conception. Les échanges avec les spécialistes ont permis de déterminer quoi afficher, quoi rendre modifiable et quels éléments laisser au jugement de l’inspecteur."
+    ],
+    [
+      "Les conditions réelles font partie du parcours principal",
+      "Les anomalies, les obstacles et les mesures incomplètes étaient au cœur du projet. Prévoir l’exclusion, la reprise et la correction des données a permis de mieux refléter le déroulement d’une inspection."
+    ],
+    [
+      "Une application concrète et porteuse de sens",
+      "J’ai apprécié de travailler sur un outil qui contribue à inspecter les bâtiments de façon moins invasive. Ce projet a relié mon intérêt pour le bâti à un défi concret : rendre des informations complexes utilisables."
+    ]
+  ],
+  "open": "Agrandir l’image",
+  "close": "Fermer l’image",
+  "previous": "Image précédente",
+  "next": "Image suivante",
+  "captions": {
+    "1": "Inspection sur site avec un scanner sans fil et un iPad fixé à un harnais.",
+    "5": "Un scan linéaire terminé : les valeurs sous le seuil d’enrobage défini apparaissent en rouge.",
+    "15": "La force du signal apporte un autre éclairage sur les mesures lors de l’examen d’anomalies possibles.",
+    "12": "Les mesures exclues restent visibles en gris et sont retirées du jeu de données et des statistiques.",
+    "18": "Les résumés statistiques permettent de consulter les moyennes et les valeurs minimales et maximales.",
+    "21": "La configuration du scan de surface demande de définir l’espacement entre les lignes.",
+    "24": "Les seuils et la carte thermique révèlent les variations d’enrobage sur la surface scannée.",
+    "28": "Proposition de sélection de tous les scans dans la direction Y pour cibler l’export.",
+    "32": "Saisie d’une distance de saut pour tenir compte d’un obstacle.",
+    "35": "Retour sur un marqueur de saut pour renseigner sa distance après le scan.",
+    "36": "Scan de surface terminé avec les distances de saut renseignées sur les deux axes."
+  },
+  "results": {
+    "title": "Des mesures techniques aux données utiles à l’inspection",
+    "items": [
+      [
+        "Des points de vigilance visibles",
+        "Les seuils, les cartes thermiques et les vues statistiques mettaient en évidence les mesures nécessitant un examen approfondi."
+      ],
+      [
+        "Un meilleur contrôle des données",
+        "Les inspecteurs pouvaient examiner les mesures douteuses, exclure les données inadaptées et revenir sur leurs décisions tout en gardant une visibilité sur le scan d’origine."
+      ],
+      [
+        "Les conditions du terrain prises en compte",
+        "La gestion des obstacles et des interruptions, ainsi que les propositions de sélection pour l’export, rapprochaient l’interface du travail réel des inspecteurs. L’équipe a reçu des retours qualitatifs positifs de la part des clients."
+      ]
+    ]
+  }
+}

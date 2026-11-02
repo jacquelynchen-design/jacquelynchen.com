@@ -1,0 +1,71 @@
+{
+  "labels": [
+    "01 - Overview",
+    "02 - Brief",
+    "03 - Exploration",
+    "04 - Guidelines",
+    "05 - Results"
+  ],
+  "title": "CaltexGo",
+  "subtitle": "A familiar brand, ready to go",
+  "intro": "An app icon for Caltex’s mobile payment service, designed to feel unmistakably part of the brand. I explored visual directions as the name evolved, then created guidelines for use across markets.",
+  "meta": "2018 · App icon design & usage guidelines",
+  "briefTitle": "New service. Recognisable identity.",
+  "brief": "CaltexGo lets motorists pay, earn and redeem loyalty points through an app. The brief was to give this new service an identifiable icon without moving too far from Caltex’s existing identity.\n\nDuring the design iterations, the client asked to move away from flat vector visuals and incorporate the word ‘go’. The design needed to bring those requests together with the familiar Caltex star.\n\nMy role: app icon design, visual exploration and guidelines for use across different applications and markets.",
+  "process": [
+    {
+      "title": "Exploring the name and the mark",
+      "body": "The early directions explored different names and ways to use the existing Caltex identity. These boards show how the icon developed alongside the naming discussions.",
+      "image": "early",
+      "caption": "Early explorations: alternative names, the Caltex star and a fuel symbol."
+    },
+    {
+      "title": "A direction for Caltex Plus",
+      "body": "For the proposed name ‘Caltex Plus’, I explored how the star and a plus sign could work together. The alternatives use different compositions and treatments of depth.",
+      "image": "plus",
+      "caption": "Two icon concepts developed for the Caltex Plus name."
+    },
+    {
+      "title": "Bringing ‘go’ into the icon",
+      "body": "Once the client confirmed ‘CaltexGo’, the explorations focused on integrating ‘go’ with the star. The final direction combines white lettering, motion lines and dimensional shading on a red background.",
+      "image": "go",
+      "caption": "CaltexGo variations: exploring lettering, motion and depth."
+    }
+  ],
+  "deliveryTitle": "Making the icon usable beyond one screen",
+  "delivery": "The final deliverables were an app icon and a set of usage guidelines for sharing the assets with other markets. The guidelines cover clear space, minimum size, colour specifications and visual effects, helping teams apply the identity consistently.",
+  "guidelines": [
+    {
+      "image": "clear",
+      "caption": "Clear space and minimum size: protecting the icon’s legibility."
+    },
+    {
+      "image": "digital",
+      "caption": "Digital colour specifications: defining the palette and gradients."
+    },
+    {
+      "image": "effects",
+      "caption": "Visual effects: examples of shadow, glow and reflection treatments."
+    }
+  ],
+  "takeawayTitle": "The icon is only part of the identity",
+  "takeaway": "This project brings together two scales of design: the detail of a single app icon and the rules that help others use it. The exploration boards show the evolution of the idea; the guidelines make the final direction practical to apply.\n\nThe result is a defined visual asset and a reference for its use across applications and markets.",
+  "footer": "Email me",
+  "results": {
+    "title": "Extending an established brand into a new digital service",
+    "items": [
+      [
+        "A distinct identity within the parent brand",
+        "The final app icon combined the familiar Caltex star with the new service name and a sense of movement."
+      ],
+      [
+        "A defined direction through an evolving brief",
+        "Visual exploration resolved changing naming and styling requirements into a consistent final asset."
+      ],
+      [
+        "A reference for use across markets",
+        "Clear-space rules, minimum sizes, colour specifications and effects guidance equipped other teams to apply the icon consistently."
+      ]
+    ]
+  }
+}

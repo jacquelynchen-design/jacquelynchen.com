@@ -1,0 +1,14 @@
+{
+  "slug": "scoot",
+  "title": "Scoot Career Portal",
+  "order": 5,
+  "visibility": "published",
+  "category": {
+    "en": "Job portal",
+    "fr": "Site carrière"
+  },
+  "quote": {
+    "en": "I want to work at Scoot Airways",
+    "fr": "J’aimerais travailler chez Scoot Airways"
+  }
+}

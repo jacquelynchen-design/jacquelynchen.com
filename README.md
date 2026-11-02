@@ -1,24 +1,19 @@
-# jacquelynchen.com content repository
+# Jacquelyn Chen — portfolio content
 
-Recovered and normalized portfolio content for Jacquelyn Chen.
+This repository holds the content of the portfolio published at [jacquelynchen.com](https://jacquelynchen.com). The active content was checked against the live site's version 66 on 21 October 2026 (source commit `b6699601ae9578aa07b0287efd0945ad56de3c36`).
 
-## Structure
+## Current content
 
-- `content/site.md` — homepage/profile content
-- `content/case-studies/*.md` — normalized CMS entries
-- `content/schema/case-study.schema.json` — machine-readable CMS contract
-- `archive/raw/*.md` — minimally edited recovery notes and source text
-- `archive/RECOVERY.md` — provenance, gaps, and ambiguity log
+- `content/site.json` contains the current English and French homepage copy.
+- `content/case-studies/<slug>/metadata.json` contains each project's homepage title, order, category, quote, and visibility.
+- `content/case-studies/<slug>/en.json` and `fr.json` contain the full published case-study content, including results.
+- `content/schema/` documents the current content format.
+- `scripts/check-content.mjs` checks that all seven published projects have complete bilingual content and valid metadata.
 
-## CMS conventions
+The seven current projects are Maps, The Manor, Santé, PM8000, Scoot, AbroadWise, and CaltexGo. Their order and visible text match the published site. Set `visibility` to `hidden` in a project's `metadata.json` when you later want to remove it from the homepage while keeping its content and direct page available. No project is hidden in this snapshot.
 
-Each case study is Markdown with YAML front matter. The four standard sections are `problem`, `process`, `delivery`, and `takeaways`. Each section has an `enabled` flag, so a future renderer can omit it without deleting its content.
+## Archive and site snapshot
 
-Interactive demos use `demo.type`:
+The older Markdown CMS entries and schema remain in `archive/legacy-cms/`; they are historical reference, not current content. The original recovery notes remain in `archive/raw/` and `archive/RECOVERY.md`.
 
-- `figma` — an embedded Figma prototype URL
-- `scrollable-screens` — an ordered list of mobile screen images in a scroll container
-- `none` — no demo is currently available
-
-Entries marked `recovery_status: summary-only` need author review before publication.
-
+The live website is hosted separately from this repository. Editing these files alone does not publish a site change. The exact published source is identified by the version and commit above. Its full source archive and restoration instructions are in `backups/site-2026-10-21-v66/`.

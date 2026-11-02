@@ -1,0 +1,122 @@
+{
+  "sections": [
+    "Overview",
+    "Challenge",
+    "Design",
+    "Delivery",
+    "Results"
+  ],
+  "quote": "A clearer path to medical travel",
+  "intro": "Service Trajet Santé helps eligible people arrange travel for medical care by train, plane or boat through France’s Assurance Maladie. Over three months, I designed the desktop and mobile journey from onboarding to booking, with particular attention to older people and people with disabilities.",
+  "credit": "Jacquelyn Chen · Product designer\nNicolas Cheriot · UX head, Systerz\nMartin Faussabry · Advice and support",
+  "facts": "3 months · 1 designer, 1 UX strategy lead, 1 product owner · Development by the client’s team",
+  "nda": "This project is covered by a confidentiality agreement. The screens shown here were shared in my original public case study; I can discuss more of the project privately.",
+  "problemTitle": "Make a detailed process easier to follow",
+  "problem": "Booking medical travel requires people to provide information about their eligibility and journey before they can choose a ticket. My challenge was to make each step understandable while keeping the information required by the service.\n\nI structured and prioritised the content around business requirements and insights supplied by the company. Clarity and readability were central design goals, especially for people who may be older or living with a disability.",
+  "process": [
+    {
+      "title": "Give onboarding a visible sequence",
+      "body": "I organised the start of the journey into three steps: create an account, enter an agreement number, and review the trip details. Completed steps stay visible, while the current step is emphasised.\n\nThe agreement form pairs the reference number with the beneficiary’s surname and provides a help link explaining where to find the number. This makes the information needed to continue explicit.",
+      "visuals": [
+        "onboarding-3"
+      ]
+    },
+    {
+      "title": "Show what the agreement covers",
+      "body": "Once the agreement is validated, the interface reveals the conditions attached to the journey. The summary groups coverage, journeys used, eligible transport options and accompanying travellers before the booking action.\n\nI wanted users to understand the conditions of their trip before moving into ticket selection. The figures in the mockup illustrate a screen state; they are not general coverage rules.",
+      "visuals": [
+        "onboarding-5"
+      ]
+    },
+    {
+      "title": "Keep the journey readable on mobile",
+      "body": "I designed the full flow for both desktop and mobile. The mobile onboarding screens carry the same sequence into a narrower layout, keeping the steps and form content in a single column.\n\nAcross screen sizes, the aim was to make a detailed service legible and the next action clear.",
+      "visuals": [
+        "mobile"
+      ]
+    }
+  ],
+  "deliveryTitle": "From eligibility to a booked journey",
+  "delivery": "Beyond onboarding, I designed the journey through travel information, available transport options, ticket and seat selection, and confirmation. Where a payment is required, the payment screen distinguishes the covered amount from the amount the user must pay. Otherwise, the flow proceeds to confirmation.\n\nI also contributed to the design system, adapting an existing system to the insurer’s visual identity and creating components that could coexist with the existing library.",
+  "tools": "Figma for design and prototyping; Coda for information and specifications; Miro for quick wireframes and design reviews; paper and pen for sketching.",
+  "future": "Future scope included combining several transport modes and accommodation in one booking, such as train, plane and hotel. This was an intended evolution, rather than a delivered feature described in the original case study.",
+  "galleryTitle": "Explore the original screens",
+  "galleryIntro": "Homepage, onboarding and booking designs. The original interface is in French.",
+  "takeawayTitle": "Clarity at each decision",
+  "takeaways": [
+    [
+      "Make progress visible",
+      "A clear sequence and visible completion states help explain where someone is in a detailed process."
+    ],
+    [
+      "Put conditions before commitment",
+      "Coverage information belongs before ticket selection, with any remaining cost made explicit at payment."
+    ],
+    [
+      "Extend a system with care",
+      "New components need to support the service while remaining consistent with the existing interface and insurer’s identity."
+    ]
+  ],
+  "gallery": "Service Trajet Santé screen gallery",
+  "open": "Open",
+  "close": "Close",
+  "image": "Image",
+  "liveCta": "Visit Service Trajet Santé",
+  "visuals": {
+    "homepage": "Service Trajet Santé homepage",
+    "onboarding-3": "Agreement number and beneficiary surname form",
+    "onboarding-4": "Agreement form with example details entered",
+    "onboarding-5": "Validated agreement and journey coverage summary",
+    "mobile": "Mobile onboarding screens",
+    "train-booking": "Train results and fare selection",
+    "booking-recap": "Outbound and return journey recap",
+    "payment": "Payment and cost breakdown",
+    "confirmation": "Successful booking confirmation"
+  },
+  "captions": {
+    "homepage": "The homepage introduces the service and the steps to arrange medical travel.",
+    "onboarding-3": "A three-step sequence makes the information required to continue explicit.",
+    "onboarding-4": "The agreement form with example details entered, before validation.",
+    "onboarding-5": "After validation, journey conditions appear before the booking action. Values shown are illustrative.",
+    "mobile": "The onboarding sequence adapted to a single-column mobile layout.",
+    "train-booking": "Train options sit alongside the journey conditions, with fare details and the remaining cost visible before selection.",
+    "booking-recap": "The recap brings the outbound and return journeys together for review before adding them to the basket.",
+    "payment": "The payment screen separates the initial price, covered amount and agency fees before card details are entered.",
+    "confirmation": "Confirmation summarises the journey dates, explains that tickets will arrive by email, and offers access to reservations."
+  },
+  "bookingSteps": [
+    {
+      "id": "train-booking",
+      "title": "Choose a train"
+    },
+    {
+      "id": "booking-recap",
+      "title": "Review the journey"
+    },
+    {
+      "id": "payment",
+      "title": "Make the remaining cost clear"
+    },
+    {
+      "id": "confirmation",
+      "title": "Confirm the booking"
+    }
+  ],
+  "results": {
+    "title": "A clearer route from eligibility to medical travel",
+    "items": [
+      [
+        "A structured path through a complex service",
+        "Within three months, I designed a desktop and mobile journey connecting onboarding, agreement validation, transport selection and confirmation."
+      ],
+      [
+        "Clarity before commitment",
+        "Coverage, eligible travel options and any remaining payment were presented where users needed them to make a decision."
+      ],
+      [
+        "Consistency across devices and future development",
+        "Responsive layouts and reusable components supported the service’s needs while maintaining continuity with the insurer’s identity."
+      ]
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "labels": [
+    "01 - Présentation",
+    "02 - Brief",
+    "03 - Exploration",
+    "04 - Charte",
+    "05 - Résultats"
+  ],
+  "title": "CaltexGo",
+  "subtitle": "Une marque familière, prête à avancer",
+  "intro": "Une icône pour le service de paiement mobile de Caltex, conçue pour s’inscrire naturellement dans l’identité de la marque. J’ai exploré plusieurs pistes au fil des propositions de nom, puis créé une charte d’utilisation destinée à différents marchés.",
+  "meta": "2018 · Design d’icône & charte d’utilisation",
+  "briefTitle": "Un nouveau service, une identité reconnaissable",
+  "brief": "CaltexGo permet aux automobilistes de payer, de cumuler et d’utiliser leurs points de fidélité depuis une application. Le brief : créer une icône identifiable pour ce nouveau service, sans trop s’éloigner de l’identité existante de Caltex.\n\nAu cours des itérations, le client a souhaité abandonner les visuels vectoriels à plat et intégrer le mot « go ». Le design devait réunir ces demandes tout en conservant l’étoile emblématique de Caltex.\n\nMon rôle : design de l’icône, exploration visuelle et création d’une charte d’utilisation pour différents supports et marchés.",
+  "process": [
+    {
+      "title": "Explorer le nom et le signe",
+      "body": "Les premières pistes explorent différents noms et plusieurs façons de reprendre l’identité de Caltex. Ces planches montrent comment l’icône a évolué en parallèle des discussions sur le nom du service.",
+      "image": "early",
+      "caption": "Premières explorations : noms alternatifs, étoile Caltex et symbole de carburant."
+    },
+    {
+      "title": "Une piste pour Caltex Plus",
+      "body": "Pour le nom proposé « Caltex Plus », j’ai exploré différentes associations entre l’étoile et le signe plus. Les variantes jouent sur la composition et le traitement du relief.",
+      "image": "plus",
+      "caption": "Deux propositions d’icône développées pour le nom Caltex Plus."
+    },
+    {
+      "title": "Intégrer « go » dans l’icône",
+      "body": "Une fois le nom « CaltexGo » confirmé par le client, les recherches se sont concentrées sur l’association de « go » et de l’étoile. La direction finale réunit un lettrage blanc, des lignes de mouvement et un effet de relief sur fond rouge.",
+      "image": "go",
+      "caption": "Variantes CaltexGo : recherches sur le lettrage, le mouvement et le relief."
+    }
+  ],
+  "deliveryTitle": "Faire vivre l’icône au-delà d’un écran",
+  "delivery": "Les livrables comprennent l’icône de l’application et une charte d’utilisation pour accompagner le partage des fichiers avec d’autres marchés. La charte précise la zone de protection, la taille minimale, les couleurs et les effets visuels, afin de faciliter une utilisation cohérente de l’identité.",
+  "guidelines": [
+    {
+      "image": "clear",
+      "caption": "Zone de protection et taille minimale : préserver la lisibilité de l’icône."
+    },
+    {
+      "image": "digital",
+      "caption": "Couleurs pour les supports numériques : définir la palette et les dégradés."
+    },
+    {
+      "image": "effects",
+      "caption": "Effets visuels : exemples de traitements d’ombre, de lueur et de reflet."
+    }
+  ],
+  "takeawayTitle": "L’identité ne s’arrête pas à l’icône",
+  "takeaway": "Ce projet articule deux échelles de design : le détail d’une icône d’application et les règles qui permettent à d’autres de l’utiliser. Les planches d’exploration retracent l’évolution de l’idée ; la charte rend la direction finale concrètement exploitable.\n\nLe résultat : un élément d’identité défini et un cadre pour son utilisation sur différents supports et marchés.",
+  "footer": "Écrivez-moi",
+  "results": {
+    "title": "Prolonger une marque établie dans un nouveau service numérique",
+    "items": [
+      [
+        "Une identité propre au sein de la marque",
+        "L’icône finale associait l’étoile familière de Caltex au nom du nouveau service et à une impression de mouvement."
+      ],
+      [
+        "Une direction définie malgré un brief évolutif",
+        "L’exploration visuelle a permis de réunir les évolutions du nom et du style dans un élément graphique final cohérent."
+      ],
+      [
+        "Une référence pour les différents marchés",
+        "Les règles de protection, les tailles minimales, les couleurs et les effets donnaient aux autres équipes un cadre pour utiliser l’icône de manière cohérente."
+      ]
+    ]
+  }
+}

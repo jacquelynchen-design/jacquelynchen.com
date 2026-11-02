@@ -1,0 +1,14 @@
+{
+  "slug": "sante",
+  "title": "Service Trajet Santé",
+  "order": 3,
+  "visibility": "published",
+  "category": {
+    "en": "Mobility",
+    "fr": "Mobilité"
+  },
+  "quote": {
+    "en": "I need to travel long distance to see a doctor",
+    "fr": "Je dois consulter un médecin loin de chez moi"
+  }
+}

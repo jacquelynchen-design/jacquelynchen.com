@@ -1,0 +1,159 @@
+{
+  "sections": [
+    "Présentation",
+    "Recherche",
+    "Conception",
+    "Tests",
+    "Résultats"
+  ],
+  "lead": "Aider chacun à trouver sa place chez Scoot",
+  "intro": "Un portail carrière pensé d’abord pour le mobile, pour ceux qui savent quel poste chercher comme pour ceux qui explorent encore.",
+  "teamTitle": "Équipe",
+  "liveCta": "https://careers.flyscoot.com/",
+  "team": [
+    [
+      "Jolyn",
+      "UX lead"
+    ],
+    [
+      "Jacquelyn",
+      "Product designer"
+    ],
+    [
+      "Sharon",
+      "Project owner"
+    ],
+    [
+      "Monica",
+      "Business analyst"
+    ]
+  ],
+  "challengeTitle": "Chaque recherche d’emploi commence différemment",
+  "challenge": "En pleine croissance, Scoot souhaitait moderniser son portail carrière pour attirer de nouveaux talents. Nous nous sommes appuyés sur un design system existant, avec la possibilité de créer des composants cohérents avec celui-ci.\n\nL’équipe supposait au départ que les visiteurs savaient déjà quel poste chercher. Trois semaines d’entretiens, complétées par les données de l’ancien portail, ont remis cette hypothèse en question. Certains visaient un rôle précis. D’autres voulaient savoir où leurs compétences pouvaient être utiles. D’autres encore étaient simplement curieux de découvrir Scoot en tant qu’employeur.",
+  "researchTitle": "Trois publics, des questions différentes",
+  "researchIntro": "Nous avons synthétisé les entretiens en trois archétypes, en nous concentrant sur les informations dont chaque groupe avait besoin pour évaluer une opportunité.",
+  "personas": [
+    {
+      "id": "flight-crew",
+      "title": "Les candidats aux métiers à bord",
+      "alt": "Illustration Scoot d’une pilote et d’un membre du personnel de cabine",
+      "goal": "Comprendre le parcours pour rejoindre l’équipage.",
+      "details": [
+        [
+          "Besoins",
+          "Des étapes de recrutement claires, les formations requises et un aperçu de la culture d’équipe."
+        ],
+        [
+          "Frustrations",
+          "Le manque de transparence du recrutement empêche de savoir à quoi s’attendre."
+        ],
+        [
+          "Comportement",
+          "Recherche des postes de pilote ou de personnel de cabine et des informations pour rejoindre l’équipe."
+        ]
+      ],
+      "body": "Les pilotes et le personnel de cabine ont besoin de comprendre le parcours vers un poste. La culture d’équipe compte aussi : passer de longues heures ensemble fait de l’environnement de travail un critère de choix."
+    },
+    {
+      "id": "office-role",
+      "title": "Les candidats aux fonctions de bureau",
+      "alt": "Illustration Scoot représentant une candidate aux fonctions de bureau",
+      "goal": "Trouver où leur expérience peut être utile chez Scoot.",
+      "details": [
+        [
+          "Besoins",
+          "Une visibilité sur les départements, les postes pertinents et les perspectives d’évolution."
+        ],
+        [
+          "Question clé",
+          "Quelles opportunités correspondent à une expérience en tech, en business ou dans un autre secteur ?"
+        ],
+        [
+          "Comportement",
+          "Explore les fonctions de bureau et les possibilités de construire une carrière dans l’aviation."
+        ]
+      ],
+      "body": "Ces candidats veulent comprendre comment leur expérience peut se traduire en une carrière chez Scoot. Les informations sur les départements et l’évolution professionnelle les aident à se projeter, surtout lorsqu’ils viennent d’un autre secteur."
+    },
+    {
+      "id": "curious-visitor",
+      "title": "Les visiteurs curieux",
+      "alt": "Illustration Scoot représentant un visiteur curieux",
+      "goal": "Découvrir à quoi pourrait ressembler une carrière chez Scoot.",
+      "details": [
+        [
+          "Besoins",
+          "Un aperçu des postes disponibles sans devoir choisir un intitulé au préalable."
+        ],
+        [
+          "Question clé",
+          "Y a-t-il une opportunité qui pourrait leur correspondre ?"
+        ],
+        [
+          "Comportement",
+          "Parcourt les offres par intérêt pour Scoot et pourrait envisager de postuler plus tard."
+        ]
+      ],
+      "body": "Certains visiteurs connaissent et apprécient Scoot, parfois après avoir voyagé avec la compagnie. Ils souhaitent découvrir les opportunités avant de décider si un poste mérite leur attention."
+    }
+  ],
+  "designTitle": "Trois façons de découvrir les opportunités",
+  "designIntro": "Les profils ont précisé les informations recherchées par les candidats. Les entretiens ont aussi révélé différentes façons de chercher un emploi. La conception les prend en compte sans réserver un parcours à un public particulier.",
+  "decisions": [
+    {
+      "title": "Commencer par un poste",
+      "body": "Pour les visiteurs qui savaient ce qu’ils cherchaient, la page d’accueil proposait une recherche par mots-clés. Les résultats menaient au tableau des offres, où des filtres permettaient d’affiner la sélection."
+    },
+    {
+      "title": "Commencer par ses compétences",
+      "body": "Pour ceux qui connaissaient leurs points forts sans savoir quel poste viser, le portail proposait une recherche par compétences. Les candidats pouvaient sélectionner jusqu’à cinq compétences recherchées par l’entreprise. Chaque offre était associée à des compétences pour faire remonter des opportunités pertinentes.\n\nCette approche permettait de découvrir des postes sans connaître d’abord le bon intitulé."
+    },
+    {
+      "title": "Commencer par explorer",
+      "body": "Les visiteurs curieux pouvaient parcourir le tableau des offres sans saisir de mots-clés ni choisir de compétences. Ils pouvaient ainsi découvrir les possibilités avant de décider ce qui les intéressait."
+    }
+  ],
+  "mobile": "Les recherches indiquaient que les visiteurs utilisaient principalement leur téléphone. Les parcours ont donc été conçus pour le mobile, puis adaptés au desktop.",
+  "testingTitle": "Un test d’utilisabilité a fait évoluer l’accueil",
+  "testing": "Lors des tests, de nombreux participants se concentraient sur les visuels accrocheurs de l’accueil et ne remarquaient pas la navigation. L’accès aux offres existait, mais il était facile de passer à côté.\n\nNous avons ajouté un raccourci vers le tableau des offres juste sous la barre de recherche. À l’endroit où les visiteurs commençaient leur recherche, l’exploration devenait une option explicite aux côtés des mots-clés.",
+  "takeawayTitle": "Concevoir pour différents niveaux de certitude",
+  "takeaway": "Un candidat peut arriver avec un intitulé, des compétences ou simplement un intérêt pour l’entreprise. Chacun de ces points de départ peut mener à une opportunité. La refonte les prend tous trois en compte, tandis que les tests ont conduit à une modification concrète pour rendre l’accès aux offres plus visible.",
+  "outcomeNote": "Les indicateurs de performance après lancement ne sont pas disponibles pour cette étude de cas.",
+  "gallery": "Galerie des interfaces Scoot",
+  "open": "Agrandir l’image",
+  "close": "Fermer la galerie",
+  "galleryHelp": "Choisissez une miniature ou utilisez les flèches du clavier pour changer d’image.",
+  "visuals": {
+    "homepage": "Accueil Scoot avec recherche par mots-clés, accès à toutes les offres et recherche par compétences",
+    "job-board": "Tableau des offres Scoot avec résultats de recherche et filtres",
+    "skills-start": "Point d’entrée mobile de la recherche par compétences",
+    "skills-select": "Sélection de compétences parmi les suggestions Scoot",
+    "skills-added": "Compétences sélectionnées dans le parcours mobile",
+    "skills-results": "Cinq compétences sélectionnées et les offres correspondantes"
+  },
+  "captions": {
+    "homepage": "Le raccourci « See all jobs » est placé juste sous la recherche par mots-clés. La recherche par compétences est accessible en dessous du visuel d’accueil.",
+    "job-board": "Les résultats mènent au tableau des offres, où les candidats peuvent affiner leur recherche.",
+    "skills-start": "Les candidats peuvent partir de leurs compétences, même sans intitulé de poste en tête.",
+    "skills-select": "Les suggestions présentent les compétences recherchées par l’entreprise.",
+    "skills-added": "Les candidats composent une sélection allant jusqu’à cinq compétences.",
+    "skills-results": "Les compétences sélectionnées font remonter des opportunités pertinentes."
+  },
+  "results": {
+    "title": "Plusieurs façons de trouver sa place chez Scoot",
+    "items": [
+      [
+        "Découvrir des postes à partir de ses compétences",
+        "La recherche par compétences offrait un point d’entrée aux candidats qui connaissaient leurs points forts sans savoir quels postes leur correspondaient."
+      ],
+      [
+        "Un accès plus explicite aux offres",
+        "Les tests ont révélé que les visiteurs ne remarquaient pas la navigation. Un raccourci « Voir tous les postes » a donc été ajouté à l’endroit où commençait leur recherche."
+      ],
+      [
+        "Une expérience de recrutement pensée pour le mobile",
+        "La recherche, la consultation et les filtres ont été conçus pour les appareils les plus utilisés par les candidats, puis adaptés à l’ordinateur."
+      ]
+    ]
+  }
+}

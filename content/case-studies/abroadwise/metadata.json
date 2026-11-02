@@ -1,0 +1,14 @@
+{
+  "slug": "abroadwise",
+  "title": "AbroadWise",
+  "order": 6,
+  "visibility": "published",
+  "category": {
+    "en": "Branding",
+    "fr": "Identité de marque"
+  },
+  "quote": {
+    "en": "I’m building a brand for a study abroad consultancy",
+    "fr": "Je crée l’identité d’un cabinet de conseil en études à l’étranger"
+  }
+}

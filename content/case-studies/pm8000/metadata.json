@@ -1,0 +1,14 @@
+{
+  "slug": "pm8000",
+  "title": "PM8000",
+  "order": 4,
+  "visibility": "published",
+  "category": {
+    "en": "Data vis",
+    "fr": "Dataviz"
+  },
+  "quote": {
+    "en": "I need to report on structural damage",
+    "fr": "Je dois signaler des dommages sur une structure"
+  }
+}

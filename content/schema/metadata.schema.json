@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Portfolio project metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["slug", "title", "order", "visibility", "category", "quote"],
+  "properties": {
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "title": { "type": "string", "minLength": 1 },
+    "order": { "type": "integer", "minimum": 1 },
+    "visibility": { "enum": ["published", "hidden"] },
+    "category": { "$ref": "#/$defs/localizedText" },
+    "quote": { "$ref": "#/$defs/localizedText" }
+  },
+  "$defs": {
+    "localizedText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["en", "fr"],
+      "properties": {
+        "en": { "type": "string", "minLength": 1 },
+        "fr": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

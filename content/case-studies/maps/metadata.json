@@ -1,0 +1,14 @@
+{
+  "slug": "maps",
+  "title": "Maps",
+  "order": 1,
+  "visibility": "published",
+  "category": {
+    "en": "Mobility",
+    "fr": "Mobilité"
+  },
+  "quote": {
+    "en": "My car broke down and I want to go home",
+    "fr": "Ma voiture est en panne et je veux rentrer chez moi"
+  }
+}

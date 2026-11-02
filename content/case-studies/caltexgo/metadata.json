@@ -1,0 +1,14 @@
+{
+  "slug": "caltexgo",
+  "title": "CaltexGo",
+  "order": 7,
+  "visibility": "published",
+  "category": {
+    "en": "Logo",
+    "fr": "Logo"
+  },
+  "quote": {
+    "en": "We need an app icon design and guidelines",
+    "fr": "Il nous faut une icône d’application et des règles d’utilisation"
+  }
+}

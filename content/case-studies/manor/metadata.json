@@ -1,0 +1,14 @@
+{
+  "slug": "manor",
+  "title": "The Manor",
+  "order": 2,
+  "visibility": "published",
+  "category": {
+    "en": "Branding",
+    "fr": "Identité de marque"
+  },
+  "quote": {
+    "en": "An identity for nourishment and wellbeing",
+    "fr": "Une identité autour de l’alimentation et du bien-être"
+  }
+}
