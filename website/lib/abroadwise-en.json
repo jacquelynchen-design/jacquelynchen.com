@@ -1,0 +1,72 @@
+{
+  "sections": [
+    "Overview",
+    "Problem",
+    "Process",
+    "Delivery",
+    "Results"
+  ],
+  "quote": "A guiding star for studying abroad",
+  "intro": "AbroadWise is an overseas education agency in Vietnam, helping students navigate international education with personalised guidance. Together with fellow designer Belle Mai, I developed a brand identity that brings knowledge, warmth and a sense of direction to that journey.",
+  "credit": "Jacquelyn Chen · Brand identity, final logo creation and ideation\nBelle Mai · Brand strategy, mockups and ideation",
+  "problemTitle": "Expertise students can feel comfortable turning to",
+  "problem": "Studying abroad is an ambitious decision, but it can also feel overwhelming. AbroadWise needed to stand out in a crowded consultancy market while communicating that it understood the person behind the application.\n\nThe brief was to balance authority with care: a knowledgeable partner that could make a complex journey feel more approachable.",
+  "process": [
+    {
+      "title": "Start with the person behind the ambition",
+      "body": "Our audience research focused on detail-oriented, ambitious young adults seeking meaningful experiences overseas. Their emotional needs mattered alongside their practical questions.\n\nCompetitor analysis highlighted information overload, dated visuals and generic branding. These observations informed a direction centred on mindfulness, warmth and innovation, supported by a transparent, reassuring brand voice.",
+      "visuals": []
+    },
+    {
+      "title": "Give guidance a recognisable shape",
+      "body": "The north star became a symbol of direction across the identity. The logo suite combines the AbroadWise wordmark with variations of the star, while the expressive “W” can stand alone as a graphic device.\n\nTogether, these elements give the brand a recognisable vocabulary for both small signatures and larger, more expressive compositions.",
+      "visuals": [
+        "graphic-language"
+      ]
+    },
+    {
+      "title": "Balance confidence with warmth",
+      "body": "The palette brings magenta and lavender together with soft pink, deep blue and a light beige. It gives the identity energy while leaving room for quieter, reassuring compositions.\n\nThe guidelines pair Lora for titles with Be Vietnam Pro for body copy and supporting text. This contrast carries the same balance of sophistication and approachability into the typography.",
+      "visuals": [
+        "guidelines"
+      ]
+    }
+  ],
+  "deliveryTitle": "One identity, across everyday touchpoints",
+  "delivery": "We extended the visual identity across stationery, envelopes, a shopping bag and social media layouts. The star, monogram, colour palette and typography connect these applications while allowing each format its own composition.\n\nThe brand guideline sheet brings the logo suite, colours, fonts and example assets together as a reference for future communications.",
+  "galleryTitle": "The identity in use",
+  "galleryIntro": "Explore the original brand applications and guidelines.",
+  "takeawayTitle": "Make the promise visible",
+  "takeaways": [
+    [
+      "Guidance as a design idea",
+      "The north star gives the promise of purposeful guidance a concrete visual expression."
+    ],
+    [
+      "Consistency with room for expression",
+      "A compact set of marks, colours and typefaces supports both formal stationery and more playful social compositions."
+    ]
+  ],
+  "gallery": "AbroadWise brand gallery",
+  "open": "Open",
+  "close": "Close",
+  "image": "Image",
+  "visuals": {
+    "stationery": "AbroadWise stationery",
+    "bag": "Branded shopping bag",
+    "envelope": "Branded envelope",
+    "graphic-language": "North star, W monogram and graphic compositions",
+    "monogram": "W monogram application",
+    "social": "Instagram grid and story highlight concepts",
+    "guidelines": "Logo suite, colour palette and typography guidelines"
+  },
+  "captions": {
+    "stationery": "AbroadWise stationery",
+    "bag": "Branded shopping bag",
+    "envelope": "Branded envelope",
+    "graphic-language": "North star, W monogram and graphic compositions",
+    "monogram": "W monogram application",
+    "social": "Instagram grid and story highlight concepts",
+    "guidelines": "Logo suite, colour palette and typography guidelines"
+  }
+}

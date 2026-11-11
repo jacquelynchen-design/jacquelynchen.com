@@ -1,0 +1,108 @@
+{
+  "sections": [
+    "Overview",
+    "Challenge",
+    "Design decisions",
+    "Outcome",
+    "Results"
+  ],
+  "lead": "Turning concrete scan data into evidence inspectors can use.",
+  "intro": "The Profometer PM8000 Pro locates reinforcing bars inside concrete and measures their diameter and concrete cover, reducing the need to drill into a structure for inspection. I worked on its iPad app, translating device readings into visualisations and interactions that help inspectors review a scan and prepare their reports.",
+  "roleTitle": "My role",
+  "role": "UX research and design during early to mid-stage product development: user interviews, usability testing, interaction design, data visualisation and iPadOS interface design.",
+  "teamTitle": "Team",
+  "team": [
+    "Sandra • Head of UX",
+    "Jacquelyn • research and design strategy — UX research and design",
+    "Andrew • programming."
+  ],
+  "challengeTitle": "A scan is only useful if an inspector can interpret it",
+  "challenge": "Imagine an inspector assessing a part of a historic building suspected of structural damage. They scan on site, review the measurements and use the findings to prepare a report with recommended next steps.\n\nOur challenge was to make a technically dense dataset usable throughout that workflow. Inspectors needed to identify areas with low concrete cover, investigate questionable measurements and select relevant data for their reports. The interface also had to account for real surfaces, including obstacles that interrupt a scan.",
+  "process": [
+    {
+      "title": "Learning the domain before designing the views",
+      "body": "We worked with inspectors, engineers, statistics specialists and developers to understand what the measurements meant and how they would be used. Research and interviews helped us connect the technical limits of the device with the decisions inspectors needed to make.\n\nThat understanding shaped a connected set of views: the scan itself, signal strength and statistical summaries. Each view answers a different question about the same dataset.",
+      "images": []
+    },
+    {
+      "title": "Make areas of concern visible in a line scan",
+      "body": "A line scan records measurements along a single direction. The interface moves from an empty state to live readings, then to a review state where users can set a concrete-cover threshold. Measurements below that threshold appear in red, drawing attention to areas that need closer inspection.\n\nInspectors can pinch to change the amount of data in view. Two-finger vertical swipes reveal signal strength and statistics, keeping related information within the scan workflow.",
+      "images": [
+        5
+      ]
+    },
+    {
+      "title": "Let inspectors investigate and exclude unreliable readings",
+      "body": "A low reading needs interpretation: an anomaly or an object in the wall can make a measurement unsuitable for the report. The signal-strength view gives inspectors additional information to assess a questionable reading.\n\nUsers can select one or several data points and exclude them from the dataset and statistics. Excluded points remain grey in the scan view, making their status visible, and can be included again. This supports review without turning every low reading into the same conclusion.",
+      "images": [
+        15,
+        12
+      ]
+    },
+    {
+      "title": "Connect individual readings to the statistical picture",
+      "body": "Inspectors also need to understand the overall scan. Statistical views show averages, minimum and maximum values, with a further view displaying a cumulative distribution curve.\n\nDesigning these views required learning enough about the underlying statistics to present values in a form that inspectors could read and use in their reports.",
+      "images": [
+        18
+      ]
+    },
+    {
+      "title": "Give area scans a clear setup and a readable overview",
+      "body": "Area scans combine horizontal and vertical passes to describe a larger surface. Before scanning can begin, users must define settings such as the spacing between scan lines.\n\nOnce the scan is complete, a heat map makes variations in concrete cover visible across the area. Users can set thresholds and hide the grid to focus on the heat map. The same measurements can therefore be reviewed as individual scan lines or as a wider spatial pattern.",
+      "images": [
+        21,
+        24
+      ]
+    },
+    {
+      "title": "Use research to shape selection for reporting",
+      "body": "Usability testing revealed that inspectors sometimes need data from only one direction or a specific region for a report. A completed area scan therefore needed more control than exporting the whole dataset.\n\nWe proposed an interaction where users select a scan through its number on the X or Y axis, then select all scans in that direction if needed. The design connects a dense overview to a more focused selection for export.",
+      "images": [
+        28
+      ]
+    },
+    {
+      "title": "Account for the parts of a wall that cannot be scanned",
+      "body": "Pillars and decorative features can interrupt a scan. Recording those interruptions matters because the skipped area still occupies physical space on the wall.\n\nThe skip-distance interaction lets users tap the probe cursor and enter the width of an obstacle. If they have not measured it yet, they can leave the distance at zero and return to the marker after scanning to enter the value. A long press removes a skip entered by mistake. The workflow accommodates an interruption without losing the opportunity to complete the measurement later.",
+      "images": [
+        32,
+        35,
+        36
+      ]
+    }
+  ],
+  "outcomeTitle": "A connected workflow from measurement to review",
+  "outcome": "The design work covered line and area scans, signal-strength review, statistics, data exclusion, selection for export and skip distances. Together, these interactions help inspectors move between the overall condition of a scanned area and the measurements that need closer attention.\n\nThe team received positive qualitative feedback from clients. Collaboration with specialists helped us turn a complex technical brief into useful, intuitive solutions for the people using the product.",
+  "reflectionTitle": "Clarity depends on understanding what the data means",
+  "takeaways": [
+    [
+      "Domain knowledge is design work",
+      "The biggest challenge was learning the technology and statistics well enough to make sound interface decisions. Conversations with specialists were essential to understanding what to show, what could be adjusted and what an inspector needed to judge."
+    ],
+    [
+      "Real conditions belong in the main workflow",
+      "Anomalies, obstacles and incomplete measurements were central to the work. Designing ways to exclude, revisit and correct data helped the interface reflect how an inspection actually unfolds."
+    ],
+    [
+      "A meaningful application of product design",
+      "I valued working on a tool that supports the inspection of buildings with less invasive investigation. It connected my interest in the built environment with the practical challenge of making complex information usable."
+    ]
+  ],
+  "open": "Enlarge image",
+  "close": "Close image",
+  "previous": "Previous image",
+  "next": "Next image",
+  "captions": {
+    "1": "On-site inspection with a wireless scanner and an iPad attached to a harness.",
+    "5": "A completed line scan with a user-defined threshold highlighting low-cover readings in red.",
+    "15": "Signal strength provides another view of the measurements when reviewing possible anomalies.",
+    "12": "Excluded readings remain visible in grey and are omitted from the dataset and statistics.",
+    "18": "Statistical summaries support review of averages and minimum and maximum values.",
+    "21": "Area-scan setup asks users to define the spacing between scan lines.",
+    "24": "Thresholds and a heat map help reveal variations in concrete cover across a scanned surface.",
+    "28": "Proposed selection of all Y-direction scans for a more focused export.",
+    "32": "Entering a skip distance to account for an obstacle interrupting the scan.",
+    "35": "Returning to a skip marker to enter its distance after scanning.",
+    "36": "A completed area scan with skip distances recorded on both axes."
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "sections": [
+    "Présentation",
+    "Problème",
+    "Démarche",
+    "Livrables",
+    "Résultats"
+  ],
+  "quote": "Une étoile pour guider les études à l’étranger",
+  "intro": "AbroadWise est une agence vietnamienne qui accompagne les étudiants dans leur projet d’études à l’étranger. Avec la designer Belle Mai, j’ai développé une identité de marque qui associe expertise, chaleur et sens de l’orientation tout au long de ce parcours.",
+  "credit": "Jacquelyn Chen · Identité de marque, création du logo final et idéation\nBelle Mai · Stratégie de marque, mockups et idéation",
+  "problemTitle": "Une expertise vers laquelle se tourner en confiance",
+  "problem": "Étudier à l’étranger est un projet ambitieux, qui peut aussi sembler intimidant. AbroadWise devait se distinguer dans un marché très concurrentiel tout en montrant son attention à la personne derrière chaque candidature.\n\nLe brief : associer expertise et bienveillance pour rendre un parcours complexe plus accessible.",
+  "process": [
+    {
+      "title": "Comprendre la personne derrière l’ambition",
+      "body": "Notre recherche s’est intéressée à de jeunes adultes ambitieux, attentifs aux détails et à la recherche d’expériences enrichissantes à l’étranger. Leurs besoins émotionnels comptaient autant que leurs questions pratiques.\n\nL’analyse concurrentielle a mis en évidence une surcharge d’informations, des visuels datés et des identités génériques. Ces observations ont nourri une direction fondée sur l’attention, la chaleur et l’innovation, portée par une voix transparente et rassurante.",
+      "visuals": []
+    },
+    {
+      "title": "Donner une forme reconnaissable à l’accompagnement",
+      "body": "L’étoile polaire est devenue un symbole d’orientation dans l’identité. Le système de logos associe le nom AbroadWise à plusieurs déclinaisons de l’étoile. Le « W » expressif peut également servir d’élément graphique autonome.\n\nCes éléments constituent un vocabulaire reconnaissable, des petites signatures aux compositions plus expressives.",
+      "visuals": [
+        "graphic-language"
+      ]
+    },
+    {
+      "title": "Associer assurance et chaleur",
+      "body": "La palette réunit magenta et lavande, complétés par du rose pâle, du bleu profond et un beige clair. Elle apporte de l’énergie tout en permettant des compositions plus calmes et rassurantes.\n\nLa charte associe Lora pour les titres à Be Vietnam Pro pour les textes courants et secondaires. Ce contraste prolonge l’équilibre entre sophistication et proximité dans la typographie.",
+      "visuals": [
+        "guidelines"
+      ]
+    }
+  ],
+  "deliveryTitle": "Une identité déclinée au quotidien",
+  "delivery": "Nous avons décliné l’identité sur la papeterie, les enveloppes, un sac et des compositions pour les réseaux sociaux. L’étoile, le monogramme, la palette et la typographie relient ces supports tout en laissant à chaque format sa propre composition.\n\nLa fiche de charte graphique rassemble les logos, les couleurs, les polices et des exemples pour guider les futures communications.",
+  "galleryTitle": "L’identité en situation",
+  "galleryIntro": "Découvrez les applications originales et la charte graphique.",
+  "takeawayTitle": "Rendre la promesse visible",
+  "takeaways": [
+    [
+      "L’accompagnement comme idée graphique",
+      "L’étoile polaire donne une expression visuelle concrète à la promesse d’un accompagnement porteur de sens."
+    ],
+    [
+      "De la cohérence, sans rigidité",
+      "Un ensemble resserré de signes, de couleurs et de polices permet aussi bien une papeterie sobre que des compositions sociales plus ludiques."
+    ]
+  ],
+  "gallery": "Galerie de la marque AbroadWise",
+  "open": "Ouvrir",
+  "close": "Fermer",
+  "image": "Image",
+  "visuals": {
+    "stationery": "Papeterie AbroadWise",
+    "bag": "Sac aux couleurs de la marque",
+    "envelope": "Enveloppe de la marque",
+    "graphic-language": "Étoile polaire, monogramme W et compositions graphiques",
+    "monogram": "Application du monogramme W",
+    "social": "Propositions de grille Instagram et de couvertures de stories",
+    "guidelines": "Logos, palette de couleurs et règles typographiques"
+  },
+  "captions": {
+    "stationery": "Papeterie AbroadWise",
+    "bag": "Sac aux couleurs de la marque",
+    "envelope": "Enveloppe de la marque",
+    "graphic-language": "Étoile polaire, monogramme W et compositions graphiques",
+    "monogram": "Application du monogramme W",
+    "social": "Propositions de grille Instagram et de couvertures de stories",
+    "guidelines": "Logos, palette de couleurs et règles typographiques"
+  }
+}

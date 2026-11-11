@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="331" height="331" viewBox="0 0 331 331" role="img" aria-labelledby="title desc">
+<title id="title">CaltexGo app icon — reconstructed vector</title>
+<desc id="desc">Editable vector recreation from a 331 pixel raster reference. Circular O with concentric circular inner edge; other letter contours traced and smoothed; colours, gradients, logo geometry and shadows approximated. No embedded raster image.</desc>
+<defs>
+ <linearGradient id="tileGradient" x1="0%" y1="0%" x2="0%" y2="100%"><stop stop-color="#f04421"/><stop offset="48%" stop-color="#b02216"/><stop offset="100%" stop-color="#700c16"/></linearGradient>
+ <filter id="tileShadow" x="-20%" y="-20%" width="140%" height="150%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="6"/><feOffset dy="7"/><feComponentTransfer><feFuncA type="linear" slope=".48"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <filter id="markShadow" x="-30%" y="-30%" width="160%" height="170%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="3.2"/><feOffset dx="-2" dy="5"/><feComponentTransfer><feFuncA type="linear" slope=".65"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <clipPath id="logoClip"><circle cx="203" cy="140.5" r="42.5"/></clipPath>
+</defs>
+<g id="app-tile"><rect x="32" y="22" width="267" height="266" rx="39" fill="url(#tileGradient)" filter="url(#tileShadow)"/></g>
+<g id="go-mark" filter="url(#markShadow)">
+ <path id="letter-g" d="M 123 108 C 109 98 94 97 80 102 C 57 109 46 129 50 153 C 54 179 75 194 99 192 C 114 191 126 184 135 173 L 138 190 C 142 213 125 230 104 228 C 88 227 76 219 72 201 C 70 191 57 194 59 203 C 64 227 80 240 102 241 C 132 243 155 219 151 190 L 134 100 C 133 94 131 92 126 94 C 122 95 121 97 122 102 Z M 96 113 C 114 113 128 126 129 144 C 131 163 117 179 99 180 C 80 182 64 168 62 150 C 60 131 75 114 96 113 Z" fill="#fff" fill-rule="evenodd"/>
+ <g id="letter-o-and-speed-lines" fill="#fff">
+  <circle id="letter-o" cx="203" cy="140.5" r="54.5"/>
+  <path id="speed-lines" d="M 229 93 C 230.67 94.00 228.50 94.67 232.00 95.00 C 235.50 95.33 241.67 95.50 250.00 95.00 C 258.33 94.50 276.67 91.67 282.00 92.00 C 287.33 92.33 287.50 94.33 282.00 97.00 C 276.50 99.67 254.33 105.50 249.00 108.00 C 243.67 110.50 244.17 111.83 250.00 112.00 C 255.83 112.17 278.50 108.83 284.00 109.00 C 289.50 109.17 287.67 110.17 283.00 113.00 C 278.33 115.83 260.33 123.17 256.00 126.00 C 251.67 128.83 253.17 129.67 257.00 130.00 C 260.83 130.33 275.17 127.67 279.00 128.00 C 282.83 128.33 283.50 129.67 280.00 132.00 C 276.50 134.33 262.00 138.00 258.00 142.00 L 240 150 L 224 105 Z"/>
+ </g>
+ <g id="caltex-star" clip-path="url(#logoClip)">
+  <circle cx="203" cy="140.5" r="42.5" fill="#ed1734"/>
+  <path d="M203 98 L203 140.5 L177 175 L150 195 L150 85 Z" fill="#005366"/>
+  <path d="M203 98 L212 127 L245 128 L217 146 L228 175 L202 157 L177 175 L187 145 L161 127 L194 127 Z" fill="#fff"/>
+ </g>
+</g>
+</svg>

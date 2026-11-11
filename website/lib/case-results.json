@@ -1,0 +1,254 @@
+{
+  "maps": {
+    "en": {
+      "title": "Turning complex transport requirements into a coordinated journey",
+      "items": [
+        [
+          "Clearer comparison of travel options",
+          "A consistent presentation of timing, cost and connections made different transport modes comparable."
+        ],
+        [
+          "Visibility over the complete journey",
+          "Train, rental-car and taxi connections were organised into a continuous itinerary, making transfers and booking details explicit."
+        ],
+        [
+          "A shared foundation for delivery",
+          "User stories, interface specifications and an evolving design system translated complex requirements into a focused MVP and a direction for future releases."
+        ]
+      ]
+    },
+    "fr": {
+      "title": "Transformer des contraintes de transport complexes en un trajet coordonné",
+      "items": [
+        [
+          "Des options de transport comparables",
+          "Une présentation cohérente des horaires, des coûts et des correspondances permettait de comparer les différents modes de transport."
+        ],
+        [
+          "Une vision du trajet dans son ensemble",
+          "Le train, la location de voiture et les liaisons en taxi formaient un itinéraire continu, avec des correspondances et des détails de réservation explicites."
+        ],
+        [
+          "Une base commune pour le développement",
+          "Les user stories, les spécifications et le design system ont traduit des besoins complexes en un MVP ciblé et une direction pour les prochaines versions."
+        ]
+      ]
+    }
+  },
+  "manor": {
+    "en": {
+      "title": "One coherent identity across three distinct experiences",
+      "items": [
+        [
+          "A recognisable brand family",
+          "The Manor and its three sub-brands shared a consistent wordmark structure while retaining clear identities for each offer."
+        ],
+        [
+          "Brand values expressed through the details",
+          "Producer stories, materials, colour and typography gave ethical consumption and premium quality a tangible visual expression."
+        ],
+        [
+          "A system beyond the logo",
+          "Guidelines, menus and packaging concepts demonstrated how the identity could work across everyday customer touchpoints. The project remained an unlaunched proposal."
+        ]
+      ]
+    },
+    "fr": {
+      "title": "Une identité cohérente pour trois expériences distinctes",
+      "items": [
+        [
+          "Une famille de marques reconnaissable",
+          "The Manor et ses trois sous-marques partageaient une même structure de logotype, tout en conservant une identité claire pour chaque activité."
+        ],
+        [
+          "Des valeurs exprimées dans les détails",
+          "Les histoires des producteurs, les matériaux, les couleurs et la typographie donnaient une expression concrète à la consommation éthique et à la qualité haut de gamme."
+        ],
+        [
+          "Un système au-delà du logo",
+          "La charte, les menus et les concepts d’emballage montraient comment décliner l’identité au fil de l’expérience client. Le projet est resté au stade de proposition, sans lancement."
+        ]
+      ]
+    }
+  },
+  "sante": {
+    "en": {
+      "title": "A clearer route from eligibility to medical travel",
+      "items": [
+        [
+          "A structured path through a complex service",
+          "Within three months, I designed a desktop and mobile journey connecting onboarding, agreement validation, transport selection and confirmation."
+        ],
+        [
+          "Clarity before commitment",
+          "Coverage, eligible travel options and any remaining payment were presented where users needed them to make a decision."
+        ],
+        [
+          "Consistency across devices and future development",
+          "Responsive layouts and reusable components supported the service’s needs while maintaining continuity with the insurer’s identity."
+        ]
+      ]
+    },
+    "fr": {
+      "title": "Un parcours plus clair pour organiser un déplacement médical",
+      "items": [
+        [
+          "Un parcours structuré dans un service complexe",
+          "En trois mois, j’ai conçu un parcours sur ordinateur et mobile reliant l’inscription, la validation de l’accord, le choix du transport et la confirmation."
+        ],
+        [
+          "Les informations utiles avant de s’engager",
+          "La prise en charge, les transports éligibles et l’éventuel reste à payer apparaissaient au moment où les utilisateurs en avaient besoin pour décider."
+        ],
+        [
+          "Une cohérence entre les supports et les évolutions",
+          "Des mises en page adaptatives et des composants réutilisables répondaient aux besoins du service tout en respectant l’identité de l’Assurance Maladie."
+        ]
+      ]
+    }
+  },
+  "pm8000": {
+    "en": {
+      "title": "Turning technical measurements into usable inspection evidence",
+      "items": [
+        [
+          "Areas of concern made visible",
+          "Thresholds, heat maps and statistical views helped surface measurements requiring closer attention."
+        ],
+        [
+          "Greater control over the evidence",
+          "Inspectors could investigate questionable readings, exclude unsuitable data and revisit those decisions without losing visibility of the original scan."
+        ],
+        [
+          "Real-world conditions accounted for",
+          "Interactions for obstacles and interrupted scans, alongside proposed controls for focused exports, connected the interface to how inspectors work in practice. The team received positive qualitative feedback from clients."
+        ]
+      ]
+    },
+    "fr": {
+      "title": "Des mesures techniques aux données utiles à l’inspection",
+      "items": [
+        [
+          "Des points de vigilance visibles",
+          "Les seuils, les cartes thermiques et les vues statistiques mettaient en évidence les mesures nécessitant un examen approfondi."
+        ],
+        [
+          "Un meilleur contrôle des données",
+          "Les inspecteurs pouvaient examiner les mesures douteuses, exclure les données inadaptées et revenir sur leurs décisions tout en gardant une visibilité sur le scan d’origine."
+        ],
+        [
+          "Les conditions du terrain prises en compte",
+          "La gestion des obstacles et des interruptions, ainsi que les propositions de sélection pour l’export, rapprochaient l’interface du travail réel des inspecteurs. L’équipe a reçu des retours qualitatifs positifs de la part des clients."
+        ]
+      ]
+    }
+  },
+  "scoot": {
+    "en": {
+      "title": "More ways for candidates to find their place",
+      "items": [
+        [
+          "Job discovery beyond job titles",
+          "Skills-based search created a route for candidates who knew their strengths but were unsure which opportunities matched."
+        ],
+        [
+          "A more explicit route to vacancies",
+          "Usability testing revealed that visitors overlooked navigation, prompting a direct “See all jobs” shortcut at the point where their search began."
+        ],
+        [
+          "A mobile-first recruitment experience",
+          "Search, browsing and filtering were designed around the devices candidates primarily used, then adapted for desktop."
+        ]
+      ]
+    },
+    "fr": {
+      "title": "Plusieurs façons de trouver sa place chez Scoot",
+      "items": [
+        [
+          "Découvrir des postes à partir de ses compétences",
+          "La recherche par compétences offrait un point d’entrée aux candidats qui connaissaient leurs points forts sans savoir quels postes leur correspondaient."
+        ],
+        [
+          "Un accès plus explicite aux offres",
+          "Les tests ont révélé que les visiteurs ne remarquaient pas la navigation. Un raccourci « Voir tous les postes » a donc été ajouté à l’endroit où commençait leur recherche."
+        ],
+        [
+          "Une expérience de recrutement pensée pour le mobile",
+          "La recherche, la consultation et les filtres ont été conçus pour les appareils les plus utilisés par les candidats, puis adaptés à l’ordinateur."
+        ]
+      ]
+    }
+  },
+  "abroadwise": {
+    "en": {
+      "title": "A distinctive, approachable identity for education guidance",
+      "items": [
+        [
+          "A clear idea at the heart of the brand",
+          "The north star turned AbroadWise’s promise of guidance into a recognisable symbol."
+        ],
+        [
+          "A balance of expertise and warmth",
+          "Working with Belle Mai, I developed a logo, palette and typographic direction that felt professional while remaining approachable to prospective students."
+        ],
+        [
+          "A foundation for future communications",
+          "A flexible logo suite, guidelines and applications connected stationery and social media through the same brand language."
+        ]
+      ]
+    },
+    "fr": {
+      "title": "Une identité distinctive et accessible pour accompagner les étudiants",
+      "items": [
+        [
+          "Une idée claire au cœur de la marque",
+          "L’étoile polaire traduisait la promesse d’accompagnement d’AbroadWise en un symbole reconnaissable."
+        ],
+        [
+          "Un équilibre entre expertise et chaleur",
+          "Avec Belle Mai, j’ai développé un logo, une palette et une direction typographique associant professionnalisme et proximité avec les futurs étudiants."
+        ],
+        [
+          "Une base pour les futures communications",
+          "Un ensemble de logos adaptables, une charte et des applications réunissaient la papeterie et les réseaux sociaux dans un même langage de marque."
+        ]
+      ]
+    }
+  },
+  "caltexgo": {
+    "en": {
+      "title": "Extending an established brand into a new digital service",
+      "items": [
+        [
+          "A distinct identity within the parent brand",
+          "The final app icon combined the familiar Caltex star with the new service name and a sense of movement."
+        ],
+        [
+          "A defined direction through an evolving brief",
+          "Visual exploration resolved changing naming and styling requirements into a consistent final asset."
+        ],
+        [
+          "A reference for use across markets",
+          "Clear-space rules, minimum sizes, colour specifications and effects guidance equipped other teams to apply the icon consistently."
+        ]
+      ]
+    },
+    "fr": {
+      "title": "Prolonger une marque établie dans un nouveau service numérique",
+      "items": [
+        [
+          "Une identité propre au sein de la marque",
+          "L’icône finale associait l’étoile familière de Caltex au nom du nouveau service et à une impression de mouvement."
+        ],
+        [
+          "Une direction définie malgré un brief évolutif",
+          "L’exploration visuelle a permis de réunir les évolutions du nom et du style dans un élément graphique final cohérent."
+        ],
+        [
+          "Une référence pour les différents marchés",
+          "Les règles de protection, les tailles minimales, les couleurs et les effets donnaient aux autres équipes un cadre pour utiliser l’icône de manière cohérente."
+        ]
+      ]
+    }
+  }
+}

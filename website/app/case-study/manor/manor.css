@@ -1,0 +1,7 @@
+.manor-case .case-visual { cursor:zoom-in; }
+.manor-case .case-visual img { display:block;width:100%;height:auto;object-fit:contain; }
+.manor-case .case-figure figcaption { font-size:14px;line-height:1.4; }
+
+.manor-case.case-stack > .case-takeaways { min-height:0; }
+.manor-case > .case-study-cta { position:relative; z-index:6; }
+.manor-case .case-takeaways .case-content { gap:16px; }

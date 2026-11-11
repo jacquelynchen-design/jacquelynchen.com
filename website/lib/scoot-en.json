@@ -1,0 +1,47 @@
+{
+  "sections": ["Overview", "Research", "Design", "Testing", "Results"],
+  "lead": "Helping people find their place at Scoot",
+  "intro": "A mobile-first career portal for people who know the role they want—and those still exploring.",
+  "teamTitle": "Team",
+  "liveCta": "https://careers.flyscoot.com/",
+  "team": [["Jolyn", "UX lead"], ["Jacquelyn", "Product designer"], ["Sharon", "Project owner"], ["Monica", "Business analyst"]],
+  "challengeTitle": "Job seekers arrive with different starting points",
+  "challenge": "Scoot was growing rapidly and wanted to modernise its career portal to attract new talent. We worked within an existing design system, with scope to introduce compatible components.\n\nThe team initially assumed visitors would already know which job they wanted. Three weeks of user interviews, together with data from the previous portal, challenged that assumption. Some people searched for a specific role. Others wanted to discover where their skills could fit. Some were simply curious about working at Scoot.",
+  "researchTitle": "Three audiences, different questions",
+  "researchIntro": "We condensed the interviews into three audience archetypes, focusing on the information each group needed to decide whether a role was right for them.",
+  "personas": [
+    {"id":"flight-crew", "title":"Flight crew candidates", "alt":"Scoot illustration of a pilot and cabin crew member", "goal":"Understand what it takes to join the crew.", "details":[["Needs","Clear recruitment steps, training requirements, and a sense of team culture."],["Frustrations","Unclear hiring processes make it difficult to know what to expect."],["Behaviour","Looks for pilot or cabin crew roles and information about joining the team."]], "body":"Pilots and cabin crew need to understand the path into a role. Team culture also matters: long hours together make the working environment part of their decision."},
+    {"id":"office-role", "title":"Office-role candidates", "alt":"Scoot illustration representing an office-role candidate", "goal":"Find where their experience fits within Scoot.", "details":[["Needs","Visibility into departments, relevant opportunities, and career progression."],["Key question","Which opportunities fit a background in technology, business, or another industry?"],["Behaviour","Explores office roles and the scope to build a career in aviation."]], "body":"Office-role candidates want to see how their experience could translate into a career at Scoot. Department information and growth opportunities help them assess the fit, especially when moving from another industry."},
+    {"id":"curious-visitor", "title":"Curious visitors", "alt":"Scoot illustration representing a curious visitor", "goal":"Explore what working at Scoot could look like.", "details":[["Needs","An overview of available roles without having to choose a job title first."],["Key question","Could there be an opportunity here that suits them?"],["Behaviour","Browses out of interest in Scoot and may consider applying later."]], "body":"Some visitors arrive because they know and like Scoot, sometimes after flying with the airline. They want to see what is available before deciding whether any role is worth pursuing."}
+  ],
+  "designTitle":"Three ways to discover opportunities",
+  "designIntro":"The audience profiles clarified what candidates needed to learn. Across the interviews, different search behaviours also emerged; the design supported these without restricting any audience to a single route.",
+  "decisions":[
+    {"title":"Start with a role", "body":"For visitors who knew what they wanted, the homepage offered keyword search. Results led to the job board, where filters helped narrow the available positions."},
+    {"title":"Start with skills", "body":"For visitors who knew their strengths but were unsure which roles to pursue, the portal offered skills-based search. Candidates could select up to five skills sought by the company. Vacancies were associated with skills so the portal could return relevant opportunities.\n\nThis opened a route to discovering jobs without first knowing the right job title."},
+    {"title":"Start by browsing", "body":"Curious visitors could explore the job board without entering keywords or choosing skills. This supported people who wanted to understand the range of opportunities before deciding what interested them."}
+  ],
+  "mobile":"Research indicated that visitors primarily used their phones, so these journeys were designed for mobile first, then adapted for desktop.",
+  "testingTitle":"A usability test changed the homepage",
+  "testing":"During testing, many participants focused on the homepage’s eye-catching visuals and overlooked the navigation. The page offered a way to browse jobs, but that route was easy to miss.\n\nWe added a direct shortcut to the job board beneath the search bar. Placing it at the point where people began their search made browsing an explicit option alongside keyword search.",
+  "takeawayTitle":"Design for different levels of certainty",
+  "takeaway":"A candidate may arrive with a title, a set of skills, or simply an interest in the company. Each can be a starting point for discovery. The redesign supported all three, while testing informed a concrete change to make browsing easier to find.",
+  "outcomeNote":"Post-launch performance metrics are not available for this case study.",
+  "gallery":"Scoot design gallery", "open":"Enlarge image", "close":"Close gallery", "galleryHelp":"Choose a thumbnail or use the arrow keys to change images.",
+  "visuals":{
+    "homepage":"Scoot homepage with keyword search, See all jobs, and skills-based search",
+    "job-board":"Scoot job board with search results and filters",
+    "skills-start":"Mobile entry point to search by skills",
+    "skills-select":"Choosing skills from Scoot’s suggestions",
+    "skills-added":"Selected skills in the mobile search flow",
+    "skills-results":"Five selected skills and matching job results"
+  },
+  "captions":{
+    "homepage":"The “See all jobs” shortcut sits directly below keyword search. Skills-based discovery is available beneath the hero.",
+    "job-board":"Keyword results lead to the job board, where candidates can refine their search.",
+    "skills-start":"Candidates can start with their skills, even without a job title in mind.",
+    "skills-select":"The suggestions surface skills sought by the company.",
+    "skills-added":"Candidates build a selection of up to five skills.",
+    "skills-results":"The selected skills return relevant opportunities on the job board."
+  }
+}

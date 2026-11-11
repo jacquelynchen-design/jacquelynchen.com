@@ -1,0 +1,50 @@
+{
+  "EN": {
+    "labels": ["01 - Overview", "02 - Brief", "03 - Exploration", "04 - Guidelines", "05 - Results"],
+    "title": "CaltexGo",
+    "subtitle": "A familiar brand, ready to go",
+    "intro": "An app icon for Caltex’s mobile payment service, designed to feel unmistakably part of the brand. I explored visual directions as the name evolved, then created guidelines for use across markets.",
+    "meta": "2018 · App icon design & usage guidelines",
+    "briefTitle": "New service. Recognisable identity.",
+    "brief": "CaltexGo lets motorists pay, earn and redeem loyalty points through an app. The brief was to give this new service an identifiable icon without moving too far from Caltex’s existing identity.\n\nDuring the design iterations, the client asked to move away from flat vector visuals and incorporate the word ‘go’. The design needed to bring those requests together with the familiar Caltex star.\n\nMy role: app icon design, visual exploration and guidelines for use across different applications and markets.",
+    "process": [
+      {"title": "Exploring the name and the mark", "body": "The early directions explored different names and ways to use the existing Caltex identity. These boards show how the icon developed alongside the naming discussions.", "image": "early", "caption": "Early explorations: alternative names, the Caltex star and a fuel symbol."},
+      {"title": "A direction for Caltex Plus", "body": "For the proposed name ‘Caltex Plus’, I explored how the star and a plus sign could work together. The alternatives use different compositions and treatments of depth.", "image": "plus", "caption": "Two icon concepts developed for the Caltex Plus name."},
+      {"title": "Bringing ‘go’ into the icon", "body": "Once the client confirmed ‘CaltexGo’, the explorations focused on integrating ‘go’ with the star. The final direction combines white lettering, motion lines and dimensional shading on a red background.", "image": "go", "caption": "CaltexGo variations: exploring lettering, motion and depth."}
+    ],
+    "deliveryTitle": "Making the icon usable beyond one screen",
+    "delivery": "The final deliverables were an app icon and a set of usage guidelines for sharing the assets with other markets. The guidelines cover clear space, minimum size, colour specifications and visual effects, helping teams apply the identity consistently.",
+    "guidelines": [
+      {"image": "clear", "caption": "Clear space and minimum size: protecting the icon’s legibility."},
+      {"image": "digital", "caption": "Digital colour specifications: defining the palette and gradients."},
+      {"image": "effects", "caption": "Visual effects: examples of shadow, glow and reflection treatments."}
+    ],
+    "takeawayTitle": "The icon is only part of the identity",
+    "takeaway": "This project brings together two scales of design: the detail of a single app icon and the rules that help others use it. The exploration boards show the evolution of the idea; the guidelines make the final direction practical to apply.\n\nThe result is a defined visual asset and a reference for its use across applications and markets.",
+    "footer": "Email me"
+  },
+  "FR": {
+    "labels": ["01 - Présentation", "02 - Brief", "03 - Exploration", "04 - Charte", "05 - Résultats"],
+    "title": "CaltexGo",
+    "subtitle": "Une marque familière, prête à avancer",
+    "intro": "Une icône pour le service de paiement mobile de Caltex, conçue pour s’inscrire naturellement dans l’identité de la marque. J’ai exploré plusieurs pistes au fil des propositions de nom, puis créé une charte d’utilisation destinée à différents marchés.",
+    "meta": "2018 · Design d’icône & charte d’utilisation",
+    "briefTitle": "Un nouveau service, une identité reconnaissable",
+    "brief": "CaltexGo permet aux automobilistes de payer, de cumuler et d’utiliser leurs points de fidélité depuis une application. Le brief : créer une icône identifiable pour ce nouveau service, sans trop s’éloigner de l’identité existante de Caltex.\n\nAu cours des itérations, le client a souhaité abandonner les visuels vectoriels à plat et intégrer le mot « go ». Le design devait réunir ces demandes tout en conservant l’étoile emblématique de Caltex.\n\nMon rôle : design de l’icône, exploration visuelle et création d’une charte d’utilisation pour différents supports et marchés.",
+    "process": [
+      {"title": "Explorer le nom et le signe", "body": "Les premières pistes explorent différents noms et plusieurs façons de reprendre l’identité de Caltex. Ces planches montrent comment l’icône a évolué en parallèle des discussions sur le nom du service.", "image": "early", "caption": "Premières explorations : noms alternatifs, étoile Caltex et symbole de carburant."},
+      {"title": "Une piste pour Caltex Plus", "body": "Pour le nom proposé « Caltex Plus », j’ai exploré différentes associations entre l’étoile et le signe plus. Les variantes jouent sur la composition et le traitement du relief.", "image": "plus", "caption": "Deux propositions d’icône développées pour le nom Caltex Plus."},
+      {"title": "Intégrer « go » dans l’icône", "body": "Une fois le nom « CaltexGo » confirmé par le client, les recherches se sont concentrées sur l’association de « go » et de l’étoile. La direction finale réunit un lettrage blanc, des lignes de mouvement et un effet de relief sur fond rouge.", "image": "go", "caption": "Variantes CaltexGo : recherches sur le lettrage, le mouvement et le relief."}
+    ],
+    "deliveryTitle": "Faire vivre l’icône au-delà d’un écran",
+    "delivery": "Les livrables comprennent l’icône de l’application et une charte d’utilisation pour accompagner le partage des fichiers avec d’autres marchés. La charte précise la zone de protection, la taille minimale, les couleurs et les effets visuels, afin de faciliter une utilisation cohérente de l’identité.",
+    "guidelines": [
+      {"image": "clear", "caption": "Zone de protection et taille minimale : préserver la lisibilité de l’icône."},
+      {"image": "digital", "caption": "Couleurs pour les supports numériques : définir la palette et les dégradés."},
+      {"image": "effects", "caption": "Effets visuels : exemples de traitements d’ombre, de lueur et de reflet."}
+    ],
+    "takeawayTitle": "L’identité ne s’arrête pas à l’icône",
+    "takeaway": "Ce projet articule deux échelles de design : le détail d’une icône d’application et les règles qui permettent à d’autres de l’utiliser. Les planches d’exploration retracent l’évolution de l’idée ; la charte rend la direction finale concrètement exploitable.\n\nLe résultat : un élément d’identité défini et un cadre pour son utilisation sur différents supports et marchés.",
+    "footer": "Écrivez-moi"
+  }
+}

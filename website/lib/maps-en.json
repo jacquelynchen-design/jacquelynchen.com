@@ -1,0 +1,117 @@
+{
+  "sections": [
+    "Overview",
+    "Problem",
+    "Process",
+    "Delivery",
+    "Results"
+  ],
+  "quote": "“My car broke down and I want to go home”",
+  "intro": "What happens at the insurance call center when a client rings to say their car has broken down in the middle of the country? Maps is the interface that helps the phone operator identify, organise and book travel solutions to help their client get to their destination.",
+  "personaTitle": "Antoine, the assistance operator",
+  "personaQuote": "“I need to get them moving again without missing a detail that could disrupt the journey later.”",
+  "personaDetails": [
+    "Needs : Quickly find and book an eligible, reliable journey while supporting the client over the phone.",
+    "Frustrations : Complex requirements and fragmented transport options make it difficult to compare solutions confidently.",
+    "Behaviour : Gathers essential details first, compares viable routes, then verifies each journey segment before booking."
+  ],
+  "personaBody": "Assistance operators use Maps while speaking on the phone with clients whose journeys have been unexpectedly interrupted. They need to understand each situation quickly, account for eligibility and passenger requirements, and compare viable transport options under time pressure. Their priority is to find a reliable solution they can confidently explain and book without losing sight of important journey details.",
+  "note": "The project name has been changed as it has not launched yet.",
+  "problemTitle": "The design challenge",
+  "problem": "Maps had to help assistance operators turn an unexpected disruption into a practical onward journey while they were still speaking with the client.\n\nThe challenge was therefore not simply to display transport results. It had to reveal the right level of complexity at each stage, display enough information to support a reliable decision, without overwhelming the operator or client during a time-sensitive call.\n\nMy role: User stories, interface and design system design, stakeholder workshops and development collaboration.",
+  "process": [
+    {
+      "title": "From user and business needs to product behaviour",
+      "body": "The interface had to balance two competing needs. Operators needed a fast, manageable search while speaking with the client; the product needed enough information to determine eligibility and show bookable solutions.\n\nCommon journey details formed the default search flow, but conditional requirements, such as passenger details for train reservation, driver details for car rental, luggage, and animals were progressively revealed when relevant. This allowed the product to support complex cases without making every search feel complex. Having the user stories grouped up per type of transport solution helped identify the commonalities, vs. the fields that pertain to specific modes of transport.",
+      "visuals": []
+    },
+    {
+      "title": "Designing for the assistance operator",
+      "body": "After verifying customer details, the assistance operator starts the process by entering the information required for the system to produce solutions.",
+      "visuals": [
+        "search",
+        "search-input"
+      ]
+    },
+    {
+      "title": "Making different solutions comparable",
+      "body": "Train, rental-car and taxi journeys contain different information and cannot be compared like identical products. I identified the criteria operators needed across every option, such as total duration, arrival time, price and connections, then used them to create a consistent recommendation structure. Labels such as “fastest” and “lowest cost” made the reasoning behind each recommendation immediately visible.",
+      "visuals": [
+        "solutions"
+      ]
+    },
+    {
+      "title": "Designing journeys instead of isolated bookings",
+      "body": "A solution could include a main transport mode and several taxi connections. I designed the journey as a continuous sequence of legs so operators could understand transfers, identify risks and explain the complete route.",
+      "visuals": [
+        "train",
+        "taxi-1",
+        "taxi-2",
+        "recap"
+      ]
+    },
+    {
+      "title": "Adding on to an existing design system",
+      "body": "Maps uses an existing design system based on the client’s brand, but the product needs to evolve and develop its own colour palette, brand language and interface components. As the project went on, I had to keep updating the design system and document changes for the team to keep track.",
+      "visuals": [
+        "system"
+      ]
+    }
+  ],
+  "deliveryTitle": "Building an MVP and phasing releases",
+  "delivery": "Collaboration with stakeholders and transport providers (for example, SNCF, Carbookr, Resacar) is essential to shape the MVP, as there were technical and business limits to keep in mind.\n\nAs new requirements and ideas emerged, I translated them into user stories and interface designs, building on the design system to keep the growing product consistent. Delivery was an ongoing effort, involving the design evolving alongside development and documentation.",
+  "galleryTitle": "Other screens and edge cases",
+  "galleryIntro": "A selection of supporting screens designed for alternative journeys, booking states and operational scenarios. Click on the image gallery below to browse through the screens",
+  "takeawayTitle": "In order to ship the MVP, we had to manage a lot of moving parts and ambition",
+  "takeaways": [
+    [
+      "Making complexity manageable",
+      "I learned that simplifying an interface starts with understanding the rules behind it. Deciding when to ask for information was as important as deciding how to display it."
+    ],
+    [
+      "Plan for growth, prioritise the first release",
+      "I learned that a strong idea doesn’t have to be part of the first release to have a place in the product. By helping stakeholders plan beyond the MVP, I kept future opportunities open while keeping the initial scope focused. In future projects, I’ll distinguish what needs to be built now from what should be explored once user feedback can guide the next step."
+    ],
+    [
+      "Creating shared understanding",
+      "Translating requirements into user stories made design discussions more concrete, helping stakeholders and developers agree on how the product should behave."
+    ]
+  ],
+  "gallery": "Image gallery",
+  "close": "Close gallery",
+  "previous": "Previous image",
+  "next": "Next image",
+  "open": "Open image",
+  "image": "Image",
+  "personaAlt": "Persona illustration of Antoine, an assistance operator",
+  "visuals": {
+    "search": "search page default",
+    "solutions": "solutions page",
+    "system": "Visual - design system",
+    "train": "booking page (train)",
+    "taxi-1": "booking page (taxi liaison 1)",
+    "taxi-2": "booking page (taxi liaison 2)",
+    "recap": "recap page",
+    "change-connection": "solutions page (change liaison)",
+    "alternative-solutions": "solutions page",
+    "confirmation": "confirmation page",
+    "map": "solutions (show map)",
+    "search-input": "Search with journey details",
+    "map-zoom": "Results with a zoomed-in map",
+    "driver": "Driver details for a rental car"
+  },
+  "captions": {
+    "search": "Search page - default state",
+    "search-input": "Search page - with origin and destination addresses so the map reflects the journey. Other info blocs are expanded to fill in the info if required by the user.",
+    "solutions": "The solution page allows the operator to compare transport options, timing and costs at a glance. In this case, it makes the most sense to choose the train because it gets the beneficiary home the fastest. If they chose the car, the rental agency would close by the time the beneficiary reaches it in the destination city, so they would have to wait the next morning to return the car. However, if the beneficiary has a lot of luggage, the train might not be suitable.",
+    "train": "Booking page - train segment. This would be the main mode transport that gets the beneficiary to the destination city.",
+    "taxi-1": "Booking page - taxi connection 1. This connection brings the beneficiary from the starting point to the train station.",
+    "taxi-2": "Booking page - taxi connection 2. This connection brings the beneficiary from the train station home.",
+    "recap": "The booking recap page summarises the journey",
+    "system": "Examples of the components I’ve worked on.",
+    "change-connection": "Comparing journey options and changing a connection.",
+    "map": "Viewing the complete journey on the map.",
+    "map-zoom": "A closer look at the local taxi connection.",
+    "driver": "Adding driver details and rental-car requirements."
+  }
+}

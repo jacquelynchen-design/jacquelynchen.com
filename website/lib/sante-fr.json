@@ -1,0 +1,105 @@
+{
+  "sections": [
+    "Présentation",
+    "Enjeu",
+    "Conception",
+    "Livraison",
+    "Résultats"
+  ],
+  "quote": "Un parcours plus clair pour les déplacements de santé",
+  "intro": "Service Trajet Santé permet aux assurés éligibles d’organiser leurs déplacements pour soins en train, avion ou bateau, dans le cadre d’une prise en charge par l’Assurance Maladie. Pendant trois mois, j’ai conçu le parcours sur ordinateur et mobile, de l’entrée dans le service à la réservation, avec une attention particulière aux personnes âgées ou en situation de handicap.",
+  "credit": "Jacquelyn Chen · Designer produit\nNicolas Cheriot · Responsable UX, Systerz\nMartin Faussabry · Conseils et soutien",
+  "facts": "3 mois · 1 designer, 1 responsable de la stratégie UX, 1 product owner · Développement par l’équipe cliente",
+  "nda": "Ce projet est couvert par un accord de confidentialité. Les écrans présentés ici figuraient dans mon étude de cas publique d’origine ; je peux en discuter davantage en privé.",
+  "problemTitle": "Rendre un parcours détaillé plus facile à suivre",
+  "problem": "Réserver un déplacement pour soins demande de renseigner des informations sur sa prise en charge et son trajet avant de choisir un billet. Mon enjeu était de rendre chaque étape compréhensible tout en conservant les informations nécessaires au service.\n\nJ’ai structuré et hiérarchisé les contenus selon les besoins métiers et les insights fournis par l’entreprise. La clarté et la lisibilité étaient au cœur de la conception, notamment pour les personnes âgées ou en situation de handicap.",
+  "process": [
+    {
+      "title": "Rendre les étapes de démarrage visibles",
+      "body": "J’ai organisé l’entrée dans le service en trois étapes : créer son compte, saisir son numéro d’accord, puis consulter les détails du trajet. Les étapes terminées restent visibles, tandis que l’étape en cours est mise en avant.\n\nLe formulaire associe le numéro d’accord au nom du bénéficiaire et propose un lien d’aide pour retrouver ce numéro. Les informations à fournir pour continuer sont ainsi explicites.",
+      "visuals": [
+        "onboarding-3"
+      ]
+    },
+    {
+      "title": "Présenter les conditions de prise en charge",
+      "body": "Après validation de l’accord, l’interface affiche les conditions du trajet. Le récapitulatif regroupe la prise en charge, les trajets utilisés, les options de transport et les accompagnants avant l’action de réservation.\n\nL’objectif était de permettre aux utilisateurs de comprendre les conditions de leur déplacement avant de choisir leurs billets. Les chiffres de la maquette illustrent un état de l’écran, et non des règles générales de prise en charge.",
+      "visuals": [
+        "onboarding-5"
+      ]
+    },
+    {
+      "title": "Préserver la lisibilité sur mobile",
+      "body": "J’ai conçu l’ensemble du parcours sur ordinateur et mobile. Les écrans de démarrage reprennent la même séquence sur un format plus étroit, avec les étapes et les champs organisés sur une seule colonne.\n\nSur chaque taille d’écran, l’objectif restait le même : rendre ce service détaillé lisible et la prochaine action claire.",
+      "visuals": [
+        "mobile"
+      ]
+    }
+  ],
+  "deliveryTitle": "De la prise en charge à la réservation",
+  "delivery": "Au-delà du démarrage, j’ai conçu le parcours de saisie des informations de voyage, de consultation des solutions de transport, de sélection des billets et des places, jusqu’à la confirmation. Lorsqu’un paiement est nécessaire, l’écran distingue le montant pris en charge du reste à payer. Sinon, le parcours mène directement à la confirmation.\n\nJ’ai également contribué au design system, en adaptant un système existant à l’identité visuelle de l’assureur et en créant des composants compatibles avec la bibliothèque en place.",
+  "tools": "Figma pour la conception et le prototypage ; Coda pour les informations et les spécifications ; Miro pour les wireframes rapides et les revues de design ; papier et stylo pour les croquis.",
+  "future": "Les évolutions envisagées comprenaient la combinaison de plusieurs modes de transport et d’un hébergement dans une même réservation, par exemple train, avion et hôtel. Il s’agissait d’une perspective d’évolution, et non d’une fonctionnalité livrée décrite dans l’étude de cas d’origine.",
+  "galleryTitle": "Explorer les écrans d’origine",
+  "galleryIntro": "Les écrans d’accueil, d’intégration et de réservation. L’interface originale est en français.",
+  "takeawayTitle": "De la clarté à chaque décision",
+  "takeaways": [
+    [
+      "Rendre la progression visible",
+      "Une séquence claire et des états de validation visibles permettent de se situer dans un parcours détaillé."
+    ],
+    [
+      "Présenter les conditions avant de choisir",
+      "Les conditions de prise en charge doivent précéder le choix des billets, et le reste à charge doit être explicite au paiement."
+    ],
+    [
+      "Faire évoluer un système avec soin",
+      "Les nouveaux composants doivent répondre aux besoins du service tout en restant cohérents avec l’interface existante et l’identité de l’assureur."
+    ]
+  ],
+  "gallery": "Galerie Service Trajet Santé",
+  "open": "Ouvrir",
+  "close": "Fermer",
+  "image": "Image",
+  "liveCta": "Voir Service Trajet Santé",
+  "visuals": {
+    "homepage": "Page d’accueil de Service Trajet Santé",
+    "onboarding-3": "Formulaire du numéro d’accord et du nom du bénéficiaire",
+    "onboarding-4": "Formulaire d’accord avec des données d’exemple",
+    "onboarding-5": "Accord validé et récapitulatif des conditions du trajet",
+    "mobile": "Écrans de démarrage sur mobile",
+    "train-booking": "Résultats de recherche et sélection du tarif",
+    "booking-recap": "Récapitulatif des trajets aller et retour",
+    "payment": "Paiement et détail du coût",
+    "confirmation": "Confirmation de la réservation"
+  },
+  "captions": {
+    "homepage": "La page d’accueil présente le service et les étapes pour organiser un déplacement pour soins.",
+    "onboarding-3": "Trois étapes rendent explicites les informations nécessaires pour continuer.",
+    "onboarding-4": "Le formulaire rempli avec des données d’exemple, avant validation.",
+    "onboarding-5": "Après validation, les conditions du trajet apparaissent avant la réservation. Les valeurs sont illustratives.",
+    "mobile": "La séquence de démarrage adaptée à une seule colonne sur mobile.",
+    "train-booking": "Les trains disponibles apparaissent à côté des conditions du voyage, avec le détail des tarifs et le reste à charge avant la sélection.",
+    "booking-recap": "Le récapitulatif rassemble les trajets aller et retour pour les vérifier avant de les ajouter au panier.",
+    "payment": "L’écran de paiement distingue le prix initial, le montant pris en charge et les frais d’agence avant la saisie des coordonnées bancaires.",
+    "confirmation": "La confirmation récapitule les dates du voyage, annonce l’envoi des billets par e-mail et permet d’accéder aux réservations."
+  },
+  "bookingSteps": [
+    {
+      "id": "train-booking",
+      "title": "Choisir un train"
+    },
+    {
+      "id": "booking-recap",
+      "title": "Vérifier le voyage"
+    },
+    {
+      "id": "payment",
+      "title": "Clarifier le reste à charge"
+    },
+    {
+      "id": "confirmation",
+      "title": "Confirmer la réservation"
+    }
+  ]
+}

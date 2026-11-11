@@ -1,0 +1,117 @@
+{
+  "sections": [
+    "Présentation",
+    "Problème",
+    "Démarche",
+    "Livraison",
+    "Résultats"
+  ],
+  "quote": "« Ma voiture est en panne et je veux rentrer chez moi »",
+  "intro": "Que se passe-t-il au centre d’assistance quand un client appelle parce que sa voiture est tombée en panne en pleine campagne ? Maps aide le chargé d’assistance à trouver, organiser et réserver les transports qui permettront au client d’arriver à destination.",
+  "personaTitle": "Antoine, chargé d’assistance",
+  "personaQuote": "« Je dois les remettre en route, sans laisser passer un détail qui pourrait compliquer la suite du voyage. »",
+  "personaDetails": [
+    "Besoins : Trouver et réserver rapidement un trajet fiable, couvert par le contrat, tout en accompagnant le client au téléphone.",
+    "Frustrations : Des conditions complexes et des offres de transport dispersées rendent les solutions difficiles à comparer sereinement.",
+    "Habitudes : Recueillir les informations essentielles, comparer les trajets possibles, puis vérifier chaque étape avant de réserver."
+  ],
+  "personaBody": "Les chargés d’assistance utilisent Maps tout en parlant avec des clients dont le voyage a été interrompu. Ils doivent comprendre rapidement la situation, tenir compte des garanties et des besoins des passagers, puis comparer les transports disponibles, le tout sous pression. Leur priorité : trouver une solution fiable, qu’ils peuvent expliquer et réserver en toute confiance, sans perdre de vue les détails du trajet.",
+  "note": "Le nom du projet a été modifié, car le produit n’a pas encore été lancé.",
+  "problemTitle": "Le défi de conception",
+  "problem": "Maps devait aider les chargés d’assistance à transformer un imprévu en solution de transport concrète, pendant qu’ils étaient encore au téléphone avec le client.\n\nL’enjeu ne se limitait donc pas à afficher des résultats. Il fallait faire apparaître la complexité au bon moment, avec assez d’informations pour prendre une décision fiable, sans submerger le chargé d’assistance ni son interlocuteur pendant un appel où chaque minute compte.\n\nMon rôle : rédaction des user stories, conception des interfaces et du design system, ateliers avec les parties prenantes et collaboration avec les développeurs.",
+  "process": [
+    {
+      "title": "Des besoins aux comportements du produit",
+      "body": "L’interface devait concilier deux besoins. Pour les chargés d’assistance, une recherche rapide et facile à mener tout en échangeant avec le client. Pour le produit, assez d’informations pour vérifier les conditions de prise en charge et proposer des solutions réservables.\n\nLes informations communes à tous les trajets formaient le parcours de recherche par défaut. Les besoins particuliers, comme les coordonnées des passagers pour le train, celles du conducteur pour la location, les bagages ou les animaux, apparaissaient seulement lorsqu’ils étaient pertinents. Le produit pouvait ainsi gérer les cas complexes sans compliquer chaque recherche. Regrouper les user stories par mode de transport m’a aidée à distinguer les points communs des champs propres à chaque solution.",
+      "visuals": []
+    },
+    {
+      "title": "Concevoir pour le chargé d’assistance",
+      "body": "Après avoir vérifié les coordonnées du client, le chargé d’assistance renseigne les informations dont le système a besoin pour proposer des solutions.",
+      "visuals": [
+        "search",
+        "search-input"
+      ]
+    },
+    {
+      "title": "Rendre les solutions comparables",
+      "body": "Un trajet en train, en voiture de location ou en taxi ne se décrit pas de la même façon. J’ai identifié les critères utiles pour toutes les options, comme la durée totale, l’heure d’arrivée, le prix et les correspondances, puis je m’en suis servie pour structurer les recommandations. Des repères comme « le plus rapide » et « le moins cher » rendaient immédiatement lisible la logique de chaque proposition.",
+      "visuals": [
+        "solutions"
+      ]
+    },
+    {
+      "title": "Concevoir des trajets, pas des réservations isolées",
+      "body": "Une solution pouvait combiner un transport principal et plusieurs liaisons en taxi. J’ai conçu le trajet comme une suite continue d’étapes, pour que les opérateurs puissent comprendre les correspondances, repérer les risques et expliquer le parcours dans son ensemble.",
+      "visuals": [
+        "train",
+        "taxi-1",
+        "taxi-2",
+        "recap"
+      ]
+    },
+    {
+      "title": "Enrichir un design system existant",
+      "body": "Maps s’appuie sur un design system existant, issu de l’identité du client. Mais le produit doit évoluer et développer sa propre palette de couleurs, son langage visuel et ses composants d’interface. Au fil du projet, j’ai enrichi le design system et documenté les changements pour que toute l’équipe puisse suivre.",
+      "visuals": [
+        "system"
+      ]
+    }
+  ],
+  "deliveryTitle": "Construire le MVP, préparer la suite",
+  "delivery": "La collaboration avec les parties prenantes et les prestataires de transport, comme la SNCF, Carbookr ou Resacar, est essentielle pour définir le MVP, en tenant compte des contraintes techniques et métier.\n\nÀ mesure que de nouveaux besoins et de nouvelles idées apparaissaient, je les traduisais en user stories et en interfaces, en m’appuyant sur le design system pour préserver la cohérence du produit. La livraison était un travail continu : le design évoluait avec le développement et la documentation.",
+  "galleryTitle": "Autres écrans et cas particuliers",
+  "galleryIntro": "Une sélection d’écrans pour les parcours alternatifs, les différents états de réservation et les situations métier. Cliquez sur une miniature pour parcourir la galerie.",
+  "takeawayTitle": "Pour livrer le MVP, il a fallu composer avec beaucoup de paramètres et d’ambition",
+  "takeaways": [
+    [
+      "Rendre la complexité plus facile à gérer",
+      "J’ai appris que simplifier une interface commence par comprendre les règles qui la font fonctionner. Choisir quand demander une information comptait autant que la façon de la présenter."
+    ],
+    [
+      "Penser à la suite, sans perdre de vue la première version",
+      "Une bonne idée n’a pas besoin d’être dans la première version pour avoir sa place dans le produit. En aidant les parties prenantes à voir au-delà du MVP, j’ai gardé des pistes ouvertes tout en recentrant le périmètre initial. Pour mes prochains projets, je distinguerai ce qu’il faut construire maintenant de ce qui mérite d’être exploré avec les premiers retours utilisateurs."
+    ],
+    [
+      "Construire une compréhension commune",
+      "Traduire les besoins en user stories a rendu les discussions plus concrètes. Les parties prenantes et les développeurs pouvaient ainsi se mettre d’accord sur le comportement attendu du produit."
+    ]
+  ],
+  "gallery": "Galerie d’images",
+  "close": "Fermer la galerie",
+  "previous": "Image précédente",
+  "next": "Image suivante",
+  "open": "Ouvrir l’image",
+  "image": "Image",
+  "personaAlt": "Illustration du persona Antoine, chargé d’assistance",
+  "visuals": {
+    "search": "recherche par défaut",
+    "solutions": "page des solutions",
+    "system": "Visuel - design system",
+    "train": "réservation du train",
+    "taxi-1": "réservation de la liaison taxi 1",
+    "taxi-2": "réservation de la liaison taxi 2",
+    "recap": "récapitulatif",
+    "change-connection": "changement de liaison",
+    "alternative-solutions": "page des solutions",
+    "confirmation": "confirmation",
+    "map": "solutions sur la carte",
+    "search-input": "Recherche avec les détails du trajet",
+    "map-zoom": "Résultats avec la carte agrandie",
+    "driver": "Informations du conducteur pour une location de voiture"
+  },
+  "captions": {
+    "search": "Page de recherche : état initial.",
+    "search-input": "Page de recherche : les adresses de départ et d’arrivée permettent à la carte de refléter le trajet. Les autres blocs se déplient pour renseigner les informations selon les besoins.",
+    "solutions": "La page de solutions permet à l’opérateur de comparer les transports, les horaires et les coûts d’un coup d’œil. Ici, le train est le choix le plus logique : il ramène le bénéficiaire chez lui le plus vite. Avec une voiture de location, l’agence serait fermée à son arrivée ; il faudrait attendre le lendemain matin pour la rendre. Mais si le bénéficiaire a beaucoup de bagages, le train n’est peut-être pas adapté.",
+    "train": "Page de réservation : le trajet en train. C’est le transport principal qui amène le bénéficiaire dans sa ville de destination.",
+    "taxi-1": "Page de réservation : première liaison en taxi, du point de départ à la gare.",
+    "taxi-2": "Page de réservation : deuxième liaison en taxi, de la gare au domicile.",
+    "recap": "Le récapitulatif de réservation résume l’ensemble du trajet.",
+    "system": "Quelques composants sur lesquels j’ai travaillé.",
+    "change-connection": "Comparer les trajets et modifier une liaison.",
+    "map": "Visualiser le trajet complet sur la carte.",
+    "map-zoom": "Voir la liaison locale en taxi de plus près.",
+    "driver": "Renseigner le conducteur et les critères de location du véhicule."
+  }
+}

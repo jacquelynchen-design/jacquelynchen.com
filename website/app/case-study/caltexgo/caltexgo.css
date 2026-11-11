@@ -1,0 +1,13 @@
+.caltexgo-case .case-section { scroll-margin-top:140px; }
+.caltexgo-hero { display:grid; place-items:center; width:100%; height:400px; background:var(--case-panel); }
+.caltexgo-hero img { width:330px; height:330px; max-width:90%; object-fit:contain; }
+.caltexgo-case .case-figure figcaption { font-size:14px; line-height:1.4; font-style:italic; }
+.caltexgo-case .case-visual { cursor:zoom-in; border:0; border-radius:0; }
+.caltexgo-case .caltexgo-guideline .case-visual { max-width:800px; }
+.caltexgo-case .case-visual:hover { outline:1px solid var(--ink); outline-offset:4px; }
+@media(max-width:700px) {
+ .caltexgo-case .case-section { scroll-margin-top:132px; }
+ .caltexgo-case .case-content h1 { font-size:var(--heading-3-size); }
+ .caltexgo-hero { height:310px; }
+ .caltexgo-hero img { width:270px; height:270px; }
+}
