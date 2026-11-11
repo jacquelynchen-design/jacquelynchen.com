@@ -30,6 +30,10 @@ The publishing checkout passed both checks. The source was checked on desktop an
 
 At <=700px the three dashboard images stack and open a three-item gallery. Desktop keeps the composite and four-item gallery. Current walkthrough is v10; do not reintroduce v4. Captions sit inside paper-coloured panels. Medication logs are self-reported, with missed and not-logged states distinct.
 
+## Vercel (branch `claude/vercel-nextjs`)
+
+On this branch the site runs on standard Next.js instead of vinext, Cloudflare and the Sites plugin, so it can be hosted on Vercel. Import the repository in Vercel with Root Directory set to `website`; Vercel detects Next.js and runs `npm install` and `next build`. Locally, `npm run dev` now starts `next dev`. The `main` branch still holds the Sites setup.
+
 ## Publishing
 
 Hosting is Sites, not GitHub Pages. `.openai/hosting.json` retains the existing project identity. GitHub contains no build output, credentials or local runtime caches. Publishing requires the supported Sites workflow, not a GitHub push. Before editing for publication, open the latest Sites source to avoid overwriting newer work. Preserve access settings and homepage unless the user asks to change them.
