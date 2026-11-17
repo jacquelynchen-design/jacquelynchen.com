@@ -86,7 +86,7 @@
 
 /* Hero: "Complexity" pours in as tiny ASCII and fills from the base, solid ink rising behind (components/hero-title.tsx). */
 .hero-complexity-line { position:relative; }
-.hero-title .hero-complexity { display:inline; padding:0; margin:0; color:transparent; animation:hero-fallback 0s 4s forwards; }
+.hero-title .hero-complexity { display:inline; padding:0; margin:0; color:transparent; animation:hero-fallback 0s 6s forwards; }
 .hero-title .hero-complexity.is-solid { color:inherit; animation:none; }
 .hero-ascii { position:absolute; max-width:none; pointer-events:none; opacity:0; }
 @keyframes hero-fallback { to { color:inherit; } }
