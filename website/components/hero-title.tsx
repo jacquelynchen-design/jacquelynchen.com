@@ -6,8 +6,8 @@ import { useEffect, useRef } from 'react';
 // fills from the bottom up; solid ink rises behind the ASCII until the word is whole.
 // Characters are crisp and solid-coloured; they keep changing while they settle.
 // "into Clarity" stays static. Skipped for visitors who prefer reduced motion.
-const POUR_CHARS = '|:!;|:\'|';       // the falling stream
-const FILL_CHARS = '#%@&$8*+=';      // the settled water
+const POUR_CHARS = '.:-=+:.-=:';    // the falling stream: the light end of a classic ASCII ramp
+const FILL_CHARS = '#%@&$8*';        // the settled water: the dense end of the ramp
 const CELL_W = 6;      // css px per ASCII column
 const CELL_H = 9;      // css px per ASCII row (font size = CELL_H, so characters never overlap)
 const TOP = 9;         // css px above the letters where the pour starts
