@@ -1,17 +1,16 @@
 'use client';
 import { useEffect, useRef } from 'react';
 
-// "Complexity" fills up from the base like liquid: tiny ASCII characters rise through
-// the letter shapes, and solid ink follows them up from the bottom until the word is
-// whole. "into Clarity" stays static.
+// "Complexity" fills from the top down: tiny ASCII characters pour down through the
+// letter shapes, and solid ink follows them down until the word is whole. "into Clarity" stays static.
 // Skipped entirely for visitors who prefer reduced motion.
 const RAMP = ' .:-=+*#%@';
 const CELL_W = 4;      // css px per ASCII column
 const CELL_H = 6;      // css px per ASCII row
-const FILL = 1200;     // ms for the ASCII level to rise from the base to the top
+const FILL = 1200;     // ms for the ASCII front to travel from the top to the base
 const LAG = 450;       // ms before the solid ink starts rising behind it
-const SOLID = 1150;    // ms for the solid ink to rise from the base to the top
-const BAND = 40;       // css px of "live", flickering characters at the ASCII surface
+const SOLID = 1150;    // ms for the solid ink to travel from the top to the base
+const BAND = 40;       // css px of "live", flickering characters at the ASCII front
 
 export function HeroTitle() {
  const wordRef = useRef<HTMLSpanElement>(null);
@@ -75,13 +74,13 @@ export function HeroTitle() {
    const start = performance.now();
    const draw = (now: number) => {
     const t = now - start;
-    const level = h - (t / FILL) * (h + BAND);               // ASCII surface, css px from top
-    const solid = h - Math.max(0, (t - LAG) / SOLID) * h;    // solid ink surface
+    const level = (t / FILL) * (h + BAND);                   // ASCII front, css px from top
+    const solid = Math.max(0, (t - LAG) / SOLID) * h;        // solid ink front
     ctx.clearRect(0, 0, w, h);
     ctx.fillStyle = ink; ctx.font = asciiFont; ctx.textBaseline = 'top';
     for (const cell of cells) {
-     if (cell.y >= solid) continue;                         // already solid ink here
-     const depth = cell.y + CELL_H - level;                 // how far below the surface
+     if (cell.y + CELL_H <= solid) continue;                // already solid ink here
+     const depth = level - cell.y;                          // how far behind the front
      if (depth < 0) continue;
      const live = depth < BAND;                             // near the surface: flicker
      const v = live ? cell.cover * (0.35 + 0.65 * Math.random()) : cell.cover;
@@ -90,15 +89,15 @@ export function HeroTitle() {
      ctx.globalAlpha = live ? 0.4 + 0.6 * (depth / BAND) : 1;
      ctx.fillText(RAMP[idx], cell.x, cell.y);
     }
-    if (solid < h) {                                         // solid word, clipped below the ink line
+    if (solid > 0) {                                         // solid word, clipped above the ink line
      ctx.save(); ctx.globalAlpha = 1;
-     ctx.beginPath(); ctx.rect(0, Math.max(0, solid), w, h); ctx.clip();
+     ctx.beginPath(); ctx.rect(0, 0, w, Math.min(h, solid)); ctx.clip();
      ctx.font = font; ctx.textBaseline = 'alphabetic';
      if ('letterSpacing' in ctx) (ctx as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = style.letterSpacing;
      ctx.fillText(label, pad, pad + ascent);
      ctx.restore();
     }
-    if (solid > 0) { frame = requestAnimationFrame(draw); return; }
+    if (solid < h) { frame = requestAnimationFrame(draw); return; }
     word.classList.add('is-solid');                          // hand over to the real text
     canvas.style.opacity = '0';
    };
