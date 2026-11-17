@@ -84,7 +84,7 @@
  .home-capability { position:sticky; top:calc(68px + 24px + var(--i) * 64px); }
 }
 
-/* Hero: "Complexity" fills with tiny ASCII from the top, then solid ink follows down (components/hero-title.tsx). */
+/* Hero: "Complexity" pours in as tiny ASCII and fills from the base, solid ink rising behind (components/hero-title.tsx). */
 .hero-complexity-line { position:relative; }
 .hero-title .hero-complexity { display:inline; padding:0; margin:0; color:transparent; animation:hero-fallback 0s 4s forwards; }
 .hero-title .hero-complexity.is-solid { color:inherit; animation:none; }
