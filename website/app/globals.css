@@ -331,23 +331,23 @@ html[data-theme="dark"] .brand img { filter:url("/assets/dark-logo-ink.svg#ink")
 @media(max-width:700px) { .sante-case .case-section { scroll-margin-top:132px; } }
 
 /* One enabled-button palette across themes, including portalled gallery controls. */
-html :is(.portfolio, .maps-gallery-dialog) :is(button, .action, .case-study-cta):not(.case-visual, .gallery-preview, .gallery-thumbnail, .language, .theme-button):not(:disabled):not([aria-disabled="true"]):not([data-disabled]) {
+html :is(.portfolio, .maps-gallery-dialog) :is(button, .action, .case-study-cta):not(.case-visual, .gallery-preview, .gallery-thumbnail, .language, .theme-button, .menu-toggle):not(:disabled):not([aria-disabled="true"]):not([data-disabled]) {
  background-color:var(--button-bg);
  color:var(--button-ink);
 }
-html :is(.portfolio, .maps-gallery-dialog) :is(button, .action, .case-study-cta):not(.case-visual, .gallery-preview, .gallery-thumbnail, .language, .theme-button):not(:disabled):not([aria-disabled="true"]):not([data-disabled]):hover {
+html :is(.portfolio, .maps-gallery-dialog) :is(button, .action, .case-study-cta):not(.case-visual, .gallery-preview, .gallery-thumbnail, .language, .theme-button, .menu-toggle):not(:disabled):not([aria-disabled="true"]):not([data-disabled]):hover {
  background-color:var(--button-hover);
  color:var(--button-ink);
 }
-html[data-theme="dark"] :is(.portfolio, .maps-gallery-dialog) :is(button:not(.theme-button) .icon, .gallery-close img) {
+html[data-theme="dark"] :is(.portfolio, .maps-gallery-dialog) :is(button:not(.theme-button, .menu-toggle) .icon, .gallery-close img) {
  filter:url('/assets/dark-button-ink.svg#ink');
 }
 
 /* Dark-mode buttons use the shared lavender palette. */
 .portfolio.night, html[data-theme="dark"] { --button-bg:#e9e3ff; --button-hover:#e0d8ff; --button-ink:#191738; }
-html[data-theme="dark"] :is(.portfolio, .maps-gallery-dialog) :is(button, .action, .case-study-cta):not(.case-visual, .gallery-preview, .gallery-thumbnail, .language, .theme-button):not(:disabled):not([aria-disabled="true"]):not([data-disabled]) { background-color:var(--button-bg); color:var(--button-ink); }
-html[data-theme="dark"] :is(.portfolio, .maps-gallery-dialog) :is(button, .action, .case-study-cta):not(.case-visual, .gallery-preview, .gallery-thumbnail, .language, .theme-button):not(:disabled):not([aria-disabled="true"]):not([data-disabled]):hover { background-color:var(--button-hover); color:var(--button-ink); }
-html[data-theme="dark"] :is(.portfolio, .maps-gallery-dialog) :is(button:not(.theme-button) .icon, .gallery-close img, .case-study-cta img) { filter:url('/assets/dark-button-ink.svg#ink'); }
+html[data-theme="dark"] :is(.portfolio, .maps-gallery-dialog) :is(button, .action, .case-study-cta):not(.case-visual, .gallery-preview, .gallery-thumbnail, .language, .theme-button, .menu-toggle):not(:disabled):not([aria-disabled="true"]):not([data-disabled]) { background-color:var(--button-bg); color:var(--button-ink); }
+html[data-theme="dark"] :is(.portfolio, .maps-gallery-dialog) :is(button, .action, .case-study-cta):not(.case-visual, .gallery-preview, .gallery-thumbnail, .language, .theme-button, .menu-toggle):not(:disabled):not([aria-disabled="true"]):not([data-disabled]):hover { background-color:var(--button-hover); color:var(--button-ink); }
+html[data-theme="dark"] :is(.portfolio, .maps-gallery-dialog) :is(button:not(.theme-button, .menu-toggle) .icon, .gallery-close img, .case-study-cta img) { filter:url('/assets/dark-button-ink.svg#ink'); }
 
 /* Image frames are transparent across themes and interaction states. */
 html :is(.portfolio, .maps-gallery-dialog) :is(.case-visual, .gallery-preview, .gallery-thumbnail, .gallery-selected, .gallery-image, .persona-image),
@@ -535,3 +535,28 @@ html[data-theme="dark"] .pm8000-case .pm8000-inspector { background-color:#E8E3F
 }
 
 .footer-credit { display:block; }
+
+/* Nav bar v2 (Figma 280:21301 desktop, 367:2801 mobile). Ghost buttons (761:9190) are
+   38px squares with no fill until hover/press, grouped with 8px gaps (761:9583). */
+.site-header { --ghost-hover:#f5f8e6; --ghost-press:#f1f4df; padding:16px; border-bottom-color:#dfe1cb; }
+.night .site-header { --ghost-hover:var(--soft); --ghost-press:#3a3257; border-bottom-color:var(--line); }
+.site-header .header-tools { gap:8px; }
+.site-header .brand { min-height:38px; }
+.desktop-nav .action { min-height:38px; padding:8px 16px; }
+.site-header .language,
+.site-header .theme-button,
+.site-header .menu-toggle { width:38px; min-width:38px; height:38px; min-height:38px; padding:0; border:0; border-radius:8px; background:transparent; color:var(--ink); font:500 16px/1.4 var(--label); transition:background .2s; }
+.site-header .language:hover,
+.site-header .theme-button:hover,
+.site-header .menu-toggle:hover { background:var(--ghost-hover); color:var(--ink); }
+.site-header .language:active,
+.site-header .theme-button:active,
+.site-header .menu-toggle:active { background:var(--ghost-press); transform:none; }
+.site-header .menu-toggle .icon { width:24px; height:24px; }
+html[data-theme="dark"] .site-header .menu-toggle { background:transparent; }
+html[data-theme="dark"] .site-header .menu-toggle:hover { background:var(--ghost-hover); }
+html[data-theme="dark"] .site-header .menu-toggle:active { background:var(--ghost-press); }
+html[data-theme="dark"] .site-header .menu-toggle .icon { filter:brightness(0) invert(1); }
+@media(max-width:800px) { .site-header .menu-toggle { display:inline-flex; } }
+@media(max-width:700px) { .site-header { padding:16px; } }
+@media(max-width:380px) { .site-header { padding-inline:12px; } .site-header .header-tools { gap:4px; } }
