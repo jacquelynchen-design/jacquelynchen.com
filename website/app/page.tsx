@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { IntroCards } from '@/components/intro-cards';
+import { HeroTitle } from '@/components/hero-title';
 import { copy } from '@/lib/portfolio-copy';
 import { usePortfolio, icon } from '@/components/portfolio-shell';
 import './home.css';
@@ -37,7 +38,7 @@ export default function Home(){
  const {language}=usePortfolio(); const text=copy[language]; const fr=language==='fr'?1:0;
  return (
  <main id="main" className="home">
-  <section className="hero" id="top" aria-labelledby="hero-title"><h1 id="hero-title" lang="en"><span>Complexity</span><span><em>into</em> Clarity</span></h1></section>
+  <section className="hero" id="top" aria-labelledby="hero-title"><HeroTitle /></section>
   <section className="home-intro" id="about" aria-label={text.about}>
    <p className="intro">{text.intro}</p>
    <div className="home-work" id="work" aria-label={text.work} role="list">
