@@ -1,15 +1,17 @@
 'use client';
 import { useEffect, useRef } from 'react';
 
-// "Complexity" builds in from top to bottom as tiny ASCII characters that fill the
-// letter shapes, then settles into the solid word. "into Clarity" stays static.
+// "Complexity" fills up from the base like liquid: tiny ASCII characters rise through
+// the letter shapes, and solid ink follows them up from the bottom until the word is
+// whole. "into Clarity" stays static.
 // Skipped entirely for visitors who prefer reduced motion.
 const RAMP = ' .:-=+*#%@';
 const CELL_W = 4;      // css px per ASCII column
 const CELL_H = 6;      // css px per ASCII row
-const SWEEP = 1300;    // ms for the reveal to travel top → bottom
-const SETTLE = 650;    // ms for the ASCII to hand over to the solid word
-const BAND = 46;       // css px of "live", flickering characters behind the reveal edge
+const FILL = 1200;     // ms for the ASCII level to rise from the base to the top
+const LAG = 450;       // ms before the solid ink starts rising behind it
+const SOLID = 1150;    // ms for the solid ink to rise from the base to the top
+const BAND = 40;       // css px of "live", flickering characters at the ASCII surface
 
 export function HeroTitle() {
  const wordRef = useRef<HTMLSpanElement>(null);
@@ -67,24 +69,37 @@ export function HeroTitle() {
    ctx.fillStyle = style.getPropertyValue('--ink') || getComputedStyle(document.documentElement).getPropertyValue('--ink') || '#1700c4';
    canvas.style.opacity = '1';
 
+   const ink = ctx.fillStyle as string;
+   const asciiFont = ctx.font;
+   const label = text.textContent ?? '';
    const start = performance.now();
    const draw = (now: number) => {
     const t = now - start;
-    const edge = (t / SWEEP) * (h + BAND);         // reveal line, css px from top
+    const level = h - (t / FILL) * (h + BAND);               // ASCII surface, css px from top
+    const solid = h - Math.max(0, (t - LAG) / SOLID) * h;    // solid ink surface
     ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = ink; ctx.font = asciiFont; ctx.textBaseline = 'top';
     for (const cell of cells) {
-     const age = edge - cell.y;                    // how long ago the edge passed
-     if (age < 0) continue;
-     const live = age < BAND;                      // near the edge: flicker
-     const level = live ? cell.cover * (0.35 + 0.65 * Math.random()) : cell.cover;
+     if (cell.y >= solid) continue;                         // already solid ink here
+     const depth = cell.y + CELL_H - level;                 // how far below the surface
+     if (depth < 0) continue;
+     const live = depth < BAND;                             // near the surface: flicker
+     const v = live ? cell.cover * (0.35 + 0.65 * Math.random()) : cell.cover;
      const jitter = live ? Math.random() : cell.seed;
-     const idx = Math.max(1, Math.min(RAMP.length - 1, Math.round(level * (RAMP.length - 1) + (jitter - 0.5) * 2)));
-     ctx.globalAlpha = live ? 0.45 + 0.55 * (age / BAND) : 1;
+     const idx = Math.max(1, Math.min(RAMP.length - 1, Math.round(v * (RAMP.length - 1) + (jitter - 0.5) * 2)));
+     ctx.globalAlpha = live ? 0.4 + 0.6 * (depth / BAND) : 1;
      ctx.fillText(RAMP[idx], cell.x, cell.y);
     }
-    if (t < SWEEP) { frame = requestAnimationFrame(draw); return; }
-    word.classList.add('is-solid');                 // solid word fades in (CSS)
-    canvas.style.transition = `opacity ${SETTLE}ms ease`;
+    if (solid < h) {                                         // solid word, clipped below the ink line
+     ctx.save(); ctx.globalAlpha = 1;
+     ctx.beginPath(); ctx.rect(0, Math.max(0, solid), w, h); ctx.clip();
+     ctx.font = font; ctx.textBaseline = 'alphabetic';
+     if ('letterSpacing' in ctx) (ctx as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = style.letterSpacing;
+     ctx.fillText(label, pad, pad + ascent);
+     ctx.restore();
+    }
+    if (solid > 0) { frame = requestAnimationFrame(draw); return; }
+    word.classList.add('is-solid');                          // hand over to the real text
     canvas.style.opacity = '0';
    };
    frame = requestAnimationFrame(draw);
