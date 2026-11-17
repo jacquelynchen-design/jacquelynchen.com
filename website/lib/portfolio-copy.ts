@@ -6,19 +6,19 @@ export const copy = {
   capabilities: [
   [
     "5 years in visual design",
-    "I built my visual design foundation working as a graphic designer at advertising agencies. TBWA, BBH and Tribal are where I refined my design instincts, working across brand identities, marketing materials, and even illustration."
+    "I built my visual design foundation working as a graphic designer at advertising agencies. TBWA, BBH and Tribal are where I refined my design instincts, working across brand identities, marketing materials, and illustration."
   ],
   [
     "5 years in product design",
-    "In 2020, I transitioned fully into UX and product design, where my curiosity takes me far. I bring that questioning instinct to specialist tools and everyday services alike. Currently, I’m using AI tools to increase the productivity and breadth of my workflow and output."
+    "In 2020, I transitioned fully into UX and product design, where my curiosity takes me far. Why this step? What happens next? Does that really need another click? I bring that questioning instinct to specialist tools and everyday services alike."
   ],
   [
-    "How I work",
-    "A pixel-perfect screen is only the beginning of my work. It often feels like navigating a ship in a foggy ocean, managing several moving parts at the same time. It’s important for me to collaborate closely with the team to understand requirements, understand constraints and turn ambiguity into something we can act on."
+    "What I do",
+    "I ask questions, untangle requirements and turn them into flows and interfaces that make it easy for someone to get their tasks done. Then I get into the details with stakeholders and developers, because a pixel-perfect screen is only the beginning."
   ],
   [
     "What I’ve done",
-    "I’ve created public-facing work for Singapore Airlines, Assurance Maladie, Scoot, Netflix, Standard Chartered... just to name a few. I’ve stepped into the worlds of building inspectors, job seekers and assistance operators. Getting to understand someone’s working day is one of my favourite parts of the job."
+    "I’ve stepped into the worlds of building inspectors, job seekers and assistance operators, designing the iOS app for rebar detectors, Scoot’s career portal and multi-mode transport booking services. Getting to understand someone else’s working day is one of my favourite parts of the job."
   ]
 ],
   quotes: ['My car broke down and I want to go home', 'I need a replacement vehicle', 'I need to travel long distance to see a doctor', 'I want to work at Scoot Airways', 'I need to report on structural damage'],
