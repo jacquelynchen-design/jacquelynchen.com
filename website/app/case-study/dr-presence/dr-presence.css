@@ -8,6 +8,8 @@
 .dr-presence-case .dr-scenario { gap:32px; }
 .dr-presence-case .dr-trends { gap:48px; }
 .dr-presence-case .dr-prose { display:flex; flex-direction:column; gap:28px; }
+/* Title uses the Figma Header 2 style (New Spirit Condensed 56/110%). */
+.portfolio .dr-presence-case .case-content h1 { font:400 56px/1.1 var(--display); letter-spacing:0; }
 .dr-presence-case h3 { margin:0; font:600 24px/1 'Barlow Semi Condensed',var(--body); }
 .dr-presence-case ul { margin:0; padding-inline-start:30px; list-style:disc; font:400 20px/1.4 var(--body); }
 .dr-presence-case .case-section-label { min-height:48px; }
@@ -66,6 +68,7 @@ html[data-theme="dark"] .dr-gallery-dialog .gallery-close img { filter:brightnes
  .dr-flow-arrow:nth-child(4) { display:none; }
 }
 @media(max-width:700px) {
+ .portfolio .dr-presence-case .case-content h1 { font-size:40px; }
  .dr-presence-case .dr-dashboard-composite { display:none; }
  .dr-dashboard-stack { display:grid; grid-template-columns:minmax(0,1fr); justify-items:center; gap:32px; }
  .dr-presence-case .dr-dashboard-screen { width:min(100%,390px); height:auto; aspect-ratio:auto; padding:0; border:0; border-radius:0; box-shadow:none; }

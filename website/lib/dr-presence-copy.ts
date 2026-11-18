@@ -3,7 +3,7 @@
 const en = {
  sections: ['Overview', 'Audit', 'Research', 'Design', 'Conclusion'],
  navLabel: 'Case-study sections',
- title: 'Dr Presence: Supporting the GP’s next decision',
+ title: 'Dr Presence (doctor-facing app): Supporting the GP’s next decision',
  quote: '“Could we do follow up visits remotely and reliably?”',
  gifAlt: 'Animated walkthrough of the Dr Presence doctor app, from the dashboard to Pauline’s measurements and review.',
  gifCaption: 'The final screens',
@@ -81,7 +81,7 @@ const en = {
 const fr: typeof en = {
  sections: ['Présentation', 'Audit', 'Recherche', 'Design', 'Conclusion'],
  navLabel: 'Sections de l’étude de cas',
- title: 'Dr Presence : accompagner la prochaine décision du généraliste',
+ title: 'Dr Presence (app médecin) : accompagner la prochaine décision du généraliste',
  quote: '« Et si les consultations de suivi pouvaient se faire à distance, en toute fiabilité ? »',
  gifAlt: 'Parcours animé de l’app médecin Dr Presence, du dashboard jusqu’aux mesures et au bilan de Pauline.',
  gifCaption: 'Les écrans finaux',
