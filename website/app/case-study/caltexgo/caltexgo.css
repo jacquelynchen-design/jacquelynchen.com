@@ -7,7 +7,7 @@
 .caltexgo-case .case-visual:hover { outline:1px solid var(--ink); outline-offset:4px; }
 @media(max-width:700px) {
  .caltexgo-case .case-section { scroll-margin-top:132px; }
- .caltexgo-case .case-content h1 { font-size:var(--heading-3-size); }
+
  .caltexgo-hero { height:310px; }
  .caltexgo-hero img { width:270px; height:270px; }
 }
