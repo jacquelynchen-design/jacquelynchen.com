@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react';
 // letters cover becomes a "piece": a tinted square carrying an ASCII glyph whose density
 // follows how much ink the cell holds. Pieces start as small dots a short distance from
 // their cell, drift in and grow into squares (the reverse of a word bursting into dots).
-// Once every piece has landed, the pieces shrink step by step (each step ~0.72× the last,
+// Once every piece has landed, the pieces shrink step by step (each step 0.8× the last,
 // glyphs included while they're still legible) while the blues settle into the heading
 // colour and the grid fades away. The last step is the letterforms themselves, so the
 // hand-over to the real text is invisible.
@@ -17,11 +17,12 @@ const GLYPHS = ' .:-+xzZ%X#';                                  // sparse → den
 const FLIGHT = 720;     // ms for one piece to drift in
 const STAGGER = 950;    // ms over which pieces set off
 const HOLD = 260;       // ms with every piece landed before the refinement
-const STEP = 95;        // ms per shrink step
-const SHRINK = 0.72;    // scale of each step's pieces vs the previous one
+const SHRINK_MS = 620;  // ms for the whole shrink, eased in and out across the steps
+const SHRINK = 0.8;     // scale of each step's pieces vs the previous one (20% smaller)
 const GRID_IN = 600;    // ms for the grid to fade in
 
 const easeOut = (x: number) => 1 - (1 - x) ** 3;
+const easeInOut = (x: number) => (x < 0.5 ? 4 * x ** 3 : 1 - (-2 * x + 2) ** 3 / 2);
 const hex = (h: string) => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
 const mix = (a: number[], b: number[], k: number) => a.map((v, i) => Math.round(v + (b[i] - v) * k));
 const rgb = (c: number[], a = 1) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
@@ -102,7 +103,7 @@ export function HeroTitle() {
     pieces.push({ x, y, sx: x + Math.cos(a) * d, sy: y + Math.sin(a) * d, cov, delay: rand() ** 1.4 * STAGGER, glyph: glyphFor(cov) });
    }
 
-   // Shrink levels after the landed pieces: each ~0.72× the last, down to 1 device px.
+   // Shrink levels after the landed pieces: each 0.8× the last, down to 1 device px.
    const levels: number[] = [];
    for (let sz = cell * SHRINK; sz > 1.5; sz *= SHRINK) { const v = Math.round(sz); if (v !== levels[levels.length - 1]) levels.push(v); }
    levels.push(1);
@@ -150,10 +151,11 @@ export function HeroTitle() {
     const ink = syncGrid();
     ctx.clearRect(0, 0, W, H);
     const shrinkT = t - landAll - HOLD;
-    const step = shrinkT < 0 ? -1 : Math.floor(shrinkT / STEP);
-    if (step >= blocks.length) { finish(); return; }
+    if (shrinkT >= SHRINK_MS) { finish(); return; }
+    const sp = shrinkT < 0 ? 0 : easeInOut(shrinkT / SHRINK_MS);              // eased shrink progress
+    const step = shrinkT < 0 ? -1 : Math.min(blocks.length - 1, Math.floor(sp * blocks.length));
     // Grid fades in at the start and fades away while the pieces shrink, gone on the last frame.
-    const gridOut = shrinkT < 0 ? 1 : 1 - Math.min(1, shrinkT / (blocks.length * STEP));
+    const gridOut = 1 - sp;
     ctx.globalAlpha = Math.min(1, t / GRID_IN) * gridOut; ctx.drawImage(grid, 0, 0); ctx.globalAlpha = 1;
 
     if (step < 0) {
@@ -183,7 +185,7 @@ export function HeroTitle() {
      ctx.globalAlpha = 1;
     } else {
      // Shrinking pieces while the blues settle into the heading colour.
-     const k = (step + 1) / blocks.length;
+     const k = Math.max(sp, (step + 1) / blocks.length);
      const tones = blues.map(b => mix(b, ink, k));
      const { s, list, font: gf } = blocks[step];
      for (const b of list) { ctx.globalAlpha = s === 1 ? b.cov : Math.min(1, b.cov * 1.15); ctx.fillStyle = rgb(tones[shade(b.cov)]); ctx.fillRect(b.x, b.y, s, s); }
