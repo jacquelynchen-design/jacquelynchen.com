@@ -16,12 +16,13 @@ const PALETTE = ['#A2A6D9', '#747BCD', '#4A52C7', '#1400BD'];  // light → deep
 const GLYPHS = ' .:-+xzZ%X#';                                  // sparse → dense
 const FLIGHT = 720;     // ms for one piece to drift in
 const STAGGER = 950;    // ms over which pieces set off
-const SHRINK_MS = 700;  // ms for the whole shrink, eased in and out across the steps
+const SHRINK_MS = 900;  // ms for the whole shrink, eased in across the steps
+const OVERLAP = 600;    // ms the shrink starts before the last piece lands, so motion never stops
 const SHRINK = 0.8;     // scale of each step's pieces vs the previous one (20% smaller)
 const GRID_IN = 600;    // ms for the grid to fade in
 
 const easeOut = (x: number) => 1 - (1 - x) ** 2;   // soft landing without a long, still-looking tail
-const easeInOut = (x: number) => (x < 0.5 ? 2 * x * x : 1 - (-2 * x + 2) ** 2 / 2);
+const easeIn = (x: number) => x ** 1.4;
 const hex = (h: string) => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
 const rgb = (c: number[], a = 1) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
 const shade = (cov: number) => (cov > 0.85 ? 3 : cov > 0.6 ? 2 : cov > 0.35 ? 1 : 0);
@@ -199,14 +200,43 @@ export function HeroTitle() {
 
    const glyphFont = `500 ${Math.round(cell * 0.72)}px ui-monospace, SFMono-Regular, Menlo, monospace`;
    const landAll = STAGGER + FLIGHT;
+   // Pieces drifting in, drawn at time t. Once the shrink starts this is the live first layer,
+   // so pieces still in flight keep moving while everything begins to shrink.
+   const drawPieces = (c: CanvasRenderingContext2D, t: number) => {
+    c.font = glyphFont; c.textAlign = 'center'; c.textBaseline = 'middle';
+    for (const p of pieces) {
+     const k = Math.min(1, Math.max(0, (t - p.delay) / FLIGHT));
+     if (k <= 0) continue;
+     const e = easeOut(k);
+     const x = p.sx + (p.x - p.sx) * e, y = p.sy + (p.y - p.sy) * e;
+     const size = cell * (0.3 + 0.7 * e);
+     const off = (cell - size) / 2;
+     const tone = shade(p.cov);
+     c.globalAlpha = Math.min(1, k * 3);
+     c.fillStyle = PALETTE[tone];
+     c.beginPath();
+     c.roundRect(x + off, y + off, size, size, (size / 2) * (1 - e));   // dot → square
+     c.fill();
+     if (e > 0.55) {
+      // Glyphs flicker while the piece settles, then lock to their density.
+      const ch = k < 1 ? GLYPHS[1 + Math.floor(Math.random() * (GLYPHS.length - 1))] : p.glyph;
+      c.globalAlpha *= Math.min(1, (e - 0.55) / 0.3) * 0.85;
+      c.fillStyle = tone >= 2 ? '#fff' : PALETTE[3];
+      c.fillText(ch, x + cell / 2, y + cell / 2 + cell * 0.04);
+     }
+    }
+    c.globalAlpha = 1;
+   };
+   const live = document.createElement('canvas'); live.width = W; live.height = H;
+   const lv = live.getContext('2d')!;
    const start = performance.now();
    const draw = (now: number) => {
     const t = now - start;
     const ink = syncGrid();
     ctx.clearRect(0, 0, W, H);
-    const shrinkT = t - landAll;   // the shrink starts the moment the last piece lands
+    const shrinkT = t - (landAll - OVERLAP);   // starts while the last pieces are still landing
     if (shrinkT >= SHRINK_MS) { finish(); return; }
-    const sp = shrinkT < 0 ? 0 : easeInOut(shrinkT / SHRINK_MS);              // eased shrink progress
+    const sp = shrinkT < 0 ? 0 : easeIn(shrinkT / SHRINK_MS);   // eases in, keeps moving to the end (no settle-pause)
     const step = shrinkT < 0 ? -1 : 0;
     // Grid fades in at the start and fades away while the pieces shrink, gone on the last frame.
     const gridOut = 1 - sp;
@@ -214,31 +244,9 @@ export function HeroTitle() {
 
     // Render the shrink layers ahead of time, one per frame while the pieces fly in, so the
     // shrink never stalls on a frame that has to build a layer.
-    if (step < 0) for (let i = 0; i <= levels.length; i++) if (!cache.has(i)) { layerAt(i); break; }
+    if (step < 0) for (let i = 1; i <= levels.length; i++) if (!cache.has(i)) { layerAt(i); break; }
     if (step < 0) {
-     // Pieces drifting in.
-     ctx.font = glyphFont; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-     for (const p of pieces) {
-      const k = Math.min(1, Math.max(0, (t - p.delay) / FLIGHT));
-      if (k <= 0) continue;
-      const e = easeOut(k);
-      const x = p.sx + (p.x - p.sx) * e, y = p.sy + (p.y - p.sy) * e;
-      const size = cell * (0.3 + 0.7 * e);
-      const off = (cell - size) / 2;
-      const tone = shade(p.cov);
-      ctx.globalAlpha = Math.min(1, k * 3);
-      ctx.fillStyle = PALETTE[tone];
-      ctx.beginPath();
-      ctx.roundRect(x + off, y + off, size, size, (size / 2) * (1 - e));   // dot → square
-      ctx.fill();
-      if (e > 0.55) {
-       // Glyphs flicker while the piece settles, then lock to their density.
-       const ch = k < 1 ? GLYPHS[1 + Math.floor(Math.random() * (GLYPHS.length - 1))] : p.glyph;
-       ctx.globalAlpha *= Math.min(1, (e - 0.55) / 0.3) * 0.85;
-       ctx.fillStyle = tone >= 2 ? '#fff' : PALETTE[3];
-       ctx.fillText(ch, x + cell / 2, y + cell / 2 + cell * 0.04);
-      }
-     }
+     drawPieces(ctx, t);
      ctx.globalAlpha = 1;
     } else {
      // Shrinking pieces: cross-fade the two nearest levels ('lighter' adds them, which is an
@@ -246,7 +254,9 @@ export function HeroTitle() {
      const u = sp * levels.length, i = Math.min(levels.length - 1, Math.floor(u)), f = u - i;
      mx.globalCompositeOperation = 'source-over'; mx.globalAlpha = 1; mx.clearRect(0, 0, W, H);
      mx.globalCompositeOperation = 'lighter';
-     mx.globalAlpha = 1 - f; mx.drawImage(layerAt(i), 0, 0);
+     let first = layerAt(i);
+     if (i === 0) { lv.clearRect(0, 0, W, H); drawPieces(lv, t); first = live; }
+     mx.globalAlpha = 1 - f; mx.drawImage(first, 0, 0);
      if (f > 0) { mx.globalAlpha = f; mx.drawImage(layerAt(i + 1), 0, 0); }
      mx.globalCompositeOperation = 'source-atop'; mx.globalAlpha = sp; mx.fillStyle = rgb(ink); mx.fillRect(0, 0, W, H);
      ctx.drawImage(mixed, 0, 0);
