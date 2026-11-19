@@ -592,9 +592,35 @@ html[data-theme="dark"] .site-header .menu-toggle .icon { filter:brightness(0) i
 .site-header.is-scrolled:not(.menu-is-open) :is(.brand,.header-tools) { transform:scale(.75); }
 .site-header.is-scrolled:not(.menu-is-open) .desktop-nav { transform:translateX(25px) scale(.75); }
 /* Things that sit under the bar follow its height. */
+/* Case pages: the header is sticky (in flow), so shrinking it would pull the page up by 17px,
+   shift the scroll position and flip the nav back. A matching bottom margin keeps its flow height at 70px. */
+.case-site .site-header { margin-bottom:0; transition:height .35s cubic-bezier(.22,1,.36,1), margin-bottom .35s cubic-bezier(.22,1,.36,1), padding .35s cubic-bezier(.22,1,.36,1), border-bottom-width .35s; }
+.case-site .site-header.is-scrolled:not(.menu-is-open) { margin-bottom:17px; }
 .case-nav { transition:top .35s cubic-bezier(.22,1,.36,1); }
 .portfolio:has(.site-header.is-scrolled:not(.menu-is-open)) .case-nav { top:53px; }
 @media (max-width:700px) and (prefers-reduced-motion:no-preference) {
  .portfolio:has(.site-header.is-scrolled:not(.menu-is-open)) .home-capability { top:calc(53px + 24px + var(--i) * 64px); }
 }
 @media (prefers-reduced-motion:reduce) { .site-header,.site-header .brand,.site-header .desktop-nav,.site-header .header-tools,.case-nav { transition:none; } }
+
+/* Case study switcher + footer, updated dimensions (Figma 441:2435, button states 788:11774 / 788:11781).
+   Switcher halves: 48px padding, 56px arrows, 24px gap, Header 3 names.
+   States: light Pink 100 → hover Pink 200 → pressed #fbd3ef; dark #e9e3ff → hover #e0d8ff → pressed #d8cfff. */
+.project-navigation { --switch-bg:#ffebf7; --switch-hover:#ffddf5; --switch-press:#fbd3ef; background:transparent; }
+.portfolio.night .project-navigation { --switch-bg:#e9e3ff; --switch-hover:#e0d8ff; --switch-press:#d8cfff; background:transparent; color:#191738; }
+.project-navigation a { background:var(--switch-bg); transition:background-color .2s; }
+.project-navigation a:hover,.portfolio.night .project-navigation a:hover { background:var(--switch-hover); }
+.project-navigation a:active,.portfolio.night .project-navigation a:active { background:var(--switch-press); }
+.project-navigation a:focus-visible { outline:2px solid currentColor; outline-offset:-6px; }
+.project-navigation img { width:56px; height:56px; }
+@media (max-width:1100px) { .project-navigation img { width:48px; height:48px; } }
+@media (max-width:700px) { .project-navigation img { width:28px; height:28px; } }
+
+/* Footer: the "Email me" row is 72px tall and the 102px arrow overflows it evenly; the link row
+   is text height (22px) with the 44px touch target kept by negative margins. */
+@media (min-width:701px) {
+ .portfolio .footer .email-link { height:72px; }
+ .footer-bottom a { min-height:44px; padding:11px 0; margin-block:-11px; }
+}
+.footer-credit p { display:flex; align-items:center; gap:4px; font:500 var(--fs-eyebrow)/1.4 var(--label); }
+.copyright-mark { font:400 var(--fs-body-l)/1 var(--body); }

@@ -10,7 +10,7 @@ export function ProjectNavigation(){
  if(index<0)return null;
  const previous=projects[(index+projects.length-1)%projects.length],next=projects[(index+1)%projects.length];
  return <nav className="project-navigation" aria-label={language==='fr'?'Parcourir les projets':'Browse projects'}>
- <a href={`/case-study/${previous[0]}`} aria-label={`${language==='fr'?'Projet précédent':'Previous project'}: ${previous[1]}`}><Image unoptimized src="/assets/project-previous.svg" width={72} height={72} alt=""/><span>{previous[1]}</span></a>
- <a href={`/case-study/${next[0]}`} aria-label={`${language==='fr'?'Projet suivant':'Next project'}: ${next[1]}`}><span>{next[1]}</span><Image unoptimized src="/assets/project-next.svg" width={72} height={72} alt=""/></a>
+ <a href={`/case-study/${previous[0]}`} aria-label={`${language==='fr'?'Projet précédent':'Previous project'}: ${previous[1]}`}><Image unoptimized src="/assets/project-previous.svg" width={56} height={56} alt=""/><span>{previous[1]}</span></a>
+ <a href={`/case-study/${next[0]}`} aria-label={`${language==='fr'?'Projet suivant':'Next project'}: ${next[1]}`}><span>{next[1]}</span><Image unoptimized src="/assets/project-next.svg" width={56} height={56} alt=""/></a>
  </nav>;
 }
