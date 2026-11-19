@@ -578,3 +578,23 @@ html[data-theme="dark"] .site-header .menu-toggle .icon { filter:brightness(0) i
 .case-content h2,.case-content .case-lead { font-size:var(--fs-h4); line-height:var(--lh-h4); }
 .case-content > p:not(.case-note,.case-lead),.case-figure figcaption,.gallery-selected figcaption,.case-project-details-content :is(p,li,dd) { font-size:var(--fs-body-l); line-height:var(--lh-body); }
 .project-navigation a { font-size:var(--fs-h2); }
+
+/* Compact nav bar (Figma 780:11461 desktop, 780:11591 mobile): once the page scrolls,
+   the bar and everything in it shrink to 0.75x. Height 70 → 53, padding 16 → 12. The
+   logo scales from its left edge and the buttons from the right edge, so the
+   layout never reflows. The desktop buttons also slide right by a quarter of the
+   ghost group plus the gap (0.25 × (84 + 16) = 25px) to keep the Figma spacing. */
+.site-header { height:70px; min-height:0; padding-block:0; transition:height .35s cubic-bezier(.22,1,.36,1), padding .35s cubic-bezier(.22,1,.36,1), border-bottom-width .35s; }
+.site-header .brand,.site-header .desktop-nav,.site-header .header-tools { transition:transform .35s cubic-bezier(.22,1,.36,1); }
+.site-header .brand { transform-origin:left center; }
+.site-header .desktop-nav,.site-header .header-tools { transform-origin:right center; }
+.site-header.is-scrolled:not(.menu-is-open) { height:53px; padding-inline:12px; border-bottom-width:.75px; }
+.site-header.is-scrolled:not(.menu-is-open) :is(.brand,.header-tools) { transform:scale(.75); }
+.site-header.is-scrolled:not(.menu-is-open) .desktop-nav { transform:translateX(25px) scale(.75); }
+/* Things that sit under the bar follow its height. */
+.case-nav { transition:top .35s cubic-bezier(.22,1,.36,1); }
+.portfolio:has(.site-header.is-scrolled:not(.menu-is-open)) .case-nav { top:53px; }
+@media (max-width:700px) and (prefers-reduced-motion:no-preference) {
+ .portfolio:has(.site-header.is-scrolled:not(.menu-is-open)) .home-capability { top:calc(53px + 24px + var(--i) * 64px); }
+}
+@media (prefers-reduced-motion:reduce) { .site-header,.site-header .brand,.site-header .desktop-nav,.site-header .header-tools,.case-nav { transition:none; } }
