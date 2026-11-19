@@ -16,7 +16,7 @@ const flowIcons = ['phone.svg', 'readings.svg', 'review.svg', 'phone.svg'];
 const bold = (text: string) => text.split('**').map((part, index) => index % 2 ? <strong key={index}>{part}</strong> : part);
 
 export default function DrPresenceCaseStudy() {
- const { language } = usePortfolio();
+ const { language, theme } = usePortfolio();
  const t = drPresenceCopy[language];
  const visuals = t.visuals.map((item, index) => ({ ...item, src: visualSources[index] }));
  const dashboardScreens = t.dashboardScreens.map((item, index) => ({ ...item, src: dashboardSources[index] }));
@@ -74,7 +74,7 @@ export default function DrPresenceCaseStudy() {
     <h1 id="dr-title">{t.title}</h1>
     <div className="dr-content-stack">
      <p className="case-lead">{t.quote}</p>
-     <figure className="case-figure dr-figure dr-gif-figure"><div className="dr-gif-stage"><img src={assets + 'dr-presence-prototype-v11.gif'} width={414} height={868} alt={t.gifAlt} decoding="async" /></div><figcaption>{t.gifCaption}</figcaption></figure>
+     <figure className="case-figure dr-figure dr-gif-figure"><div className="dr-gif-stage"><img src={assets + (theme === 'dark' ? 'dr-presence-prototype-v11-dark.gif' : 'dr-presence-prototype-v11-light.gif')} width={414} height={868} alt={t.gifAlt} decoding="async" /></div><figcaption>{t.gifCaption}</figcaption></figure>
      <div className="dr-prose">{t.intro.map(p => <p key={p}>{bold(p)}</p>)}</div>
      <CaseProjectDetails language={language}>{t.details.map(lines => <p key={lines[0]}>{lines[0]}<br />{lines[1]}</p>)}</CaseProjectDetails>
     </div>
