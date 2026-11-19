@@ -6,9 +6,10 @@ import { useEffect, useRef } from 'react';
 // letters cover becomes a "piece": a tinted square carrying an ASCII glyph whose density
 // follows how much ink the cell holds. Pieces start as small dots a short distance from
 // their cell, drift in and grow into squares (the reverse of a word bursting into dots).
-// Once every piece has landed, the cells refine step by step (cell → ½ → ¼ → 2px → 1px)
-// while the blues settle into the heading colour, and the last step is the letterforms
-// themselves, so the hand-over to the real text is invisible.
+// Once every piece has landed, the pieces shrink step by step (each step ~0.72× the last,
+// glyphs included while they're still legible) while the blues settle into the heading
+// colour and the grid fades away. The last step is the letterforms themselves, so the
+// hand-over to the real text is invisible.
 // "into Clarity" stays static. Visitors who prefer reduced motion get the final state.
 
 const PALETTE = ['#A2A6D9', '#747BCD', '#4A52C7', '#1400BD'];  // light → deep, from Jac's swatches
@@ -16,7 +17,8 @@ const GLYPHS = ' .:-+xzZ%X#';                                  // sparse → den
 const FLIGHT = 720;     // ms for one piece to drift in
 const STAGGER = 950;    // ms over which pieces set off
 const HOLD = 260;       // ms with every piece landed before the refinement
-const STEP = 110;       // ms per refinement step
+const STEP = 95;        // ms per shrink step
+const SHRINK = 0.72;    // scale of each step's pieces vs the previous one
 const GRID_IN = 600;    // ms for the grid to fade in
 
 const easeOut = (x: number) => 1 - (1 - x) ** 3;
@@ -37,7 +39,7 @@ export function HeroTitle() {
   const word = wordRef.current, canvas = canvasRef.current;
   if (!word || !canvas) return;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let frame = 0, cancelled = false, observer: MutationObserver | undefined;
+  let frame = 0, cancelled = false;
 
   const run = async () => {
    await document.fonts.ready;
@@ -100,17 +102,19 @@ export function HeroTitle() {
     pieces.push({ x, y, sx: x + Math.cos(a) * d, sy: y + Math.sin(a) * d, cov, delay: rand() ** 1.4 * STAGGER, glyph: glyphFor(cov) });
    }
 
-   // Refinement levels after the ASCII cells: ½, ¼ of a cell, then 2 and 1 device px.
-   const levels = [...new Set([Math.round(cell / 2), Math.round(cell / 4), 2, 1].map(s => Math.max(1, s)))].sort((a, b) => b - a);
+   // Shrink levels after the landed pieces: each ~0.72× the last, down to 1 device px.
+   const levels: number[] = [];
+   for (let sz = cell * SHRINK; sz > 1.5; sz *= SHRINK) { const v = Math.round(sz); if (v !== levels[levels.length - 1]) levels.push(v); }
+   levels.push(1);
    const blocks = levels.map(s => {
-    const list: { x: number; y: number; cov: number }[] = [];
-    for (let y = 0; y < H; y += s) for (let x = 0; x < W; x += s) { const cov = coverage(x, y, s); if (cov > 0.02) list.push({ x, y, cov }); }
-    return { s, list };
+    const list: { x: number; y: number; cov: number; glyph: string }[] = [];
+    for (let y = 0; y < H; y += s) for (let x = 0; x < W; x += s) { const cov = coverage(x, y, s); if (cov > 0.02) list.push({ x, y, cov, glyph: glyphFor(cov) }); }
+    return { s, list, font: s / dpr >= 5 ? `500 ${Math.round(s * 0.72)}px ui-monospace, SFMono-Regular, Menlo, monospace` : '' };
    });
 
    // Colours. Ink is re-read each frame, since the light/dark theme can settle after start.
    const probe = document.createElement('canvas').getContext('2d', { willReadFrequently: true })!;
-   const toRgb = (c: string) => { probe.clearRect(0, 0, 1, 1); probe.fillStyle = c; probe.fillRect(0, 0, 1, 1); return [...probe.getImageData(0, 0, 1, 1).data.slice(0, 3)]; };
+   const toRgb = (c: string) => { probe.clearRect(0, 0, 1, 1); probe.fillStyle = c; probe.fillRect(0, 0, 1, 1); return Array.from(probe.getImageData(0, 0, 1, 1).data.slice(0, 3)); };
    const inkNow = () => toRgb(getComputedStyle(word.closest('h1') ?? document.body).color);
    const blues = PALETTE.map(hex);
 
@@ -133,18 +137,10 @@ export function HeroTitle() {
    let gridInk = '';
    const syncGrid = () => { const ink = inkNow(); const k = ink.join(); if (k !== gridInk) { gridInk = k; paintGrid(ink); } return ink; };
 
-   // Final state: the grid with the letters cut out, so the real text shows through cleanly.
-   const finish = () => {
-    syncGrid();
-    ctx.globalAlpha = 1; ctx.clearRect(0, 0, W, H);
-    ctx.drawImage(grid, 0, 0);
-    ctx.globalCompositeOperation = 'destination-out'; ctx.drawImage(mask, 0, 0); ctx.globalCompositeOperation = 'source-over';
-    word.classList.add('is-solid');
-   };
-   canvas.style.opacity = '1';
-   observer = new MutationObserver(() => { if (word.classList.contains('is-solid')) finish(); });
-   observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'class'] });
+   // Final state: the real text, with the grid fully faded out.
+   const finish = () => { ctx.clearRect(0, 0, W, H); canvas.style.opacity = '0'; word.classList.add('is-solid'); };
    if (reduced) { finish(); return; }
+   canvas.style.opacity = '1';
 
    const glyphFont = `500 ${Math.round(cell * 0.72)}px ui-monospace, SFMono-Regular, Menlo, monospace`;
    const landAll = STAGGER + FLIGHT;
@@ -153,10 +149,12 @@ export function HeroTitle() {
     const t = now - start;
     const ink = syncGrid();
     ctx.clearRect(0, 0, W, H);
-    ctx.globalAlpha = Math.min(1, t / GRID_IN); ctx.drawImage(grid, 0, 0); ctx.globalAlpha = 1;
-
-    const step = t < landAll + HOLD ? -1 : Math.floor((t - landAll - HOLD) / STEP);
+    const shrinkT = t - landAll - HOLD;
+    const step = shrinkT < 0 ? -1 : Math.floor(shrinkT / STEP);
     if (step >= blocks.length) { finish(); return; }
+    // Grid fades in at the start and fades away while the pieces shrink, gone on the last frame.
+    const gridOut = shrinkT < 0 ? 1 : 1 - Math.min(1, shrinkT / (blocks.length * STEP));
+    ctx.globalAlpha = Math.min(1, t / GRID_IN) * gridOut; ctx.drawImage(grid, 0, 0); ctx.globalAlpha = 1;
 
     if (step < 0) {
      // Pieces drifting in.
@@ -184,11 +182,21 @@ export function HeroTitle() {
      }
      ctx.globalAlpha = 1;
     } else {
-     // Refinement: finer and finer blocks while the blues settle into the heading colour.
+     // Shrinking pieces while the blues settle into the heading colour.
      const k = (step + 1) / blocks.length;
-     const tones = blues.map(b => rgb(mix(b, ink, k)));
-     const { s, list } = blocks[step];
-     for (const b of list) { ctx.globalAlpha = s === 1 ? b.cov : Math.min(1, b.cov * 1.15); ctx.fillStyle = tones[shade(b.cov)]; ctx.fillRect(b.x, b.y, s, s); }
+     const tones = blues.map(b => mix(b, ink, k));
+     const { s, list, font: gf } = blocks[step];
+     for (const b of list) { ctx.globalAlpha = s === 1 ? b.cov : Math.min(1, b.cov * 1.15); ctx.fillStyle = rgb(tones[shade(b.cov)]); ctx.fillRect(b.x, b.y, s, s); }
+     if (gf) {
+      ctx.font = gf; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      for (const b of list) {
+       if (b.cov < 0.1) continue;
+       const tone = shade(b.cov);
+       ctx.globalAlpha = 0.85 * (1 - k);
+       ctx.fillStyle = tone >= 2 ? '#fff' : rgb(tones[3]);
+       ctx.fillText(b.glyph, b.x + s / 2, b.y + s / 2 + s * 0.04);
+      }
+     }
      ctx.globalAlpha = 1;
     }
     frame = requestAnimationFrame(draw);
@@ -196,7 +204,7 @@ export function HeroTitle() {
    frame = requestAnimationFrame(draw);
   };
   run().catch(() => word.classList.add('is-solid'));
-  return () => { cancelled = true; cancelAnimationFrame(frame); observer?.disconnect(); };
+  return () => { cancelled = true; cancelAnimationFrame(frame); };
  }, []);
 
  return <h1 id="hero-title" lang="en" className="hero-title">
