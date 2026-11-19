@@ -577,7 +577,6 @@ html[data-theme="dark"] .site-header .menu-toggle .icon { filter:brightness(0) i
 .portfolio .footer .email-link { font-size:var(--fs-h2); line-height:var(--lh-h2); }
 .case-content h2,.case-content .case-lead { font-size:var(--fs-h4); line-height:var(--lh-h4); }
 .case-content > p:not(.case-note,.case-lead),.case-figure figcaption,.gallery-selected figcaption,.case-project-details-content :is(p,li,dd) { font-size:var(--fs-body-l); line-height:var(--lh-body); }
-.project-navigation a { font-size:var(--fs-h3); line-height:var(--lh-h3); }   /* Figma 441:2435: Header 3 */
 
 /* Compact nav bar (Figma 780:11461 desktop, 780:11591 mobile): while scrolling down (is-scrolled, set in portfolio-shell; scrolling up restores it),
    the bar and everything in it shrink to 0.75x. Height 70 → 53, padding 16 → 12. The
@@ -612,9 +611,11 @@ html[data-theme="dark"] .site-header .menu-toggle .icon { filter:brightness(0) i
 .project-navigation a:hover,.portfolio.night .project-navigation a:hover { background:var(--switch-hover); }
 .project-navigation a:active,.portfolio.night .project-navigation a:active { background:var(--switch-press); }
 .project-navigation a:focus-visible { outline:2px solid currentColor; outline-offset:-6px; }
-.project-navigation img { width:56px; height:56px; }
-@media (max-width:1100px) { .project-navigation img { width:48px; height:48px; } }
-@media (max-width:700px) { .project-navigation img { width:28px; height:28px; } }
+/* 2026-11-19 update: names in Header 4, 48px arrows, 124px tall on desktop (content centred, 48px side padding). */
+.project-navigation a { padding:38px 48px; font:400 var(--fs-h4)/var(--lh-h4) var(--display); letter-spacing:.01em; }
+.project-navigation img { width:48px; height:48px; }
+@media (max-width:1100px) { .project-navigation a { padding:32px; gap:16px; } }
+@media (max-width:700px) { .project-navigation a { padding:28px 16px; gap:8px; } .project-navigation img { width:28px; height:28px; } }
 
 /* Footer: the "Email me" row is 72px tall and the 102px arrow overflows it evenly; the link row
    is text height (22px) with the 44px touch target kept by negative margins. */
