@@ -33,10 +33,11 @@
 .dr-original-doctor img { left:-142.89%; }
 .dr-affinity-map { width:100%; }
 .dr-affinity-map img { display:block; width:100%; height:auto; }
-.dr-flow { display:flex; align-items:center; gap:12px; list-style:none; padding:0; margin:0; }
-.dr-flow-step { display:flex; flex:1; flex-direction:column; align-items:center; justify-content:center; gap:12px; min-width:0; min-height:130px; padding:16px; border-radius:8px; background:var(--pink); font:400 16px/1.4 var(--body); text-align:center; }
+.dr-flow { display:flex; align-items:stretch; gap:12px; list-style:none; padding:0; margin:0; }
+/* Equal-height boxes; icon and text sit top-left, spare space falls at the bottom. */
+.dr-flow-step { display:flex; flex:1; flex-direction:column; align-items:flex-start; justify-content:flex-start; gap:12px; min-width:0; min-height:130px; padding:20px; border-radius:8px; background:var(--pink); font:400 16px/1.4 var(--body); text-align:left; }
 .dr-flow-step>img { flex-shrink:0; }
-.dr-flow-arrow { flex:0 0 22px; display:flex; align-items:center; justify-content:center; }
+.dr-flow-arrow { flex:0 0 22px; align-self:center; display:flex; align-items:center; justify-content:center; }
 .dr-flow-arrow img { max-width:none; }
 html[data-theme="dark"] .dr-flow img { filter:brightness(0) invert(1); }
 .dr-presence-case .dr-conclusion { padding-bottom:128px; }
@@ -91,7 +92,7 @@ html[data-theme="dark"] .dr-gallery-dialog .gallery-close img { filter:brightnes
  .dr-gif-stage img { height:360px; }
  .dr-original-phone { border-width:3px; border-radius:9px; }
  .dr-flow { flex-direction:column; gap:16px; }
- .dr-flow-step { width:100%; flex-direction:column; gap:12px; align-items:center; min-height:112px; padding:20px; }
+ .dr-flow-step { width:100%; min-height:0; padding:16px; flex-direction:row; }
  .dr-flow-arrow { flex:0 0 24px; transform:rotate(90deg); }
  .dr-presence-case .dr-conclusion { padding-bottom:64px; }
  .dr-gallery-dialog { padding:20px; }
