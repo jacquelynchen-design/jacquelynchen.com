@@ -16,13 +16,12 @@ const PALETTE = ['#A2A6D9', '#747BCD', '#4A52C7', '#1400BD'];  // light → deep
 const GLYPHS = ' .:-+xzZ%X#';                                  // sparse → dense
 const FLIGHT = 720;     // ms for one piece to drift in
 const STAGGER = 950;    // ms over which pieces set off
-const HOLD = 260;       // ms with every piece landed before the refinement
 const SHRINK_MS = 700;  // ms for the whole shrink, eased in and out across the steps
 const SHRINK = 0.8;     // scale of each step's pieces vs the previous one (20% smaller)
 const GRID_IN = 600;    // ms for the grid to fade in
 
-const easeOut = (x: number) => 1 - (1 - x) ** 3;
-const easeInOut = (x: number) => (x < 0.5 ? 4 * x ** 3 : 1 - (-2 * x + 2) ** 3 / 2);
+const easeOut = (x: number) => 1 - (1 - x) ** 2;   // soft landing without a long, still-looking tail
+const easeInOut = (x: number) => (x < 0.5 ? 2 * x * x : 1 - (-2 * x + 2) ** 2 / 2);
 const hex = (h: string) => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
 const rgb = (c: number[], a = 1) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
 const shade = (cov: number) => (cov > 0.85 ? 3 : cov > 0.6 ? 2 : cov > 0.35 ? 1 : 0);
@@ -163,7 +162,7 @@ export function HeroTitle() {
    const cache = new Map<number, HTMLCanvasElement>();
    const layerAt = (i: number) => {
     let c = cache.get(i);
-    if (!c) { c = renderLevel(i); cache.set(i, c); for (const k of cache.keys()) if (k < i - 1) cache.delete(k); }
+    if (!c) { c = renderLevel(i); cache.set(i, c); }
     return c;
    };
    const mixed = document.createElement('canvas'); mixed.width = W; mixed.height = H;
@@ -194,7 +193,7 @@ export function HeroTitle() {
    const syncGrid = () => { const ink = inkNow(); const k = ink.join(); if (k !== gridInk) { gridInk = k; paintGrid(ink); } return ink; };
 
    // Final state: the real text, with the grid fully faded out.
-   const finish = () => { ctx.clearRect(0, 0, W, H); canvas.style.opacity = '0'; word.classList.add('is-solid'); };
+   const finish = () => { cache.clear(); ctx.clearRect(0, 0, W, H); canvas.style.opacity = '0'; word.classList.add('is-solid'); };
    if (reduced) { finish(); return; }
    canvas.style.opacity = '1';
 
@@ -205,7 +204,7 @@ export function HeroTitle() {
     const t = now - start;
     const ink = syncGrid();
     ctx.clearRect(0, 0, W, H);
-    const shrinkT = t - landAll - HOLD;
+    const shrinkT = t - landAll;   // the shrink starts the moment the last piece lands
     if (shrinkT >= SHRINK_MS) { finish(); return; }
     const sp = shrinkT < 0 ? 0 : easeInOut(shrinkT / SHRINK_MS);              // eased shrink progress
     const step = shrinkT < 0 ? -1 : 0;
@@ -213,7 +212,9 @@ export function HeroTitle() {
     const gridOut = 1 - sp;
     ctx.globalAlpha = Math.min(1, t / GRID_IN) * gridOut; ctx.drawImage(grid, 0, 0); ctx.globalAlpha = 1;
 
-    if (step < 0 && t > landAll && !cache.has(1)) { layerAt(0); layerAt(1); }   // warm up during the hold
+    // Render the shrink layers ahead of time, one per frame while the pieces fly in, so the
+    // shrink never stalls on a frame that has to build a layer.
+    if (step < 0) for (let i = 0; i <= levels.length; i++) if (!cache.has(i)) { layerAt(i); break; }
     if (step < 0) {
      // Pieces drifting in.
      ctx.font = glyphFont; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
