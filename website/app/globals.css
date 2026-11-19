@@ -604,9 +604,11 @@ html[data-theme="dark"] .site-header .menu-toggle .icon { filter:brightness(0) i
 
 /* Case study switcher + footer, updated dimensions (Figma 441:2435, button states 788:11774 / 788:11781).
    Switcher halves: 48px padding, 56px arrows, 24px gap, Header 3 names.
-   States: light Pink 100 → hover Pink 200 → pressed #fbd3ef; dark #e9e3ff → hover #e0d8ff → pressed #d8cfff. */
+   States: light Pink 100 → hover Pink 200 → pressed #fbd3ef; dark #e9e3ff → hover #e0d8ff → pressed #d8cefd, Ballpoint ink in both modes. */
 .project-navigation { --switch-bg:#ffebf7; --switch-hover:#ffddf5; --switch-press:#fbd3ef; background:transparent; }
-.portfolio.night .project-navigation { --switch-bg:#e9e3ff; --switch-hover:#e0d8ff; --switch-press:#d8cfff; background:transparent; color:#191738; }
+.portfolio.night .project-navigation { --switch-bg:#e9e3ff; --switch-hover:#e0d8ff; --switch-press:#d8cefd; background:transparent; color:#1700c4; }
+/* Dark states (Figma 788:12276 / 788:12289) keep Ballpoint text and arrows. */
+.portfolio.night .project-navigation img { filter:none; }
 .project-navigation a { background:var(--switch-bg); transition:background-color .2s; }
 .project-navigation a:hover,.portfolio.night .project-navigation a:hover { background:var(--switch-hover); }
 .project-navigation a:active,.portfolio.night .project-navigation a:active { background:var(--switch-press); }
