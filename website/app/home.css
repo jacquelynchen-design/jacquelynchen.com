@@ -16,9 +16,9 @@
 .home-project-pm8000 .home-thumb { --h:77.6%; }
 .home-project-scoot .home-thumb { --h:59.3%; }
 
-.home-story { display:flex; flex-direction:column; align-items:flex-start; flex:1 1 0; min-width:0; }
+.home-story { display:flex; flex-direction:column; align-items:flex-start; flex:1 1 0; min-width:0; padding-right:40px; }
 .home-chip { padding:6px 12px; border:1px solid var(--home-chip-line); border-radius:4px; background:var(--home-chip-bg); color:#1700c4; font:500 var(--fs-eyebrow)/1.4 var(--label); }
-.home-quote { margin:24px 0 0; font:400 var(--fs-h2)/var(--lh-h2) var(--display); letter-spacing:0; text-wrap:pretty; }
+.home-quote { margin:24px 0 0; font:400 var(--fs-h3)/var(--lh-h3) var(--display); letter-spacing:0; text-wrap:pretty; }
 .home-summary { margin:32px 0 0; opacity:.72; font:400 var(--fs-body-l)/var(--lh-body) var(--body); }
 .home-action { margin-top:32px; min-height:48px; padding:8px 16px; font-size:var(--fs-button-l); }
 .night .home-action .icon { filter:brightness(0) invert(1); }
@@ -61,7 +61,7 @@
  .home-project-pm8000 .home-thumb { --h:208px; padding:0; }
  .home-project-scoot .home-thumb { --h:178px; }
  .home-thumb img { max-height:100%; }
- .home-story { align-items:center; text-align:center; }
+ .home-story { align-items:center; text-align:center; padding-right:0; }
  .home-action { align-self:stretch; }
  .home-capabilities { display:flex; flex-direction:column; gap:16px; margin:48px 4px 0; border:0; }
  .home-capability,
