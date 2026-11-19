@@ -17,14 +17,13 @@ const GLYPHS = ' .:-+xzZ%X#';                                  // sparse → den
 const FLIGHT = 720;     // ms for one piece to drift in
 const STAGGER = 950;    // ms over which pieces set off
 const HOLD = 260;       // ms with every piece landed before the refinement
-const SHRINK_MS = 620;  // ms for the whole shrink, eased in and out across the steps
+const SHRINK_MS = 700;  // ms for the whole shrink, eased in and out across the steps
 const SHRINK = 0.8;     // scale of each step's pieces vs the previous one (20% smaller)
 const GRID_IN = 600;    // ms for the grid to fade in
 
 const easeOut = (x: number) => 1 - (1 - x) ** 3;
 const easeInOut = (x: number) => (x < 0.5 ? 4 * x ** 3 : 1 - (-2 * x + 2) ** 3 / 2);
 const hex = (h: string) => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
-const mix = (a: number[], b: number[], k: number) => a.map((v, i) => Math.round(v + (b[i] - v) * k));
 const rgb = (c: number[], a = 1) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
 const shade = (cov: number) => (cov > 0.85 ? 3 : cov > 0.6 ? 2 : cov > 0.35 ? 1 : 0);
 const glyphFor = (cov: number) => GLYPHS[Math.max(1, Math.min(GLYPHS.length - 1, Math.round(cov * (GLYPHS.length - 1))))];
@@ -107,17 +106,73 @@ export function HeroTitle() {
    const levels: number[] = [];
    for (let sz = cell * SHRINK; sz > 1.5; sz *= SHRINK) { const v = Math.round(sz); if (v !== levels[levels.length - 1]) levels.push(v); }
    levels.push(1);
-   const blocks = levels.map(s => {
-    const list: { x: number; y: number; cov: number; glyph: string }[] = [];
-    for (let y = 0; y < H; y += s) for (let x = 0; x < W; x += s) { const cov = coverage(x, y, s); if (cov > 0.02) list.push({ x, y, cov, glyph: glyphFor(cov) }); }
-    return { s, list, font: s / dpr >= 5 ? `500 ${Math.round(s * 0.72)}px ui-monospace, SFMono-Regular, Menlo, monospace` : '' };
-   });
+   const blues = PALETTE.map(hex);
+   const glyphLevels = levels.filter(sz => sz / dpr >= 5).length;
+   const monoFont = (sz: number) => `500 ${Math.round(sz * 0.72)}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+
+   // Each shrink level is rendered once, in the blue palette, into its own layer. Level 0 is
+   // the landed pieces exactly as they end their flight. Frames cross-fade neighbouring
+   // layers, so the shrink flows continuously instead of jumping from one size to the next.
+   const renderLevel = (i: number) => {
+    const layer = document.createElement('canvas'); layer.width = W; layer.height = H;
+    const l = layer.getContext('2d')!;
+    if (i === 0) {
+     l.font = monoFont(cell); l.textAlign = 'center'; l.textBaseline = 'middle';
+     for (const p of pieces) {
+      const tone = shade(p.cov);
+      l.globalAlpha = 1; l.fillStyle = PALETTE[tone]; l.fillRect(p.x, p.y, cell, cell);
+      l.globalAlpha = 0.85; l.fillStyle = tone >= 2 ? '#fff' : PALETTE[3];
+      l.fillText(p.glyph, p.x + cell / 2, p.y + cell / 2 + cell * 0.04);
+     }
+     return layer;
+    }
+    const sz = levels[i - 1];
+    if (sz / dpr >= 5) {
+     // Big enough to carry a glyph: squares plus characters that fade out level by level.
+     l.font = monoFont(sz); l.textAlign = 'center'; l.textBaseline = 'middle';
+     const glyphAlpha = 0.85 * (1 - i / (glyphLevels + 1));
+     for (let y = 0; y < H; y += sz) for (let x = 0; x < W; x += sz) {
+      const cov = coverage(x, y, sz);
+      if (cov <= 0.02) continue;
+      const tone = shade(cov);
+      l.globalAlpha = Math.min(1, cov * 1.15); l.fillStyle = PALETTE[tone]; l.fillRect(x, y, sz, sz);
+      if (cov < 0.1) continue;
+      l.globalAlpha = glyphAlpha; l.fillStyle = tone >= 2 ? '#fff' : PALETTE[3];
+      l.fillText(glyphFor(cov), x + sz / 2, y + sz / 2 + sz * 0.04);
+     }
+     return layer;
+    }
+    // Small blocks: written straight into pixels. The 1px level is the letter mask itself.
+    const img = l.createImageData(W, H), d = img.data;
+    const bcols = Math.ceil(W / sz), brows = Math.ceil(H / sz);
+    const bc = new Float32Array(bcols * brows);
+    for (let by = 0; by < brows; by++) for (let bx = 0; bx < bcols; bx++) bc[by * bcols + bx] = coverage(bx * sz, by * sz, sz);
+    for (let y = 0; y < H; y++) {
+     const row = ((y / sz) | 0) * bcols;
+     for (let x = 0; x < W; x++) {
+      const cov = bc[row + ((x / sz) | 0)];
+      if (cov <= 0.02 && sz > 1) continue;
+      const c = blues[shade(cov)], o = (y * W + x) * 4;
+      d[o] = c[0]; d[o + 1] = c[1]; d[o + 2] = c[2];
+      d[o + 3] = Math.round(255 * (sz === 1 ? cov : Math.min(1, cov * 1.15)));
+     }
+    }
+    l.putImageData(img, 0, 0);
+    return layer;
+   };
+   const cache = new Map<number, HTMLCanvasElement>();
+   const layerAt = (i: number) => {
+    let c = cache.get(i);
+    if (!c) { c = renderLevel(i); cache.set(i, c); for (const k of cache.keys()) if (k < i - 1) cache.delete(k); }
+    return c;
+   };
+   const mixed = document.createElement('canvas'); mixed.width = W; mixed.height = H;
+   const mx = mixed.getContext('2d')!;
 
    // Colours. Ink is re-read each frame, since the light/dark theme can settle after start.
    const probe = document.createElement('canvas').getContext('2d', { willReadFrequently: true })!;
    const toRgb = (c: string) => { probe.clearRect(0, 0, 1, 1); probe.fillStyle = c; probe.fillRect(0, 0, 1, 1); return Array.from(probe.getImageData(0, 0, 1, 1).data.slice(0, 3)); };
    const inkNow = () => toRgb(getComputedStyle(word.closest('h1') ?? document.body).color);
-   const blues = PALETTE.map(hex);
 
    // Grid lines, faded towards the edges with an elliptical gradient.
    const grid = document.createElement('canvas'); grid.width = W; grid.height = H;
@@ -153,11 +208,12 @@ export function HeroTitle() {
     const shrinkT = t - landAll - HOLD;
     if (shrinkT >= SHRINK_MS) { finish(); return; }
     const sp = shrinkT < 0 ? 0 : easeInOut(shrinkT / SHRINK_MS);              // eased shrink progress
-    const step = shrinkT < 0 ? -1 : Math.min(blocks.length - 1, Math.floor(sp * blocks.length));
+    const step = shrinkT < 0 ? -1 : 0;
     // Grid fades in at the start and fades away while the pieces shrink, gone on the last frame.
     const gridOut = 1 - sp;
     ctx.globalAlpha = Math.min(1, t / GRID_IN) * gridOut; ctx.drawImage(grid, 0, 0); ctx.globalAlpha = 1;
 
+    if (step < 0 && t > landAll && !cache.has(1)) { layerAt(0); layerAt(1); }   // warm up during the hold
     if (step < 0) {
      // Pieces drifting in.
      ctx.font = glyphFont; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
@@ -184,21 +240,15 @@ export function HeroTitle() {
      }
      ctx.globalAlpha = 1;
     } else {
-     // Shrinking pieces while the blues settle into the heading colour.
-     const k = Math.max(sp, (step + 1) / blocks.length);
-     const tones = blues.map(b => mix(b, ink, k));
-     const { s, list, font: gf } = blocks[step];
-     for (const b of list) { ctx.globalAlpha = s === 1 ? b.cov : Math.min(1, b.cov * 1.15); ctx.fillStyle = rgb(tones[shade(b.cov)]); ctx.fillRect(b.x, b.y, s, s); }
-     if (gf) {
-      ctx.font = gf; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      for (const b of list) {
-       if (b.cov < 0.1) continue;
-       const tone = shade(b.cov);
-       ctx.globalAlpha = 0.85 * (1 - k);
-       ctx.fillStyle = tone >= 2 ? '#fff' : rgb(tones[3]);
-       ctx.fillText(b.glyph, b.x + s / 2, b.y + s / 2 + s * 0.04);
-      }
-     }
+     // Shrinking pieces: cross-fade the two nearest levels ('lighter' adds them, which is an
+     // exact linear blend), then tint everything towards the heading colour.
+     const u = sp * levels.length, i = Math.min(levels.length - 1, Math.floor(u)), f = u - i;
+     mx.globalCompositeOperation = 'source-over'; mx.globalAlpha = 1; mx.clearRect(0, 0, W, H);
+     mx.globalCompositeOperation = 'lighter';
+     mx.globalAlpha = 1 - f; mx.drawImage(layerAt(i), 0, 0);
+     if (f > 0) { mx.globalAlpha = f; mx.drawImage(layerAt(i + 1), 0, 0); }
+     mx.globalCompositeOperation = 'source-atop'; mx.globalAlpha = sp; mx.fillStyle = rgb(ink); mx.fillRect(0, 0, W, H);
+     ctx.drawImage(mixed, 0, 0);
      ctx.globalAlpha = 1;
     }
     frame = requestAnimationFrame(draw);
