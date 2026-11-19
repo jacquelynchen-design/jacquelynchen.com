@@ -30,7 +30,7 @@
 .home-capability:nth-child(odd) { border-right:1px solid var(--home-rule); }
 .home-capability:nth-child(n+3) { border-top:1px solid var(--home-rule); }
 .home-capability:nth-child(-n+2) { justify-content:center; }
-.home-capability h2 { margin:0; font:400 var(--fs-h3)/var(--lh-h3) var(--display); letter-spacing:0; }
+.home-capability h2 { margin:0; font:400 var(--fs-h4)/var(--lh-h4) var(--display); letter-spacing:.01em; }
 .home-capability p { margin:0; font:400 var(--fs-body-l)/var(--lh-body) var(--body); }
 
 /* Tablet */
@@ -48,8 +48,6 @@
  .home-action { margin-top:24px; }
  .home-capabilities { margin-top:64px; }
  .home-capability { gap:16px; padding:32px; }
- /* Figma: capability titles drop to Header 4 on tablet and mobile. */
- .home-capability h2 { font-size:var(--fs-h4); line-height:var(--lh-h4); letter-spacing:.01em; }
 }
 
 /* Mobile */
