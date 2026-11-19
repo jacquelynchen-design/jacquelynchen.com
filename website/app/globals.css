@@ -560,3 +560,21 @@ html[data-theme="dark"] .site-header .menu-toggle .icon { filter:brightness(0) i
 @media(max-width:800px) { .site-header .menu-toggle { display:inline-flex; } }
 @media(max-width:700px) { .site-header { padding:16px; } }
 @media(max-width:380px) { .site-header { padding-inline:12px; } .site-header .header-tools { gap:4px; } }
+
+/* Type scale: Figma "Font size tokens" (desktop / tablet ≤1100 / mobile ≤700).
+   Line heights from the Figma text styles: H1–H3 110%, H4 120%, H5 100%, body 140%. */
+:root {
+ --fs-h1:128px; --fs-h2:56px; --fs-h3:44px; --fs-h4:36px; --fs-h5:24px;
+ --fs-body-l:20px; --fs-body-m:16px; --fs-body-s:14px; --fs-eyebrow:16px; --fs-button-l:20px; --fs-button:16px;
+ --lh-h1:1.1; --lh-h2:1.1; --lh-h3:1.1; --lh-h4:1.2; --lh-h5:1; --lh-body:1.4;
+ --heading-2-size:var(--fs-h2); --heading-3-size:var(--fs-h3);
+}
+@media (max-width:1100px) { :root { --fs-h1:104px; --fs-h2:48px; --fs-h3:40px; --fs-h4:32px; --fs-h5:20px; --fs-body-l:16px; --fs-body-m:14px; --fs-body-s:12px; --fs-eyebrow:14px; --heading-2-size:var(--fs-h2); --heading-3-size:var(--fs-h3); } }
+@media (max-width:700px) { :root { --fs-h1:72px; --fs-h2:40px; --fs-h3:32px; --fs-h4:24px; --fs-h5:20px; --fs-body-l:16px; --fs-body-m:14px; --fs-body-s:12px; --fs-eyebrow:14px; --heading-2-size:var(--fs-h2); --heading-3-size:var(--fs-h3); } }
+
+/* Shared site-wide styles mapped onto the scale. */
+.portfolio .footer .email-link { font-size:var(--fs-h2); line-height:var(--lh-h2); }
+.case-main .case-content h1 { font-size:var(--fs-h3); line-height:var(--lh-h3); }
+.case-content h2,.case-content .case-lead { font-size:var(--fs-h4); line-height:var(--lh-h4); }
+.case-content > p:not(.case-note,.case-lead),.case-figure figcaption,.gallery-selected figcaption,.case-project-details-content :is(p,li,dd) { font-size:var(--fs-body-l); line-height:var(--lh-body); }
+.project-navigation a { font-size:var(--fs-h2); }
