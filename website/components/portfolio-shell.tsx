@@ -13,11 +13,15 @@ const email='mailto:jacquelynchenwork@gmail.com';
 export function PortfolioShell({children}:{children:React.ReactNode}) {
  const [menuOpen,setMenuOpen]=useState(false);
  const [scrolled,setScrolled]=useState(false);
+ const holdRef=useRef(0);
+ const holdNav=()=>{holdRef.current=performance.now()+600;};
  useEffect(()=>{
   // Compact nav: shrink while scrolling down, expand as soon as the user scrolls back up
   // (or is near the top). A few px of hysteresis ignores jitter and overscroll bounce.
+  // Layout changes (a language or theme switch) can move the scroll position without the
+  // user scrolling; during a short hold those moves only re-sync the reference point.
   let last=window.scrollY;
-  const update=()=>{const y=Math.max(0,window.scrollY);if(y<=8){setScrolled(false);last=y;return;}if(Math.abs(y-last)<6)return;setScrolled(y>last);last=y;};
+  const update=()=>{const y=Math.max(0,window.scrollY);if(performance.now()<holdRef.current){last=y;return;}if(y<=8){setScrolled(false);last=y;return;}if(Math.abs(y-last)<6)return;setScrolled(y>last);last=y;};
   setScrolled(window.scrollY>8);
   window.addEventListener('scroll',update,{passive:true});
   return()=>window.removeEventListener('scroll',update);
@@ -35,7 +39,7 @@ export function PortfolioShell({children}:{children:React.ReactNode}) {
  <header ref={headerRef} className={`site-header${scrolled?' is-scrolled':''}${menuOpen?' menu-is-open':''}`}>
  <a href="/" onClick={()=>setMenuOpen(false)} className="brand" aria-label={text.home}><Image unoptimized src="/assets/imgLogo2.svg" width="185" height="32" alt="Jacquelyn Chen" /></a>
  <nav className="desktop-nav" aria-label={text.navigation}><a className="action" href={email}>{text.contact} {icon('imgMail')}</a><a className="action" href={resumeUrl(language)} download>{text.resume} {icon('imgDownload')}</a></nav>
- <div className="header-tools"><Button variant="ghost" className="language" aria-label={language==='en'?'Switch to French':'Passer en anglais'} title={language==='en'?'Passer en français':'Switch to English'} onClick={()=>setLanguage(language==='en'?'fr':'en')}>{language.toUpperCase()}</Button><Button variant="ghost" className="theme-button" aria-label={dark?text.light:text.dark} aria-pressed={dark} onClick={()=>setTheme(dark?'light':'dark')}>{icon('imgClearDay')}</Button><Button className="action menu-toggle" aria-label={menuOpen?text.closeMenu:text.openMenu} aria-expanded={menuOpen} aria-controls="mobile-menu" onClick={()=>setMenuOpen(!menuOpen)}>{menuOpen?<Image unoptimized className="icon" src="/assets/maps/close.svg" width={24} height={24} alt="" />:icon('imgMenu')}</Button></div>
+ <div className="header-tools"><Button variant="ghost" className="language" aria-label={language==='en'?'Switch to French':'Passer en anglais'} title={language==='en'?'Passer en français':'Switch to English'} onClick={()=>{holdNav();setLanguage(language==='en'?'fr':'en');}}>{language.toUpperCase()}</Button><Button variant="ghost" className="theme-button" aria-label={dark?text.light:text.dark} aria-pressed={dark} onClick={()=>{holdNav();setTheme(dark?'light':'dark');}}>{icon('imgClearDay')}</Button><Button className="action menu-toggle" aria-label={menuOpen?text.closeMenu:text.openMenu} aria-expanded={menuOpen} aria-controls="mobile-menu" onClick={()=>setMenuOpen(!menuOpen)}>{menuOpen?<Image unoptimized className="icon" src="/assets/maps/close.svg" width={24} height={24} alt="" />:icon('imgMenu')}</Button></div>
  {menuOpen&&<nav id="mobile-menu" className="mobile-nav" aria-label={text.mobileNavigation}><a className="action" href={email} onClick={()=>setMenuOpen(false)}>{text.contact} {icon('imgMail')}</a><a className="action" href={resumeUrl(language)} download onClick={()=>setMenuOpen(false)}>{text.resume} {icon('imgDownload')}</a></nav>}
  </header>
 
