@@ -435,9 +435,8 @@ html[data-theme="dark"] .pm8000-case .pm8000-inspector { background-color:#E8E3F
 @media(max-width:1100px) { :root { --heading-2-size:56px; --heading-3-size:40px; } }
 @media(max-width:700px) { :root { --heading-2-size:48px; --heading-3-size:32px; } }
 .portfolio .project h2,.portfolio .email-link,.portfolio .case-study-cta { font-size:var(--heading-2-size); }
-/* Case-study titles use the Figma Header 2 style (New Spirit Condensed 56/110%, 40 on phones). */
-.portfolio .case-main .case-content h1 { font:400 56px/1.1 var(--display); letter-spacing:0; }
-@media(max-width:700px) { .portfolio .case-main .case-content h1 { font-size:40px; } }
+/* Case-study titles use the Figma Header 3 style (New Spirit Condensed 44/40/32, 110%). */
+.portfolio .case-main .case-content h1 { font:400 var(--fs-h3)/var(--lh-h3) var(--display); letter-spacing:0; }
 
 /* Mobile utilities size to their content, with even space between controls. */
 @media(max-width:700px) {
