@@ -579,7 +579,7 @@ html[data-theme="dark"] .site-header .menu-toggle .icon { filter:brightness(0) i
 .case-content > p:not(.case-note,.case-lead),.case-figure figcaption,.gallery-selected figcaption,.case-project-details-content :is(p,li,dd) { font-size:var(--fs-body-l); line-height:var(--lh-body); }
 .project-navigation a { font-size:var(--fs-h2); }
 
-/* Compact nav bar (Figma 780:11461 desktop, 780:11591 mobile): once the page scrolls,
+/* Compact nav bar (Figma 780:11461 desktop, 780:11591 mobile): while scrolling down (is-scrolled, set in portfolio-shell; scrolling up restores it),
    the bar and everything in it shrink to 0.75x. Height 70 → 53, padding 16 → 12. The
    logo scales from its left edge and the buttons from the right edge, so the
    layout never reflows. The desktop buttons also slide right by a quarter of the
