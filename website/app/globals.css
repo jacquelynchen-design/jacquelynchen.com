@@ -575,7 +575,6 @@ html[data-theme="dark"] .site-header .menu-toggle .icon { filter:brightness(0) i
 
 /* Shared site-wide styles mapped onto the scale. */
 .portfolio .footer .email-link { font-size:var(--fs-h2); line-height:var(--lh-h2); }
-.case-main .case-content h1 { font-size:var(--fs-h3); line-height:var(--lh-h3); }
 .case-content h2,.case-content .case-lead { font-size:var(--fs-h4); line-height:var(--lh-h4); }
 .case-content > p:not(.case-note,.case-lead),.case-figure figcaption,.gallery-selected figcaption,.case-project-details-content :is(p,li,dd) { font-size:var(--fs-body-l); line-height:var(--lh-body); }
 .project-navigation a { font-size:var(--fs-h3); line-height:var(--lh-h3); }   /* Figma 441:2435: Header 3 */
