@@ -14,8 +14,11 @@ export function PortfolioShell({children}:{children:React.ReactNode}) {
  const [menuOpen,setMenuOpen]=useState(false);
  const [scrolled,setScrolled]=useState(false);
  useEffect(()=>{
-  const update=()=>setScrolled(window.scrollY>8);
-  update();
+  // Compact nav: shrink while scrolling down, expand as soon as the user scrolls back up
+  // (or is near the top). A few px of hysteresis ignores jitter and overscroll bounce.
+  let last=window.scrollY;
+  const update=()=>{const y=Math.max(0,window.scrollY);if(y<=8){setScrolled(false);last=y;return;}if(Math.abs(y-last)<6)return;setScrolled(y>last);last=y;};
+  setScrolled(window.scrollY>8);
   window.addEventListener('scroll',update,{passive:true});
   return()=>window.removeEventListener('scroll',update);
  },[]);

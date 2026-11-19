@@ -2,7 +2,8 @@
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { usePortfolio } from './portfolio-shell';
-const projects=[['maps','Maps'],['manor','The Manor'],['sante','Service Trajet Santé'],['pm8000','PM8000'],['scoot','Scoot Career Portal'],['abroadwise','AbroadWise'],['caltexgo','CaltexGo']];
+// Same order as the homepage cards; the switcher loops (first ← last, last → first).
+const projects=[['dr-presence','Dr Presence'],['maps','Maps'],['pm8000','PM8000'],['scoot','Scoot Career Portal']];
 export function ProjectNavigation(){
  const pathname=usePathname(); const {language}=usePortfolio();
  const index=projects.findIndex(([slug])=>pathname===`/case-study/${slug}`);
