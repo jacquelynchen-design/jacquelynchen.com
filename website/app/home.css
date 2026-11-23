@@ -75,7 +75,7 @@
  .home-capability { position:sticky; top:calc(68px + 24px + var(--i) * 64px); }
 }
 
-/* Hero: "Complexity" builds up as an ordered dither from the base, then the grid refines into the letterforms (components/hero-title.tsx). */
+/* Hero: "Complexity" assembles from ASCII pieces over a fading grid, then refines into the letterforms (components/hero-title.tsx). */
 .hero-title { font-size:var(--fs-h1); }
 @media (max-width:700px) { .hero-title { font-size:min(var(--fs-h1), 18.46vw); } }
 .hero-complexity-line { position:relative; }

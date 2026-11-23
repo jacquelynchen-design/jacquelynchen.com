@@ -1,22 +1,35 @@
 'use client';
 import { useEffect, useRef } from 'react';
 
-// "Complexity" builds up as a 1-bit ordered (Bayer) dither: a soft density gradient
-// rises from the base of the letters until the word is fully dense, then the dither
-// grid refines step by step (3px → 2 → 1.5 → 1 → 0.5) until the last step is the
-// letterforms themselves, so the hand-over to the real text is invisible.
-// "into Clarity" stays static. Skipped for visitors who prefer reduced motion.
-const BAYER = [
- 0, 32, 8, 40, 2, 34, 10, 42, 48, 16, 56, 24, 50, 18, 58, 26,
- 12, 44, 4, 36, 14, 46, 6, 38, 60, 28, 52, 20, 62, 30, 54, 22,
- 3, 35, 11, 43, 1, 33, 9, 41, 51, 19, 59, 27, 49, 17, 57, 25,
- 15, 47, 7, 39, 13, 45, 5, 37, 63, 31, 55, 23, 61, 29, 53, 21,
-].map(v => (v + 0.5) / 64);
-const LEVELS = [3, 2, 1.5, 1, 0.5]; // css px per dither dot, coarse → fine
-const FILL = 1800;     // ms for the density to rise from the base to the top
-const BAND = 1;        // height of the soft density gradient, as a share of the word
-const STEP = 140;      // ms per refinement step once the word is fully dense
-const ease = (x: number) => 1 - (1 - x) ** 1.6;   // gentle ease-out
+// "Complexity" assembles from ASCII pieces (test, 2026-11-19).
+// A subtle grid sits behind the word and fades out towards its edges. Each grid cell the
+// letters cover becomes a "piece": a tinted square carrying an ASCII glyph whose density
+// follows how much ink the cell holds. Pieces start as small dots a short distance from
+// their cell, drift in and grow into squares (the reverse of a word bursting into dots).
+// Once every piece has landed, the pieces shrink step by step (each step 0.8× the last,
+// glyphs included while they're still legible) while the blues settle into the heading
+// colour and the grid fades away. The last step is the letterforms themselves, so the
+// hand-over to the real text is invisible.
+// "into Clarity" stays static. Visitors who prefer reduced motion get the final state.
+
+const PALETTE = ['#A2A6D9', '#747BCD', '#4A52C7', '#1400BD'];  // light → deep, from Jac's swatches
+const GLYPHS = ' .:-+xzZ%X#';                                  // sparse → dense
+const FLIGHT = 480;     // ms for one piece to drift in
+const STAGGER = 620;    // ms over which pieces set off
+const SHRINK_MS = 600;  // ms for the whole shrink, eased in across the steps
+const OVERLAP = 400;    // ms the shrink starts before the last piece lands, so motion never stops
+const SHRINK = 0.8;     // scale of each step's pieces vs the previous one (20% smaller)
+const GRID_IN = 400;    // ms for the grid to fade in
+
+const easeOut = (x: number) => 1 - (1 - x) ** 2;   // soft landing without a long, still-looking tail
+const easeIn = (x: number) => x ** 1.4;
+const hex = (h: string) => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const rgb = (c: number[], a = 1) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
+const shade = (cov: number) => (cov > 0.85 ? 3 : cov > 0.6 ? 2 : cov > 0.35 ? 1 : 0);
+const glyphFor = (cov: number) => GLYPHS[Math.max(1, Math.min(GLYPHS.length - 1, Math.round(cov * (GLYPHS.length - 1))))];
+
+// Seeded random, so the composition is the same on every visit.
+const rng = (seed: number) => () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
 
 export function HeroTitle() {
  const wordRef = useRef<HTMLSpanElement>(null);
@@ -25,102 +38,309 @@ export function HeroTitle() {
  useEffect(() => {
   const word = wordRef.current, canvas = canvasRef.current;
   if (!word || !canvas) return;
-  const done = () => { word.classList.add('is-solid'); canvas.style.opacity = '0'; };
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { done(); return; }
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let frame = 0, cancelled = false, hover: (() => void) | undefined;
 
-  let frame = 0, cancelled = false;
   const run = async () => {
    await document.fonts.ready;
    if (cancelled) return;
    const text = word.firstChild;
-   if (!text) return done();
+   if (!text) { word.classList.add('is-solid'); return; }
    const range = document.createRange(); range.selectNodeContents(text);
    const glyphs = range.getBoundingClientRect();
    const host = word.parentElement!.getBoundingClientRect();
    const style = getComputedStyle(word);
+   const fontPx = parseFloat(style.fontSize);
    const font = `${style.fontStyle} ${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
-   const pad = 12;
-   const w = Math.ceil(glyphs.width + pad * 2), h = Math.ceil(glyphs.height + pad * 2);
    const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-   // Letter mask at device-pixel resolution; alpha = how much of each pixel is ink.
-   const W = Math.round(w * dpr), H = Math.round(h * dpr);
+   // Grid geometry, in device pixels. The canvas reaches past the word so the grid has room to fade.
+   const cell = Math.max(6, Math.round(fontPx / 11)) * dpr;
+   const margin = Math.ceil((glyphs.height * 0.55 * dpr) / cell) * cell;
+   const cols = Math.ceil((glyphs.width * dpr) / cell) + (2 * margin) / cell + 1;
+   const rows = Math.ceil((glyphs.height * dpr) / cell) + (2 * margin) / cell + 1;
+   const W = cols * cell, H = rows * cell;
+   canvas.width = W; canvas.height = H;
+   canvas.style.width = `${W / dpr}px`; canvas.style.height = `${H / dpr}px`;
+   canvas.style.left = `${glyphs.left - host.left - margin / dpr}px`;
+   canvas.style.top = `${glyphs.top - host.top - margin / dpr}px`;
+   const ctx = canvas.getContext('2d')!;
+
+   // Letter mask; alpha = how much of each device pixel is ink.
    const mask = document.createElement('canvas'); mask.width = W; mask.height = H;
    const m = mask.getContext('2d', { willReadFrequently: true })!;
    m.scale(dpr, dpr);
    m.font = font; m.textBaseline = 'alphabetic'; m.fillStyle = '#000';
    if ('letterSpacing' in m) (m as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = style.letterSpacing;
    const ascent = m.measureText('Complexity').fontBoundingBoxAscent;
-   m.fillText(text.textContent ?? '', pad, pad + ascent);
+   m.fillText(text.textContent ?? '', margin / dpr, margin / dpr + ascent);
    const src = m.getImageData(0, 0, W, H).data;
-   const alpha = new Float32Array(W * H);
-   for (let i = 0; i < alpha.length; i++) alpha[i] = src[i * 4 + 3] / 255;
 
-   // Coverage per dither dot, for each grid size.
-   const sizes = [...new Set(LEVELS.map(l => Math.max(1, Math.round(l * dpr))))];
-   if (sizes[sizes.length - 1] !== 1) sizes.push(1);
-   const grids = sizes.map(sz => {
-    const cols = Math.ceil(W / sz), rows = Math.ceil(H / sz), cov = new Float32Array(cols * rows);
-    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
-     let sum = 0, n = 0;
-     for (let y = r * sz; y < Math.min(H, (r + 1) * sz); y++) for (let x = c * sz; x < Math.min(W, (c + 1) * sz); x++) { sum += alpha[y * W + x]; n++; }
-     cov[r * cols + c] = sum / n;
-    }
-    return { sz, cols, rows, cov };
-   });
-
-   canvas.width = W; canvas.height = H;
-   canvas.style.width = `${w}px`; canvas.style.height = `${h}px`;
-   canvas.style.left = `${glyphs.left - host.left - pad}px`;
-   canvas.style.top = `${glyphs.top - host.top - pad}px`;
-   const ctx = canvas.getContext('2d')!;
-   const out = ctx.createImageData(W, H), px = out.data;
-   // Ink = the heading colour (the word itself is transparent until handed over). Re-read
-   // each frame, since the light/dark theme can settle after the animation starts.
-   const probe = document.createElement('canvas').getContext('2d', { willReadFrequently: true })!;
-   let inkColor = '';
-   const syncInk = () => {
-    const c = getComputedStyle(word.closest('h1') ?? document.body).color;
-    if (c === inkColor) return; inkColor = c;
-    probe.clearRect(0, 0, 1, 1); probe.fillStyle = c; probe.fillRect(0, 0, 1, 1);
-    const [R, G, B] = probe.getImageData(0, 0, 1, 1).data;
-    for (let i = 0; i < px.length; i += 4) { px[i] = R; px[i + 1] = G; px[i + 2] = B; }
+   // Summed-area table → ink coverage of any square in O(1).
+   const sat = new Float64Array((W + 1) * (H + 1));
+   for (let y = 0; y < H; y++) {
+    let row = 0;
+    for (let x = 0; x < W; x++) { row += src[(y * W + x) * 4 + 3] / 255; sat[(y + 1) * (W + 1) + x + 1] = sat[y * (W + 1) + x + 1] + row; }
+   }
+   const coverage = (x: number, y: number, s: number) => {
+    const x1 = Math.min(W, x + s), y1 = Math.min(H, y + s);
+    const sum = sat[y1 * (W + 1) + x1] - sat[y * (W + 1) + x1] - sat[y1 * (W + 1) + x] + sat[y * (W + 1) + x];
+    return sum / ((x1 - x) * (y1 - y));
    };
+
+   // Pieces: one per covered cell.
+   const rand = rng(7);
+   const cx0 = W / 2, cy0 = H / 2;
+   const pieces: { x: number; y: number; sx: number; sy: number; cov: number; delay: number; glyph: string }[] = [];
+   for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+    const cov = coverage(c * cell, r * cell, cell);
+    if (cov < 0.1) continue;
+    const x = c * cell, y = r * cell;
+    // Drift in from a short distance, roughly away from the middle of the word.
+    const a = Math.atan2(y - cy0, (x - cx0) * 0.35) + (rand() - 0.5) * 2.2;
+    const d = cell * (1.5 + rand() * 4.5);
+    pieces.push({ x, y, sx: x + Math.cos(a) * d, sy: y + Math.sin(a) * d, cov, delay: rand() ** 1.4 * STAGGER, glyph: glyphFor(cov) });
+   }
+
+   // Shrink levels after the landed pieces: each 0.8× the last, down to 1 device px.
+   const levels: number[] = [];
+   for (let sz = cell * SHRINK; sz > 1.5; sz *= SHRINK) { const v = Math.round(sz); if (v !== levels[levels.length - 1]) levels.push(v); }
+   levels.push(1);
+   const blues = PALETTE.map(hex);
+   const glyphLevels = levels.filter(sz => sz / dpr >= 5).length;
+   const monoFont = (sz: number) => `500 ${Math.round(sz * 0.72)}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+
+   // Each shrink level is rendered once, in the blue palette, into its own layer. Level 0 is
+   // the landed pieces exactly as they end their flight. Frames cross-fade neighbouring
+   // layers, so the shrink flows continuously instead of jumping from one size to the next.
+   const renderLevel = (i: number) => {
+    const layer = document.createElement('canvas'); layer.width = W; layer.height = H;
+    const l = layer.getContext('2d')!;
+    if (i === 0) {
+     l.font = monoFont(cell); l.textAlign = 'center'; l.textBaseline = 'middle';
+     for (const p of pieces) {
+      const tone = shade(p.cov);
+      l.globalAlpha = 1; l.fillStyle = PALETTE[tone]; l.fillRect(p.x, p.y, cell, cell);
+      l.globalAlpha = 0.85; l.fillStyle = tone >= 2 ? '#fff' : PALETTE[3];
+      l.fillText(p.glyph, p.x + cell / 2, p.y + cell / 2 + cell * 0.04);
+     }
+     return layer;
+    }
+    const sz = levels[i - 1];
+    if (sz / dpr >= 5) {
+     // Big enough to carry a glyph: squares plus characters that fade out level by level.
+     l.font = monoFont(sz); l.textAlign = 'center'; l.textBaseline = 'middle';
+     const glyphAlpha = 0.85 * (1 - i / (glyphLevels + 1));
+     for (let y = 0; y < H; y += sz) for (let x = 0; x < W; x += sz) {
+      const cov = coverage(x, y, sz);
+      if (cov <= 0.02) continue;
+      const tone = shade(cov);
+      l.globalAlpha = Math.min(1, cov * 1.15); l.fillStyle = PALETTE[tone]; l.fillRect(x, y, sz, sz);
+      if (cov < 0.1) continue;
+      l.globalAlpha = glyphAlpha; l.fillStyle = tone >= 2 ? '#fff' : PALETTE[3];
+      l.fillText(glyphFor(cov), x + sz / 2, y + sz / 2 + sz * 0.04);
+     }
+     return layer;
+    }
+    // Small blocks: written straight into pixels. The 1px level is the letter mask itself.
+    const img = l.createImageData(W, H), d = img.data;
+    const bcols = Math.ceil(W / sz), brows = Math.ceil(H / sz);
+    const bc = new Float32Array(bcols * brows);
+    for (let by = 0; by < brows; by++) for (let bx = 0; bx < bcols; bx++) bc[by * bcols + bx] = coverage(bx * sz, by * sz, sz);
+    for (let y = 0; y < H; y++) {
+     const row = ((y / sz) | 0) * bcols;
+     for (let x = 0; x < W; x++) {
+      const cov = bc[row + ((x / sz) | 0)];
+      if (cov <= 0.02 && sz > 1) continue;
+      const c = blues[shade(cov)], o = (y * W + x) * 4;
+      d[o] = c[0]; d[o + 1] = c[1]; d[o + 2] = c[2];
+      d[o + 3] = Math.round(255 * (sz === 1 ? cov : Math.min(1, cov * 1.15)));
+     }
+    }
+    l.putImageData(img, 0, 0);
+    return layer;
+   };
+   const cache = new Map<number, HTMLCanvasElement>();
+   const layerAt = (i: number) => {
+    let c = cache.get(i);
+    if (!c) { c = renderLevel(i); cache.set(i, c); }
+    return c;
+   };
+   const mixed = document.createElement('canvas'); mixed.width = W; mixed.height = H;
+   const mx = mixed.getContext('2d')!;
+
+   // Colours. Ink is re-read each frame, since the light/dark theme can settle after start.
+   const probe = document.createElement('canvas').getContext('2d', { willReadFrequently: true })!;
+   const toRgb = (c: string) => { probe.clearRect(0, 0, 1, 1); probe.fillStyle = c; probe.fillRect(0, 0, 1, 1); return Array.from(probe.getImageData(0, 0, 1, 1).data.slice(0, 3)); };
+   const inkNow = () => toRgb(getComputedStyle(word.closest('h1') ?? document.body).color);
+
+   // Grid lines, faded towards the edges with an elliptical gradient.
+   const grid = document.createElement('canvas'); grid.width = W; grid.height = H;
+   const g = grid.getContext('2d')!;
+   const paintGrid = (ink: number[]) => {
+    g.clearRect(0, 0, W, H);
+    g.fillStyle = rgb(ink, 0.14);
+    for (let c = 0; c <= cols; c++) g.fillRect(Math.min(W - 1, c * cell), 0, 1, H);
+    for (let r = 0; r <= rows; r++) g.fillRect(0, Math.min(H - 1, r * cell), W, 1);
+    g.save();
+    g.globalCompositeOperation = 'destination-in';
+    g.translate(W / 2, H / 2); g.scale(W / 2, H / 2);
+    const fade = g.createRadialGradient(0, 0, 0, 0, 0, 1);
+    fade.addColorStop(0, '#000'); fade.addColorStop(0.45, '#000'); fade.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = fade; g.fillRect(-1, -1, 2, 2);
+    g.restore();
+   };
+   let gridInk = '';
+   const syncGrid = () => { const ink = inkNow(); const k = ink.join(); if (k !== gridInk) { gridInk = k; paintGrid(ink); } return ink; };
+
+   // Final state: the real text, with the grid fully faded out.
+   const finish = () => {
+    cache.clear(); ctx.clearRect(0, 0, W, H); canvas.style.opacity = '0'; word.classList.add('is-solid');
+    if (!reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) hover = setupHover();
+   };
+
+   // Hover: around the cursor the word breaks back into its ASCII pieces over a patch of the
+   // grid, pushed gently away from the pointer, and heals as the cursor moves on. The real
+   // text is masked out with the same soft falloff, so pieces and letters cross-fade.
+   const setupHover = () => {
+    const R = cell * 5.5;                      // radius of the effect, device px
+    const line = word.parentElement!;
+    const base = word.getBoundingClientRect();
+    let px = 0, py = 0, tx = 0, ty = 0, strength = 0, target = 0, raf = 0, last = 0;
+    const smooth = (a: number, b: number, x: number) => { const k = Math.min(1, Math.max(0, (x - a) / (b - a))); return k * k * (3 - 2 * k); };
+    const glyphFontH = `500 ${Math.round(cell * 0.72)}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+    const flicker = new Map<number, string>();
+    const paint = (now: number) => {
+     const dt = Math.min(50, now - (last || now)); last = now;
+     strength += (target - strength) * Math.min(1, dt / 90);
+     px += (tx - px) * Math.min(1, dt / 60); py += (ty - py) * Math.min(1, dt / 60);
+     const rad = R * strength;
+     const ink = syncGrid();
+     ctx.clearRect(0, 0, W, H);
+     if (rad > 1) {
+      // Grid patch around the cursor.
+      ctx.save();
+      ctx.beginPath(); ctx.arc(px, py, rad * 1.3, 0, Math.PI * 2); ctx.clip();
+      const gx = ctx.createRadialGradient(px, py, 0, px, py, rad * 1.3);
+      gx.addColorStop(0, rgb(ink, 1)); gx.addColorStop(1, rgb(ink, 0));
+      ctx.drawImage(grid, 0, 0);
+      ctx.globalCompositeOperation = 'destination-in'; ctx.fillStyle = gx; ctx.fillRect(0, 0, W, H);
+      ctx.restore();
+      // Pieces.
+      ctx.font = glyphFontH; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      pieces.forEach((p, n) => {
+       const cx = p.x + cell / 2, cy = p.y + cell / 2;
+       const dx = cx - px, dy = cy - py, d = Math.hypot(dx, dy);
+       const w = 1 - smooth(rad * 0.55, rad, d);
+       if (w <= 0) return;
+       const push = w * cell * 0.7 / Math.max(1, d);
+       const x = p.x + dx * push, y = p.y + dy * push;
+       const size = cell * (0.55 + 0.45 * (1 - w * 0.5));
+       const off = (cell - size) / 2;
+       const tone = shade(p.cov);
+       ctx.globalAlpha = w; ctx.fillStyle = PALETTE[tone];
+       ctx.fillRect(x + off, y + off, size, size);
+       if (Math.random() < 0.06 || !flicker.has(n)) flicker.set(n, Math.random() < 0.5 ? p.glyph : GLYPHS[1 + Math.floor(Math.random() * (GLYPHS.length - 1))]);
+       ctx.globalAlpha = w * 0.85; ctx.fillStyle = tone >= 2 ? '#fff' : PALETTE[3];
+       ctx.fillText(flicker.get(n)!, x + cell / 2, y + cell / 2 + cell * 0.04);
+      });
+      ctx.globalAlpha = 1;
+     }
+     // Hole in the real text, matching the pieces' falloff (CSS px, relative to the word).
+     const r = word.getBoundingClientRect(), c = canvas.getBoundingClientRect();
+     const hx = c.left - r.left + px / dpr, hy = c.top - r.top + py / dpr, rr = rad / dpr;
+     const hole = rr > 1 ? `radial-gradient(circle at ${hx}px ${hy}px, transparent ${rr * 0.55}px, #000 ${rr}px)` : '';
+     word.style.maskImage = hole;
+     canvas.style.opacity = rad > 1 ? '1' : '0';
+     if (Math.abs(target - strength) > 0.01 || target > 0) raf = requestAnimationFrame(paint);
+     else { raf = 0; strength = target; ctx.clearRect(0, 0, W, H); }
+    };
+    const kick = () => { if (!raf) { last = 0; raf = requestAnimationFrame(paint); } };
+    const move = (e: PointerEvent) => {
+     const now = word.getBoundingClientRect();
+     if (Math.abs(now.width - base.width) > 1 || Math.abs(now.height - base.height) > 1) return;   // layout changed since load
+     const c = canvas.getBoundingClientRect();
+     tx = (e.clientX - c.left) * dpr; ty = (e.clientY - c.top) * dpr;
+     if (target === 0) { px = tx; py = ty; }
+     target = 1; kick();
+    };
+    const leave = () => { target = 0; kick(); };
+    line.addEventListener('pointermove', move); line.addEventListener('pointerleave', leave);
+    return () => { cancelAnimationFrame(raf); line.removeEventListener('pointermove', move); line.removeEventListener('pointerleave', leave); };
+   };
+   if (reduced) { finish(); return; }
    canvas.style.opacity = '1';
 
+   const glyphFont = `500 ${Math.round(cell * 0.72)}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+   const landAll = STAGGER + FLIGHT;
+   // Pieces drifting in, drawn at time t. Once the shrink starts this is the live first layer,
+   // so pieces still in flight keep moving while everything begins to shrink.
+   const drawPieces = (c: CanvasRenderingContext2D, t: number) => {
+    c.font = glyphFont; c.textAlign = 'center'; c.textBaseline = 'middle';
+    for (const p of pieces) {
+     const k = Math.min(1, Math.max(0, (t - p.delay) / FLIGHT));
+     if (k <= 0) continue;
+     const e = easeOut(k);
+     const x = p.sx + (p.x - p.sx) * e, y = p.sy + (p.y - p.sy) * e;
+     const size = cell * (0.3 + 0.7 * e);
+     const off = (cell - size) / 2;
+     const tone = shade(p.cov);
+     c.globalAlpha = Math.min(1, k * 3);
+     c.fillStyle = PALETTE[tone];
+     c.beginPath();
+     c.roundRect(x + off, y + off, size, size, (size / 2) * (1 - e));   // dot → square
+     c.fill();
+     if (e > 0.55) {
+      // Glyphs flicker while the piece settles, then lock to their density.
+      const ch = k < 1 ? GLYPHS[1 + Math.floor(Math.random() * (GLYPHS.length - 1))] : p.glyph;
+      c.globalAlpha *= Math.min(1, (e - 0.55) / 0.3) * 0.85;
+      c.fillStyle = tone >= 2 ? '#fff' : PALETTE[3];
+      c.fillText(ch, x + cell / 2, y + cell / 2 + cell * 0.04);
+     }
+    }
+    c.globalAlpha = 1;
+   };
+   const live = document.createElement('canvas'); live.width = W; live.height = H;
+   const lv = live.getContext('2d')!;
    const start = performance.now();
    const draw = (now: number) => {
     const t = now - start;
-    const p = ease(Math.min(1, t / FILL));
-    const step = t < FILL ? 0 : Math.floor((t - FILL) / STEP) + 1;
-    const last = step >= grids.length - 1;
-    syncInk();
-    for (let i = 3; i < px.length; i += 4) px[i] = 0;
-    if (last) {
-     for (let i = 0; i < alpha.length; i++) px[i * 4 + 3] = Math.round(alpha[i] * 255);   // the letterforms themselves
+    const ink = syncGrid();
+    ctx.clearRect(0, 0, W, H);
+    const shrinkT = t - (landAll - OVERLAP);   // starts while the last pieces are still landing
+    if (shrinkT >= SHRINK_MS) { finish(); return; }
+    const sp = shrinkT < 0 ? 0 : easeIn(shrinkT / SHRINK_MS);   // eases in, keeps moving to the end (no settle-pause)
+    const step = shrinkT < 0 ? -1 : 0;
+    // Grid fades in at the start and fades away while the pieces shrink, gone on the last frame.
+    const gridOut = 1 - sp;
+    ctx.globalAlpha = Math.min(1, t / GRID_IN) * gridOut; ctx.drawImage(grid, 0, 0); ctx.globalAlpha = 1;
+
+    // Render the shrink layers ahead of time, one per frame while the pieces fly in, so the
+    // shrink never stalls on a frame that has to build a layer.
+    if (step < 0) for (let i = 1; i <= levels.length; i++) if (!cache.has(i)) { layerAt(i); break; }
+    if (step < 0) {
+     drawPieces(ctx, t);
+     ctx.globalAlpha = 1;
     } else {
-     const { sz, cols, rows, cov } = grids[step];
-     for (let r = 0; r < rows; r++) {
-      const fromBase = 1 - ((r + 0.5) * sz) / H;                              // 0 at the base, 1 at the top
-      const d = Math.max(0, Math.min(1, (p * (1 + BAND) - fromBase) / BAND));  // density at this height
-      if (d <= 0) continue;
-      for (let c = 0; c < cols; c++) {
-       const v = cov[r * cols + c] * d;
-       if (v <= BAYER[(r & 7) * 8 + (c & 7)]) continue;
-       for (let y = r * sz; y < Math.min(H, (r + 1) * sz); y++)
-        for (let x = c * sz, e = Math.min(W, (c + 1) * sz); x < e; x++) px[(y * W + x) * 4 + 3] = 255;
-      }
-     }
+     // Shrinking pieces: cross-fade the two nearest levels ('lighter' adds them, which is an
+     // exact linear blend), then tint everything towards the heading colour.
+     const u = sp * levels.length, i = Math.min(levels.length - 1, Math.floor(u)), f = u - i;
+     mx.globalCompositeOperation = 'source-over'; mx.globalAlpha = 1; mx.clearRect(0, 0, W, H);
+     mx.globalCompositeOperation = 'lighter';
+     let first = layerAt(i);
+     if (i === 0) { lv.clearRect(0, 0, W, H); drawPieces(lv, t); first = live; }
+     mx.globalAlpha = 1 - f; mx.drawImage(first, 0, 0);
+     if (f > 0) { mx.globalAlpha = f; mx.drawImage(layerAt(i + 1), 0, 0); }
+     mx.globalCompositeOperation = 'source-atop'; mx.globalAlpha = sp; mx.fillStyle = rgb(ink); mx.fillRect(0, 0, W, H);
+     ctx.drawImage(mixed, 0, 0);
+     ctx.globalAlpha = 1;
     }
-    ctx.putImageData(out, 0, 0);
-    if (!last) { frame = requestAnimationFrame(draw); return; }
-    word.classList.add('is-solid');                                             // identical pixels: invisible hand-over
-    canvas.style.opacity = '0';
+    frame = requestAnimationFrame(draw);
    };
    frame = requestAnimationFrame(draw);
   };
-  run().catch(done);
-  return () => { cancelled = true; cancelAnimationFrame(frame); };
+  run().catch(() => word.classList.add('is-solid'));
+  return () => { cancelled = true; cancelAnimationFrame(frame); hover?.(); };
  }, []);
 
  return <h1 id="hero-title" lang="en" className="hero-title">
