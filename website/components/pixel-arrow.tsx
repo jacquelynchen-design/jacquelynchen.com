@@ -6,11 +6,11 @@ const N = 10;
 const cells: { x: number; y: number; o: number; i: number }[] = [];
 const seen = new Set<string>();
 const add = (x: number, y: number, o: number, i: number) => { const k = `${x},${y}`; if (!seen.has(k)) { seen.add(k); cells.push({ x, y, o, i }); } };
-for (let c = 3; c < N; c++) for (const r of [0, 1]) add(c, r, 1, 0);          // head, top arm (2 pieces thick)
-for (let r = 0; r <= 6; r++) for (const c of [N - 2, N - 1]) add(c, r, 1, 0);  // head, right arm
-for (let r = 2; r < N; r++) {                                                // shaft, a 2-piece staircase down to the tail
+for (let c = 3; c < N; c++) add(c, 0, 1, 0);                                 // head, top arm (1 piece thick)
+for (let r = 1; r <= 6; r++) add(N - 1, r, 1, 0);                            // head, right arm
+for (let r = 1; r < N; r++) {                                                // shaft, 1-piece diagonal down to the tail
  const o = r <= 4 ? 1 : r <= 6 ? 0.7 : r <= 7 ? 0.5 : 0.3;
- add(N - 1 - r, r, o, N - r); add(N - r, r, o, N - r);
+ add(N - 1 - r, r, o, N - r);
 }
 const GAP = 0.14;
 
