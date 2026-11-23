@@ -1,5 +1,6 @@
 'use client';
 
+import { CaseMovie } from '@/components/case-movie';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { CaseProjectDetails } from '@/components/case-project-details';
@@ -74,7 +75,7 @@ export default function DrPresenceCaseStudy() {
     <h1 id="dr-title">{t.title}</h1>
     <div className="dr-content-stack">
      <p className="case-lead">{t.quote}</p>
-     <figure className="case-figure dr-figure dr-gif-figure"><div className="dr-gif-stage"><img src={assets + (theme === 'dark' ? 'dr-presence-prototype-v11-dark.gif' : 'dr-presence-prototype-v11-light.gif')} width={414} height={868} alt={t.gifAlt} decoding="async" /></div><figcaption>{t.gifCaption}</figcaption></figure>
+     <figure className="case-figure dr-figure dr-gif-figure"><div className="dr-gif-stage"><CaseMovie src={assets + `dr-presence-prototype-${theme === 'dark' ? 'dark' : 'light'}.mp4`} poster={assets + `dr-presence-prototype-${theme === 'dark' ? 'dark' : 'light'}.webp`} width={414} height={868} label={t.gifAlt} /></div><figcaption>{t.gifCaption}</figcaption></figure>
      <div className="dr-prose">{t.intro.map(p => <p key={p}>{bold(p)}</p>)}</div>
      <CaseProjectDetails language={language}>{t.details.map(lines => <p key={lines[0]}>{lines[0]}<br />{lines[1]}</p>)}</CaseProjectDetails>
     </div>
