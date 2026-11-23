@@ -627,3 +627,10 @@ html[data-theme="dark"] .site-header .menu-toggle .icon { filter:brightness(0) i
 }
 .footer-credit p { display:flex; align-items:center; gap:4px; font:500 var(--fs-eyebrow)/1.4 var(--label); }
 .copyright-mark { font:400 var(--fs-body-l)/1 var(--body); }
+
+/* Footer arrow made of grid pieces (components/pixel-arrow.tsx), echoing the hero. */
+.pixel-arrow { flex:none; overflow:visible; transition:transform .3s; }
+.pixel-arrow rect { fill:#ff8fdd; opacity:var(--o); transition:opacity .25s; }
+.email-link:hover .pixel-arrow { transform:translate(5px,-5px); }
+.email-link:hover .pixel-arrow rect, .email-link:focus-visible .pixel-arrow rect { opacity:1; transition:opacity .12s calc(var(--i) * 30ms); }   /* tail lights up first */
+@media (prefers-reduced-motion:reduce) { .pixel-arrow, .pixel-arrow rect { transition:none; } }
