@@ -85,3 +85,7 @@
 .hero-ascii { position:absolute; max-width:none; pointer-events:none; opacity:0; }
 @keyframes hero-fallback { to { color:inherit; } }
 @media (prefers-reduced-motion:reduce) { .hero-title .hero-complexity { color:inherit; } }
+
+/* Dark mode homepage colours from Figma (798:15357): hero in #fdfff4, project chips in deep indigo. */
+html[data-theme="dark"] .hero-title, .portfolio.night .hero-title { color:#fdfff4; }
+html[data-theme="dark"] .home-chip, .portfolio.night .home-chip { color:#fdfff4; background:#090046; border-color:#2c009d; }

@@ -12,7 +12,12 @@ import { useEffect, useRef } from 'react';
 // hand-over to the real text is invisible.
 // "into Clarity" stays static. Visitors who prefer reduced motion get the final state.
 
-const PALETTE = ['#A2A6D9', '#747BCD', '#4A52C7', '#1400BD'];  // light → deep, from Jac's swatches
+// Hero palettes from Jac's Figma (frames 798:15363 light, 798:15357 dark), faint → strong.
+// Dark mode: #fdfff4 at 30 / 50 / 70 / 100% opacity, pre-blended onto the dark paper (#171622).
+const PALETTES = {
+ light: { tones: ['#A2A6D9', '#747BCD', '#4A52C7', '#1400BD'], glyphOnStrong: '#fff' },
+ dark: { tones: ['#5C5B61', '#8A8A8B', '#B8B8B2', '#FDFFF4'], glyphOnStrong: '#171622' },
+};
 const GLYPHS = ' .:-+xzZ%X#';                                  // sparse → dense
 const FLIGHT = 480;     // ms for one piece to drift in
 const STAGGER = 620;    // ms over which pieces set off
@@ -106,7 +111,8 @@ export function HeroTitle() {
    const levels: number[] = [];
    for (let sz = cell * SHRINK; sz > 1.5; sz *= SHRINK) { const v = Math.round(sz); if (v !== levels[levels.length - 1]) levels.push(v); }
    levels.push(1);
-   const blues = PALETTE.map(hex);
+   const isDark = () => document.documentElement.dataset.theme === 'dark' || !!word.closest('.night');
+   const pal = () => (isDark() ? PALETTES.dark : PALETTES.light);
    const glyphLevels = levels.filter(sz => sz / dpr >= 5).length;
    const monoFont = (sz: number) => `500 ${Math.round(sz * 0.72)}px ui-monospace, SFMono-Regular, Menlo, monospace`;
 
@@ -120,8 +126,8 @@ export function HeroTitle() {
      l.font = monoFont(cell); l.textAlign = 'center'; l.textBaseline = 'middle';
      for (const p of pieces) {
       const tone = shade(p.cov);
-      l.globalAlpha = 1; l.fillStyle = PALETTE[tone]; l.fillRect(p.x, p.y, cell, cell);
-      l.globalAlpha = 0.85; l.fillStyle = tone >= 2 ? '#fff' : PALETTE[3];
+      l.globalAlpha = 1; l.fillStyle = pal().tones[tone]; l.fillRect(p.x, p.y, cell, cell);
+      l.globalAlpha = 0.85; l.fillStyle = tone >= 2 ? pal().glyphOnStrong : pal().tones[3];
       l.fillText(p.glyph, p.x + cell / 2, p.y + cell / 2 + cell * 0.04);
      }
      return layer;
@@ -135,15 +141,15 @@ export function HeroTitle() {
       const cov = coverage(x, y, sz);
       if (cov <= 0.02) continue;
       const tone = shade(cov);
-      l.globalAlpha = Math.min(1, cov * 1.15); l.fillStyle = PALETTE[tone]; l.fillRect(x, y, sz, sz);
+      l.globalAlpha = Math.min(1, cov * 1.15); l.fillStyle = pal().tones[tone]; l.fillRect(x, y, sz, sz);
       if (cov < 0.1) continue;
-      l.globalAlpha = glyphAlpha; l.fillStyle = tone >= 2 ? '#fff' : PALETTE[3];
+      l.globalAlpha = glyphAlpha; l.fillStyle = tone >= 2 ? pal().glyphOnStrong : pal().tones[3];
       l.fillText(glyphFor(cov), x + sz / 2, y + sz / 2 + sz * 0.04);
      }
      return layer;
     }
     // Small blocks: written straight into pixels. The 1px level is the letter mask itself.
-    const img = l.createImageData(W, H), d = img.data;
+    const img = l.createImageData(W, H), d = img.data, tones = pal().tones.map(hex);
     const bcols = Math.ceil(W / sz), brows = Math.ceil(H / sz);
     const bc = new Float32Array(bcols * brows);
     for (let by = 0; by < brows; by++) for (let bx = 0; bx < bcols; bx++) bc[by * bcols + bx] = coverage(bx * sz, by * sz, sz);
@@ -152,7 +158,7 @@ export function HeroTitle() {
      for (let x = 0; x < W; x++) {
       const cov = bc[row + ((x / sz) | 0)];
       if (cov <= 0.02 && sz > 1) continue;
-      const c = blues[shade(cov)], o = (y * W + x) * 4;
+      const c = tones[shade(cov)], o = (y * W + x) * 4;
       d[o] = c[0]; d[o + 1] = c[1]; d[o + 2] = c[2];
       d[o + 3] = Math.round(255 * (sz === 1 ? cov : Math.min(1, cov * 1.15)));
      }
@@ -238,10 +244,10 @@ export function HeroTitle() {
        const size = cell * (0.55 + 0.45 * (1 - w * 0.5));
        const off = (cell - size) / 2;
        const tone = shade(p.cov);
-       ctx.globalAlpha = w; ctx.fillStyle = PALETTE[tone];
+       ctx.globalAlpha = w; ctx.fillStyle = pal().tones[tone];
        ctx.fillRect(x + off, y + off, size, size);
        if (Math.random() < 0.06 || !flicker.has(n)) flicker.set(n, Math.random() < 0.5 ? p.glyph : GLYPHS[1 + Math.floor(Math.random() * (GLYPHS.length - 1))]);
-       ctx.globalAlpha = w * 0.85; ctx.fillStyle = tone >= 2 ? '#fff' : PALETTE[3];
+       ctx.globalAlpha = w * 0.85; ctx.fillStyle = tone >= 2 ? pal().glyphOnStrong : pal().tones[3];
        ctx.fillText(flicker.get(n)!, x + cell / 2, y + cell / 2 + cell * 0.04);
       });
       ctx.globalAlpha = 1;
@@ -286,7 +292,7 @@ export function HeroTitle() {
      const off = (cell - size) / 2;
      const tone = shade(p.cov);
      c.globalAlpha = Math.min(1, k * 3);
-     c.fillStyle = PALETTE[tone];
+     c.fillStyle = pal().tones[tone];
      c.beginPath();
      c.roundRect(x + off, y + off, size, size, (size / 2) * (1 - e));   // dot → square
      c.fill();
@@ -294,7 +300,7 @@ export function HeroTitle() {
       // Glyphs flicker while the piece settles, then lock to their density.
       const ch = k < 1 ? GLYPHS[1 + Math.floor(Math.random() * (GLYPHS.length - 1))] : p.glyph;
       c.globalAlpha *= Math.min(1, (e - 0.55) / 0.3) * 0.85;
-      c.fillStyle = tone >= 2 ? '#fff' : PALETTE[3];
+      c.fillStyle = tone >= 2 ? pal().glyphOnStrong : pal().tones[3];
       c.fillText(ch, x + cell / 2, y + cell / 2 + cell * 0.04);
      }
     }
