@@ -39,7 +39,7 @@ const L='/assets/home/loops/';
 const loops: Record<string, ThumbLoopSpec> = {
  'dr-presence': { src:L+'dr-presence.mp4', size:[896,864], from:[476,0,420,864], to:[238,0,420,864], radius:44 },
  maps: { src:L+'emaps.mp4', size:[900,648], from:[13,14,872,620], to:[13,14,872,620], radius:20, fadeImage:false, intro:.01, outro:.01 },
- pm8000: { src:L+'pm8000.mp4', poster:L+'pm8000-poster.webp', size:[1145,834], rect:[27,27,750,562], radius:9, cover:L+'pm8000-device.webp' },
+ pm8000: { src:L+'pm8000.mp4', size:[1145,834], from:[3,3,848,608], to:[148,113,848,608], radius:37, crossfade:true },
  scoot: { src:L+'scoot.mp4', poster:L+'scoot-poster.webp', size:[1256,640], rect:[959,19,278,600], radius:22 },
 };
 
