@@ -4,7 +4,6 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ProjectNavigation } from './project-navigation';
-import { PixelArrow } from './pixel-arrow';
 import { copy, resumeUrl } from '@/lib/portfolio-copy';
 import { usePreference } from '@/lib/use-preference';
 const PortfolioContext=createContext<{language:'en'|'fr';theme:'light'|'dark'}>({language:'en',theme:'light'});
@@ -46,6 +45,6 @@ export function PortfolioShell({children}:{children:React.ReactNode}) {
 
 {children}
  {isCase&&<ProjectNavigation/>}
- <footer className="footer" id="contact"><a className="email-link" href={email}><span>{text.email}</span><PixelArrow className="footer-arrow" /></a><div className="footer-bottom"><nav aria-label={text.contactResume}><a href="https://www.linkedin.com/in/jjxchen" target="_blank" rel="noopener noreferrer">LinkedIn {icon('imgArrowOutward1')}</a><a href={resumeUrl('fr')} download lang="fr">Français - PDF {icon('imgArrowOutward1')}</a><a href={resumeUrl('en')} download lang="en">English - PDF {icon('imgArrowOutward1')}</a></nav><div className="footer-credit"><p><span className="copyright-mark">©</span>Jacquelyn Chen 2026</p></div></div></footer>
+ <footer className="footer" id="contact"><a className="email-link" href={email}><span>{text.email}</span><picture><source media="(max-width:700px)" srcSet="/assets/footer-arrow-mobile.svg" /><img className="footer-arrow" src="/assets/footer-arrow-desktop.svg" width="102" height="102" alt="" aria-hidden="true" /></picture></a><div className="footer-bottom"><nav aria-label={text.contactResume}><a href="https://www.linkedin.com/in/jjxchen" target="_blank" rel="noopener noreferrer">LinkedIn {icon('imgArrowOutward1')}</a><a href={resumeUrl('fr')} download lang="fr">Français - PDF {icon('imgArrowOutward1')}</a><a href={resumeUrl('en')} download lang="en">English - PDF {icon('imgArrowOutward1')}</a></nav><div className="footer-credit"><p><span className="copyright-mark">©</span>Jacquelyn Chen 2026</p></div></div></footer>
 </div></PortfolioContext.Provider>;
 }
