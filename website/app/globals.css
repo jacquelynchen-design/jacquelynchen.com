@@ -627,3 +627,7 @@ html[data-theme="dark"] .site-header .menu-toggle .icon { filter:brightness(0) i
 }
 .footer-credit p { display:flex; align-items:center; gap:4px; font:500 var(--fs-eyebrow)/1.4 var(--label); }
 .copyright-mark { font:400 var(--fs-body-l)/1 var(--body); }
+
+/* Case-study prototype movies (components/case-movie.tsx) */
+.case-movie-figure video { display:block; width:100%; height:auto; border-radius:8px; border:1px solid var(--line); background:var(--case-panel, transparent); }
+.case-movie-figure.is-phone video { width:min(100%,340px); align-self:center; border-radius:24px; }

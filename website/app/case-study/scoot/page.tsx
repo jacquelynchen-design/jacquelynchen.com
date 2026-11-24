@@ -1,6 +1,7 @@
 'use client';
 import { CaseProjectDetails } from '@/components/case-project-details';
 import { CaseResults } from '@/components/case-results';
+import { CaseMovie } from '@/components/case-movie';
 import { useCaseSectionStack } from '@/components/case-section-stack';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
@@ -45,7 +46,7 @@ export default function ScootCaseStudy(){
  <section id="overview" className="case-section case-overview" tabIndex={-1} aria-labelledby="scoot-title">
   <p className="case-section-label">{sectionLabel(0)}</p>
   <div className="case-content">
-   <h1 id="scoot-title">Scoot Career Portal</h1><p className="case-lead">{text.lead}</p><p>{text.intro}</p>
+   <h1 id="scoot-title">Scoot Career Portal</h1><p className="case-lead">{text.lead}</p><figure className="case-figure case-movie-figure is-phone"><CaseMovie src="/assets/scoot/scoot-movie.mp4" poster="/assets/scoot/scoot-movie.webp" width={376} height={812} label={language==='fr'?'Prototype mobile : recherche d’offres par compétences, ajout de cinq compétences, puis offres correspondantes.':'Mobile prototype: searching jobs by skills, adding five skills, then the matching jobs.'} /><figcaption>{language==='fr'?'La recherche d’offres par compétences, sur mobile.':'Searching jobs by skills, on mobile.'}</figcaption></figure><p>{text.intro}</p>
    <CaseProjectDetails language={language}><ul className="project-team">{text.team.map(([name,role])=><li key={name}><strong>{name}</strong><br />{role}</li>)}</ul></CaseProjectDetails>
    <div className="case-block"><h2>{text.challengeTitle}</h2>{paragraphs(text.challenge)}</div>
   </div>

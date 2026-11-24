@@ -10,9 +10,14 @@
 .home-project { display:flex; align-items:center; gap:32px; padding:56px 0; }
 .home-project + .home-project { border-top:1px solid var(--home-rule); }
 .home-project:last-child { padding-bottom:0; }
-.home-thumb { --h:80%; display:flex; align-items:center; justify-content:center; flex:0 0 min(720px,53.6%); aspect-ratio:4/3; padding:0 40px; }
-.home-thumb img { display:block; width:auto; height:var(--h); max-width:100%; object-fit:contain; transition:transform .6s cubic-bezier(.22,1,.36,1); }
-.home-project:hover .home-thumb img { transform:scale(1.02); }
+.home-thumb { --h:80%; container-type:size; display:flex; align-items:center; justify-content:center; flex:0 0 min(720px,53.6%); aspect-ratio:4/3; padding:0 40px; }
+.home-thumb-media { position:relative; display:block; height:min(var(--h), 100cqw / var(--ar)); aspect-ratio:var(--ar); transition:transform .6s cubic-bezier(.22,1,.36,1); }
+.home-thumb img { display:block; width:100%; height:100%; }
+.home-project:hover .home-thumb-media { transform:scale(1.02); }
+/* Looping clip over the thumbnail's screen (components/thumb-loop.tsx) */
+.home-thumb .home-thumb-loop { position:absolute; display:block; object-fit:cover; background:transparent; pointer-events:none; }
+.home-thumb .home-thumb-stage { z-index:1; opacity:0; }
+.home-thumb .home-thumb-cover { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
 .home-project-pm8000 .home-thumb { --h:77.6%; }
 .home-project-scoot .home-thumb { --h:59.3%; }
 
@@ -60,7 +65,6 @@
  .home-project-maps .home-thumb { height:248px; --h:238px; }
  .home-project-pm8000 .home-thumb { --h:208px; padding:0; }
  .home-project-scoot .home-thumb { --h:178px; }
- .home-thumb img { max-height:100%; }
  .home-story { align-items:center; text-align:center; padding-right:0; }
  .home-action { align-self:stretch; }
  .home-capabilities { display:flex; flex-direction:column; gap:16px; margin:48px 4px 0; border:0; }
