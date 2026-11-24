@@ -17,9 +17,9 @@ Run `npm install`, then `npm run dev`. Run `npm run build` for production.
 
 The EN/FR button switches all homepage copy except the English headline. The main résumé link downloads the selected language; the footer always offers both original PDFs. Copy and résumé mapping are in `lib/portfolio-copy.ts`. The language and appearance choices are stored locally through `lib/use-preference.ts`. The supplied New Spirit Condensed Regular and Regular Italic fonts are self-hosted in `public/fonts`. The headline uses the true Regular Italic face without synthesized italics. Contact links use her email and LinkedIn profile.
 
-## Maps case study
+## eMaps case study
 
-The Maps card opens `/case-study/maps`. Five sticky section anchors track the reading position. The four delivery-gallery items open in a desktop dialog or mobile bottom sheet; thumbnails and left/right arrow keys select the image. Escape, the close button, or a backdrop click dismisses the gallery. Shared navigation, downloads, language, and appearance apply to both routes.
+The eMaps card opens `/case-study/maps`. Five sticky section anchors track the reading position. The four delivery-gallery items open in a desktop dialog or mobile bottom sheet; thumbnails and left/right arrow keys select the image. Escape, the close button, or a backdrop click dismisses the gallery. Shared navigation, downloads, language, and appearance apply to both routes.
 
 - `lib/maps-en.json` and `lib/maps-fr.json`: bilingual case-study content.
 - `lib/maps-visuals.ts`: main visual mappings and four supporting-gallery visuals.

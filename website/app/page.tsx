@@ -16,7 +16,7 @@ const projects: { slug: string; title: string; image: [number, number]; category
   summary: ['Facilitating remote reviews and data transmission between doctor and patient', 'Faciliter le suivi à distance et la transmission des données entre médecin et patient'],
  },
  {
-  slug: 'maps', title: 'Maps', image: [900, 648],
+  slug: 'maps', title: 'eMaps', image: [900, 648],
   category: ['Mobility', 'Mobilité'],
   quote: ['My car broke down and I want to go home', 'Ma voiture est en panne et je veux rentrer chez moi'],
   summary: ['Aiding assistance operators help stranded travellers find a solution under time pressure.', 'Aider les chargés d’assistance à trouver une solution pour les voyageurs immobilisés, sous la pression du temps.'],
