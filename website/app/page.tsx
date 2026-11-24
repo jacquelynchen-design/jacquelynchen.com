@@ -37,7 +37,7 @@ const projects: { slug: string; title: string; image: [number, number]; category
 
 const L='/assets/home/loops/';
 const loops: Record<string, ThumbLoopSpec> = {
- 'dr-presence': { src:L+'dr-presence.mp4', poster:L+'dr-presence-poster.webp', size:[896,864], rect:[495,19,382,826], radius:23.5 },
+ 'dr-presence': { src:L+'dr-presence.mp4', size:[896,864], from:[476,0,420,864], to:[238,0,420,864], radius:44 },
  maps: { src:L+'maps.mp4', poster:L+'maps-poster.webp', size:[900,648], rect:[13,14,872,620], radius:20 },
  pm8000: { src:L+'pm8000.mp4', poster:L+'pm8000-poster.webp', size:[1145,834], rect:[27,27,750,562], radius:9, cover:L+'pm8000-device.webp' },
  scoot: { src:L+'scoot.mp4', poster:L+'scoot-poster.webp', size:[1256,640], rect:[959,19,278,600], radius:22 },
