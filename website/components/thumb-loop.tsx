@@ -15,6 +15,7 @@ export type StageLoopSpec = {
   radius: number;                         // device outer corner radius, image px at `from` size
   intro?: number; outro?: number;         // seconds spent gliding in / out (inside the clip's own hold)
   pause?: number;                         // seconds the static thumbnail rests between plays
+  fadeImage?: boolean;                    // false keeps the thumbnail (bezel) visible under the clip
 };
 // Legacy overlay clips (`rect`): a clip laid over the thumbnail's screen.
 export type OverlayLoopSpec = {
@@ -56,7 +57,7 @@ function StageLoop({ spec }: { spec: StageLoopSpec }) {
       video.style.left = `${(r[0] / W) * 100}%`; video.style.top = `${(r[1] / H) * 100}%`;
       video.style.width = `${(r[2] / W) * 100}%`; video.style.height = `${(r[3] / H) * 100}%`;
       video.style.borderRadius = `${(spec.radius / spec.from[2]) * 100}% / ${(spec.radius / spec.from[3]) * 100}%`;
-      if (img) img.style.opacity = String(1 - ease(clamp(k * 1.6)));
+      if (img && spec.fadeImage !== false) img.style.opacity = String(1 - ease(clamp(k * 1.6)));
     };
     const tick = () => {
       const t = video.currentTime, d = video.duration || 1;
