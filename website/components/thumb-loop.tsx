@@ -46,27 +46,31 @@ function useInView(ref: React.RefObject<HTMLElement | null>, onChange: (play: bo
 function StageLoop({ spec }: { spec: StageLoopSpec }) {
   const ref = useRef<HTMLVideoElement>(null);
   const state = useRef({ play: false, timer: 0 as unknown as ReturnType<typeof setTimeout>, raf: 0 });
-  const [W, H] = spec.size, intro = spec.intro ?? .9, outro = spec.outro ?? .9, pause = spec.pause ?? 2;
+  const [W, H] = spec.size, intro = spec.intro ?? .9, outro = spec.outro ?? .9, pause = spec.pause ?? 1;
 
   useEffect(() => {
     const video = ref.current; if (!video) return;
     const img = video.parentElement?.querySelector('img') as HTMLImageElement | null;
     const s = state.current;
-    const place = (k: number) => {           // k: 0 = resting on the static device, 1 = centred
+    // k: 0 = resting on the static device, 1 = centred. f: hand-off between the static image and the clip,
+    // done while the clip sits exactly on the device (0 = image only, 1 = clip only), so they never show twice.
+    const place = (k: number, f = k > 0 ? 1 : 0) => {
       const e = ease(clamp(k));
       const r = spec.from.map((a, i) => a + (spec.to[i] - a) * e);
       video.style.left = `${(r[0] / W) * 100}%`; video.style.top = `${(r[1] / H) * 100}%`;
       video.style.width = `${(r[2] / W) * 100}%`; video.style.height = `${(r[3] / H) * 100}%`;
       video.style.borderRadius = `${(spec.radius / spec.from[2]) * 100}% / ${(spec.radius / spec.from[3]) * 100}%`;
-      if (img && spec.fadeImage !== false) img.style.opacity = String(1 - ease(clamp(k * 1.6)));
-      if (spec.crossfade) video.style.opacity = String(ease(clamp(k * 1.6)));
+      if (img && spec.fadeImage !== false) img.style.opacity = String(1 - ease(clamp(f)));
+      if (spec.crossfade) video.style.opacity = String(ease(clamp(f)));
     };
+    const hand = (span: number) => Math.min(.3, span * .4);   // seconds of the hand-off inside intro/outro
+    const phase = (x: number, span: number) => { const h = hand(span); place((x - h) / (span - h), x / h); };
     const tick = () => {
       const t = video.currentTime, d = video.duration || 1;
-      place(t < intro ? t / intro : t > d - outro ? (d - t) / outro : 1);
+      if (t < intro) phase(t, intro); else if (t > d - outro) phase(d - t, outro); else place(1, 1);
       s.raf = requestAnimationFrame(tick);
     };
-    const start = () => { if (!s.play) return; video.currentTime = 0; video.style.opacity = '1'; video.play().catch(() => {}); cancelAnimationFrame(s.raf); s.raf = requestAnimationFrame(tick); };
+    const start = () => { if (!s.play) return; video.currentTime = 0; video.style.opacity = spec.crossfade ? '0' : '1'; video.play().catch(() => {}); cancelAnimationFrame(s.raf); s.raf = requestAnimationFrame(tick); };
     const onEnded = () => { cancelAnimationFrame(s.raf); place(0); video.style.opacity = '0'; s.timer = setTimeout(start, pause * 1000); };
     video.addEventListener('ended', onEnded);
     place(0); video.style.opacity = '0';
