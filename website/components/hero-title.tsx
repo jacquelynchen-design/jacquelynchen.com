@@ -31,7 +31,7 @@ const easeIn = (x: number) => x ** 1.4;
 const hex = (h: string) => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
 const rgb = (c: number[], a = 1) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
 const shade = (cov: number) => (cov > 0.85 ? 3 : cov > 0.6 ? 2 : cov > 0.35 ? 1 : 0);
-const glyphFor = (cov: number) => GLYPHS[Math.max(1, Math.min(GLYPHS.length - 1, Math.round(cov * (GLYPHS.length - 1))))];
+const glyphFor = (cov: number) => GLYPHS[Math.max(1, Math.min(GLYPHS.length - 1, Math.round((cov || 0) * (GLYPHS.length - 1))))];
 
 // Seeded random, so the composition is the same on every visit.
 const rng = (seed: number) => () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
@@ -72,7 +72,10 @@ export function HeroTitle() {
    const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
    // Grid geometry, in device pixels. The canvas reaches past the word so the grid has room to fade.
-   const cell = Math.max(6, Math.round(fontPx / 11)) * dpr;
+   // Must be a whole number of device pixels: on screens with fractional scaling (e.g. 150%
+   // on a 4K monitor, devicePixelRatio 1.5) a fractional cell made the coverage lookups read
+   // past the pixel table, filling the hero with garbage and "undefined" glyphs.
+   const cell = Math.round(Math.max(6, Math.round(fontPx / 11)) * dpr);
    const margin = Math.ceil((glyphs.height * 0.55 * dpr) / cell) * cell;
    const cols = Math.ceil((glyphs.width * dpr) / cell) + (2 * margin) / cell + 1;
    const rows = Math.ceil((glyphs.height * dpr) / cell) + (2 * margin) / cell + 1;
