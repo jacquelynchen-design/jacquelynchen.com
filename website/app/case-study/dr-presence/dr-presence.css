@@ -23,7 +23,7 @@
 .dr-dashboard-stack { display:none; }
 .dr-presence-case .dr-gif-figure { min-height:585px; }
 .dr-gif-stage { display:flex; align-items:center; justify-content:center; flex:1; min-height:517px; }
-.dr-gif-stage img { display:block; width:auto; height:517px; max-width:100%; object-fit:contain; }
+.dr-gif-stage video { display:block; width:auto; height:517px; max-width:100%; object-fit:contain; }
 .dr-original-stage { position:relative; width:100%; aspect-ratio:854/479; }
 .dr-original-phone { position:absolute; top:9.637%; width:21.92%; height:81.485%; border:8px solid var(--case-placeholder); border-radius:20px; overflow:hidden; }
 .dr-original-patient { left:25.835%; }
@@ -89,7 +89,7 @@ html[data-theme="dark"] .dr-gallery-dialog .gallery-close img { filter:brightnes
  .dr-presence-case .dr-figure figcaption { font-size:12px; }
  .dr-presence-case .dr-gif-figure { min-height:420px; }
  .dr-gif-stage { min-height:360px; }
- .dr-gif-stage img { height:360px; }
+ .dr-gif-stage video { height:360px; }
  .dr-original-phone { border-width:3px; border-radius:9px; }
  .dr-flow { flex-direction:column; gap:16px; }
  .dr-flow-step { width:100%; min-height:0; padding:16px; flex-direction:row; }

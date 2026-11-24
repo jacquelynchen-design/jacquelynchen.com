@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { usePortfolio } from './portfolio-shell';
 // Same order as the homepage cards; the switcher loops (first ← last, last → first).
-const projects=[['dr-presence','Dr Presence'],['maps','Maps'],['pm8000','PM8000'],['scoot','Scoot Career Portal']];
+const projects=[['dr-presence','Dr Presence'],['maps','eMaps'],['pm8000','PM8000'],['scoot','Scoot Career Portal']];
 export function ProjectNavigation(){
  const pathname=usePathname(); const {language}=usePortfolio();
  const index=projects.findIndex(([slug])=>pathname===`/case-study/${slug}`);

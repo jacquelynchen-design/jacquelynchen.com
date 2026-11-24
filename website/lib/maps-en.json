@@ -7,7 +7,7 @@
     "Results"
   ],
   "quote": "“My car broke down and I want to go home”",
-  "intro": "What happens at the insurance call center when a client rings to say their car has broken down in the middle of the country? Maps is the interface that helps the phone operator identify, organise and book travel solutions to help their client get to their destination.",
+  "intro": "What happens at the insurance call center when a client rings to say their car has broken down in the middle of the country? eMaps is the interface that helps the phone operator identify, organise and book travel solutions to help their client get to their destination.",
   "personaTitle": "Antoine, the assistance operator",
   "personaQuote": "“I need to get them moving again without missing a detail that could disrupt the journey later.”",
   "personaDetails": [
@@ -15,10 +15,10 @@
     "Frustrations : Complex requirements and fragmented transport options make it difficult to compare solutions confidently.",
     "Behaviour : Gathers essential details first, compares viable routes, then verifies each journey segment before booking."
   ],
-  "personaBody": "Assistance operators use Maps while speaking on the phone with clients whose journeys have been unexpectedly interrupted. They need to understand each situation quickly, account for eligibility and passenger requirements, and compare viable transport options under time pressure. Their priority is to find a reliable solution they can confidently explain and book without losing sight of important journey details.",
+  "personaBody": "Assistance operators use eMaps while speaking on the phone with clients whose journeys have been unexpectedly interrupted. They need to understand each situation quickly, account for eligibility and passenger requirements, and compare viable transport options under time pressure. Their priority is to find a reliable solution they can confidently explain and book without losing sight of important journey details.",
   "note": "The project name has been changed as it has not launched yet.",
   "problemTitle": "The design challenge",
-  "problem": "Maps had to help assistance operators turn an unexpected disruption into a practical onward journey while they were still speaking with the client.\n\nThe challenge was therefore not simply to display transport results. It had to reveal the right level of complexity at each stage, display enough information to support a reliable decision, without overwhelming the operator or client during a time-sensitive call.\n\nMy role: User stories, interface and design system design, stakeholder workshops and development collaboration.",
+  "problem": "eMaps had to help assistance operators turn an unexpected disruption into a practical onward journey while they were still speaking with the client.\n\nThe challenge was therefore not simply to display transport results. It had to reveal the right level of complexity at each stage, display enough information to support a reliable decision, without overwhelming the operator or client during a time-sensitive call.\n\nMy role: User stories, interface and design system design, stakeholder workshops and development collaboration.",
   "process": [
     {
       "title": "From user and business needs to product behaviour",
@@ -52,7 +52,7 @@
     },
     {
       "title": "Adding on to an existing design system",
-      "body": "Maps uses an existing design system based on the client’s brand, but the product needs to evolve and develop its own colour palette, brand language and interface components. As the project went on, I had to keep updating the design system and document changes for the team to keep track.",
+      "body": "eMaps uses an existing design system based on the client’s brand, but the product needs to evolve and develop its own colour palette, brand language and interface components. As the project went on, I had to keep updating the design system and document changes for the team to keep track.",
       "visuals": [
         "system"
       ]

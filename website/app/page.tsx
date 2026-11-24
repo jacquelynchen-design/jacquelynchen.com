@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import { IntroCards } from '@/components/intro-cards';
 import { HeroTitle } from '@/components/hero-title';
+import { ThumbLoop, type ThumbLoopSpec } from '@/components/thumb-loop';
 import { copy } from '@/lib/portfolio-copy';
 import { usePortfolio, icon } from '@/components/portfolio-shell';
 import './home.css';
@@ -15,7 +16,7 @@ const projects: { slug: string; title: string; image: [number, number]; category
   summary: ['Facilitating remote reviews and data transmission between doctor and patient', 'Faciliter le suivi à distance et la transmission des données entre médecin et patient'],
  },
  {
-  slug: 'maps', title: 'Maps', image: [900, 648],
+  slug: 'maps', title: 'eMaps', image: [900, 648],
   category: ['Mobility', 'Mobilité'],
   quote: ['My car broke down and I want to go home', 'Ma voiture est en panne et je veux rentrer chez moi'],
   summary: ['Aiding assistance operators help stranded travellers find a solution under time pressure.', 'Aider les chargés d’assistance à trouver une solution pour les voyageurs immobilisés, sous la pression du temps.'],
@@ -34,6 +35,14 @@ const projects: { slug: string; title: string; image: [number, number]; category
  },
 ];
 
+const L='/assets/home/loops/';
+const loops: Record<string, ThumbLoopSpec> = {
+ 'dr-presence': { src:L+'dr-presence.mp4', size:[896,864], from:[476,0,420,864], to:[238,0,420,864], radius:44 },
+ maps: { src:L+'emaps.mp4', size:[900,648], from:[13,14,872,620], to:[13,14,872,620], radius:20, fadeImage:false, intro:.01, outro:.01 },
+ pm8000: { src:L+'pm8000.mp4', size:[1145,834], from:[3,3,848,608], to:[148,113,848,608], radius:37, crossfade:true },
+ scoot: { src:L+'scoot.mp4', size:[1256,640], from:[0,0,884,640], to:[186,0,884,640], radius:40, crossfade:true },
+};
+
 export default function Home(){
  const {language}=usePortfolio(); const text=copy[language]; const fr=language==='fr'?1:0;
  return (
@@ -45,7 +54,7 @@ export default function Home(){
     {projects.map(project=>{
      const href=`/case-study/${project.slug}`;
      return <article className={`home-project home-project-${project.slug}`} key={project.slug} role="listitem">
-      <a className="home-thumb" href={href} tabIndex={-1} aria-hidden="true"><Image unoptimized src={`/assets/home/${project.slug}.webp`} width={project.image[0]} height={project.image[1]} alt="" loading="lazy" /></a>
+      <a className="home-thumb" href={href} tabIndex={-1} aria-hidden="true"><span className="home-thumb-media" style={{'--ar':project.image[0]/project.image[1]} as React.CSSProperties}><Image unoptimized src={`/assets/home/${project.slug}.webp`} width={project.image[0]} height={project.image[1]} alt="" loading="lazy" />{loops[project.slug] && <ThumbLoop spec={loops[project.slug]} />}</span></a>
       <div className="home-story">
        <span className="home-chip">{project.category[fr]}</span>
        <h2 className="home-quote">{fr?`« ${project.quote[1]} »`:`“${project.quote[0]}”`}</h2>

@@ -1,6 +1,7 @@
 'use client';
 import { CaseProjectDetails } from '@/components/case-project-details';
 import { CaseResults } from '@/components/case-results';
+import { CaseMovie } from '@/components/case-movie';
 import { useCaseSectionStack } from '@/components/case-section-stack';
 
 import { useEffect, useRef, useState } from 'react';
@@ -74,6 +75,7 @@ export default function PM8000CaseStudy() {
       <div className="case-content">
         <h1 id="pm8000-title">Profometer PM8000 Pro</h1>
         <p className="case-lead">{text.lead}</p>
+        <figure className="case-figure case-movie-figure"><CaseMovie src="/assets/pm8000/pm8000-movie.mp4" poster="/assets/pm8000/pm8000-movie.webp" width={1194} height={834} label={language==='fr'?'Prototype de l’app PM8000 : comparaison des barres, vue du signal, statistiques, puis scan de surface avec carte thermique et distance de saut.':'PM8000 app prototype: comparing bars, the signal view, statistics, then an area scan with heat map and skip distance.'} /><figcaption>{language==='fr'?'De la ligne de scan aux statistiques, puis au scan de surface.':'From a line scan to statistics, then an area scan.'}</figcaption></figure>
         <p>{text.intro}</p>
         <figure className="case-figure"><div className="case-visual has-image pm8000-inspector"><div className="pm8000-inspector-crop">{picture(1, true)}</div></div><figcaption>{caption(1)}</figcaption></figure>
         <CaseProjectDetails language={language}><dl className="pm8000-credits"><div><dt>{text.roleTitle}</dt><dd>{text.role}</dd></div><div><dt>{text.teamTitle}</dt>{text.team.map(member => <dd key={member}>{member}</dd>)}</div></dl></CaseProjectDetails>

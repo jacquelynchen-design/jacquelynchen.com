@@ -7,7 +7,7 @@
     "Résultats"
   ],
   "quote": "« Ma voiture est en panne et je veux rentrer chez moi »",
-  "intro": "Que se passe-t-il au centre d’assistance quand un client appelle parce que sa voiture est tombée en panne en pleine campagne ? Maps aide le chargé d’assistance à trouver, organiser et réserver les transports qui permettront au client d’arriver à destination.",
+  "intro": "Que se passe-t-il au centre d’assistance quand un client appelle parce que sa voiture est tombée en panne en pleine campagne ? eMaps aide le chargé d’assistance à trouver, organiser et réserver les transports qui permettront au client d’arriver à destination.",
   "personaTitle": "Antoine, chargé d’assistance",
   "personaQuote": "« Je dois les remettre en route, sans laisser passer un détail qui pourrait compliquer la suite du voyage. »",
   "personaDetails": [
@@ -15,10 +15,10 @@
     "Frustrations : Des conditions complexes et des offres de transport dispersées rendent les solutions difficiles à comparer sereinement.",
     "Habitudes : Recueillir les informations essentielles, comparer les trajets possibles, puis vérifier chaque étape avant de réserver."
   ],
-  "personaBody": "Les chargés d’assistance utilisent Maps tout en parlant avec des clients dont le voyage a été interrompu. Ils doivent comprendre rapidement la situation, tenir compte des garanties et des besoins des passagers, puis comparer les transports disponibles, le tout sous pression. Leur priorité : trouver une solution fiable, qu’ils peuvent expliquer et réserver en toute confiance, sans perdre de vue les détails du trajet.",
+  "personaBody": "Les chargés d’assistance utilisent eMaps tout en parlant avec des clients dont le voyage a été interrompu. Ils doivent comprendre rapidement la situation, tenir compte des garanties et des besoins des passagers, puis comparer les transports disponibles, le tout sous pression. Leur priorité : trouver une solution fiable, qu’ils peuvent expliquer et réserver en toute confiance, sans perdre de vue les détails du trajet.",
   "note": "Le nom du projet a été modifié, car le produit n’a pas encore été lancé.",
   "problemTitle": "Le défi de conception",
-  "problem": "Maps devait aider les chargés d’assistance à transformer un imprévu en solution de transport concrète, pendant qu’ils étaient encore au téléphone avec le client.\n\nL’enjeu ne se limitait donc pas à afficher des résultats. Il fallait faire apparaître la complexité au bon moment, avec assez d’informations pour prendre une décision fiable, sans submerger le chargé d’assistance ni son interlocuteur pendant un appel où chaque minute compte.\n\nMon rôle : rédaction des user stories, conception des interfaces et du design system, ateliers avec les parties prenantes et collaboration avec les développeurs.",
+  "problem": "eMaps devait aider les chargés d’assistance à transformer un imprévu en solution de transport concrète, pendant qu’ils étaient encore au téléphone avec le client.\n\nL’enjeu ne se limitait donc pas à afficher des résultats. Il fallait faire apparaître la complexité au bon moment, avec assez d’informations pour prendre une décision fiable, sans submerger le chargé d’assistance ni son interlocuteur pendant un appel où chaque minute compte.\n\nMon rôle : rédaction des user stories, conception des interfaces et du design system, ateliers avec les parties prenantes et collaboration avec les développeurs.",
   "process": [
     {
       "title": "Des besoins aux comportements du produit",
@@ -52,7 +52,7 @@
     },
     {
       "title": "Enrichir un design system existant",
-      "body": "Maps s’appuie sur un design system existant, issu de l’identité du client. Mais le produit doit évoluer et développer sa propre palette de couleurs, son langage visuel et ses composants d’interface. Au fil du projet, j’ai enrichi le design system et documenté les changements pour que toute l’équipe puisse suivre.",
+      "body": "eMaps s’appuie sur un design system existant, issu de l’identité du client. Mais le produit doit évoluer et développer sa propre palette de couleurs, son langage visuel et ses composants d’interface. Au fil du projet, j’ai enrichi le design system et documenté les changements pour que toute l’équipe puisse suivre.",
       "visuals": [
         "system"
       ]
