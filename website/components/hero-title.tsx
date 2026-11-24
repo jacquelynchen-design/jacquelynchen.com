@@ -46,8 +46,20 @@ export function HeroTitle() {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let frame = 0, cancelled = false, hover: (() => void) | undefined;
 
+  // JS is running, so the CSS safety net (reveal the word after 6s) isn't needed. Turning it
+  // off keeps the word hidden while the page waits in a background tab.
+  if (!reduced) word.style.animation = 'none';
+  // Start only once the page is actually in front of the visitor: a page opened in a
+  // background tab waits until its tab is shown.
+  const whenVisible = () => new Promise<void>(resolve => {
+   if (document.visibilityState === 'visible') return resolve();
+   const on = () => { if (document.visibilityState === 'visible') { document.removeEventListener('visibilitychange', on); resolve(); } };
+   document.addEventListener('visibilitychange', on);
+  });
+
   const run = async () => {
    await document.fonts.ready;
+   await whenVisible();
    if (cancelled) return;
    const text = word.firstChild;
    if (!text) { word.classList.add('is-solid'); return; }
@@ -308,9 +320,11 @@ export function HeroTitle() {
    };
    const live = document.createElement('canvas'); live.width = W; live.height = H;
    const lv = live.getContext('2d')!;
-   const start = performance.now();
+   // Animation clock: advances by real frame time but at most 50ms per frame, so leaving the
+   // tab mid-animation pauses it instead of skipping to the end on return.
+   let t = 0, last = 0;
    const draw = (now: number) => {
-    const t = now - start;
+    t += last ? Math.min(50, now - last) : 0; last = now;
     const ink = syncGrid();
     ctx.clearRect(0, 0, W, H);
     const shrinkT = t - (landAll - OVERLAP);   // starts while the last pieces are still landing
