@@ -10,8 +10,6 @@
 .dr-presence-case .dr-prose { display:flex; flex-direction:column; gap:28px; }
 .dr-presence-case h3 { margin:0; font:600 24px/1 'Barlow Semi Condensed',var(--body); }
 .dr-presence-case ul { margin:0; padding-inline-start:30px; list-style:disc; font:400 20px/1.4 var(--body); }
-.dr-presence-case .case-section-label { min-height:48px; }
-.dr-presence-case .case-overview .case-section-label { min-height:48.4px; }
 .dr-presence-case .case-project-details { padding:40px; }
 .dr-presence-case .case-project-details h2 { margin-bottom:24px; }
 .dr-presence-case .case-project-details-content { grid-template-columns:repeat(2,minmax(0,1fr)); align-items:start; gap:32px; }
