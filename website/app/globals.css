@@ -519,9 +519,11 @@ html[data-theme="dark"] .pm8000-case .pm8000-inspector { background-color:#E8E3F
 .portfolio.night .footer { background:#0a0822; }
 .portfolio.night .footer-bottom { border-color:#50496b; }
 .portfolio.night .footer-credit p + p { display:none; }
-@media (min-width:701px) and (max-width:1100px) { .case-section-label { min-height:43.2px; } .case-overview .case-section-label { min-height:48.4px; } }
+/* Label row height = first line of the heading beside it, so their centres line up at every width. */
+.case-section-label { min-height:calc(var(--fs-h4) * var(--lh-h4)); }
+.case-overview .case-section-label { min-height:calc(var(--fs-h2) * var(--lh-h2)); }
 @media (max-width:700px) {
- .case-section-label { min-height:0; justify-content:flex-start; text-align:left; }
+ .case-section-label,.case-overview .case-section-label { min-height:0; justify-content:flex-start; text-align:left; }
  .case-project-details { padding:24px 20px; }
  .case-project-details-content { grid-template-columns:1fr; gap:24px; }
  .case-project-details-content :is(p,li,dd) { font-size:18px; }
