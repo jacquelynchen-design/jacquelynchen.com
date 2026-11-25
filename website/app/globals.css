@@ -633,3 +633,14 @@ html[data-theme="dark"] .site-header .menu-toggle .icon { filter:brightness(0) i
 /* Case-study prototype movies (components/case-movie.tsx) */
 .case-movie-figure video { display:block; width:100%; height:auto; border-radius:8px; border:1px solid var(--line); background:var(--case-panel, transparent); }
 .case-movie-figure.is-phone video { width:min(100%,340px); align-self:center; border-radius:24px; }
+
+/* Footer and case study switcher line up with the page content above: the 1344px content
+   column (homepage rules, case study sections) on wide screens, the page gutter below that. */
+.footer { padding-inline:max(var(--gutter), calc((100% - 1344px) / 2)); }
+.project-navigation { container-type:inline-size; --nav-edge:max(var(--gutter), calc((100cqw - 1344px) / 2)); }
+.project-navigation a:first-child { padding-left:var(--nav-edge); }
+.project-navigation a:last-child { padding-right:var(--nav-edge); }
+/* Case study sections sit 40px in on tablet, so their footer and switcher follow them. */
+@media (min-width:701px) and (max-width:1100px) {
+ .case-site :is(.footer,.project-navigation) { --gutter:40px; }
+}
