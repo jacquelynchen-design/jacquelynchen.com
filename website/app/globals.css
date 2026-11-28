@@ -660,17 +660,9 @@ html[data-theme="dark"] .site-header .menu-toggle .icon { filter:brightness(0) i
 .scoot-case .gallery-preview .scoot-phone,.scoot-gallery-dialog .gallery-thumbnail .scoot-phone { border-width:3px; border-radius:8px; }
 .scoot-gallery-dialog .gallery-thumbnail { display:flex; align-items:stretch; }
 .scoot-gallery-dialog .gallery-thumbnail .scoot-stage { padding:8px 12px; border-radius:0; }
-.scoot-gallery-dialog .gallery-thumbnail .is-desktop .scoot-window { max-height:100%; }
-.scoot-gallery-dialog .gallery-thumbnail .is-desktop .scoot-window img { aspect-ratio:auto; height:100%; object-fit:cover; object-position:top; }
 .scoot-gallery-dialog .gallery-image { width:100%; }
-.scoot-gallery-dialog .gallery-image .scoot-stage { height:100%; padding:24px; }
-.scoot-gallery-dialog .gallery-image .scoot-phone { flex:0 1 auto; height:100%; aspect-ratio:375/812; }
-.scoot-gallery-dialog .gallery-image .scoot-phone img { height:100%; width:auto; }
-.scoot-gallery-dialog .gallery-image .is-desktop { overflow:auto; align-items:flex-start; }
-.scoot-gallery-dialog .gallery-image .scoot-window img { border:0; height:auto; width:100%; }
 @media(max-width:700px) {
  .scoot-case .case-gallery { grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:72%; overflow-x:auto; }
- .scoot-gallery-dialog .gallery-image .scoot-stage { padding:12px; }
 }
 /* The gallery dialog renders outside .case-site, so it needs the stage colours itself. */
 .scoot-gallery-dialog { --case-placeholder:#dfe1cb; --case-panel:#f5f8e6; }
@@ -686,3 +678,14 @@ html[data-theme="dark"] .scoot-gallery-dialog { --case-placeholder:#35304d; --ca
 .scoot-stage.is-component { padding:6%; }
 .scoot-stage.is-component img { display:block; width:100%; height:auto; border-radius:8px; }
 .scoot-stage.is-component:has(img[src$="skills-callout.png"]) img { width:min(100%,420px); margin-inline:auto; border-radius:0; }
+/* Scoot desktop + mobile pairs, after the Figma case-study image (854 × 602 thumbnail: 543 + 178 screens, 48 gap).
+   Both screens share one height (--h, in stage widths) so the devices line up. */
+.scoot-stage.is-pair { --h:40cqi; --b:max(2px,1.3cqi); gap:5.6cqi; padding:8cqi 4cqi; align-items:center; }
+.scoot-stage.is-pair :is(.scoot-window,.scoot-phone) { flex:0 0 auto; width:auto; border-width:var(--b); border-radius:max(6px,3.2cqi); }
+.scoot-stage.is-pair img { height:var(--h); width:auto; max-width:none; object-fit:cover; object-position:top; }
+.scoot-stage.is-pair .scoot-window img { aspect-ratio:1440/1024; }
+.scoot-stage.is-pair .scoot-phone img { aspect-ratio:390/844; }
+.scoot-gallery-dialog .gallery-thumbnail .scoot-stage.is-pair { padding:0; height:100%; border-radius:0; }
+.scoot-gallery-dialog .gallery-image { align-items:center; }
+.scoot-gallery-dialog .gallery-image .scoot-stage { width:100%; height:auto; }
+.scoot-gallery-dialog .gallery-image .scoot-stage img { border:0; }

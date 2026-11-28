@@ -32,12 +32,11 @@ export default function ScootCaseStudy(){
  useEffect(()=>{if(selection)thumbRefs.current[selection.index]?.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'});},[selection]);
  const label=(id:string)=>text.visuals[id as keyof typeof text.visuals]??id;
  const caption=(id:string)=>text.captions[id as keyof typeof text.captions]??label(id);
- const visual=(id:string,context:'page'|'enlarged'='page')=>{
+ const visual=(id:string)=>{
   const item=scootVisuals[id as ScootVisualId];
   if(!item)return <span>{label(id)}</span>;
-  if(item.kind==='phones')return <span className="scoot-stage is-phones">{item.screens.map((src,index)=><span className="scoot-phone" key={src}><Image unoptimized src={src} width={390} height={844} alt={index===0?label(id):''} loading="lazy" /></span>)}</span>;
   if(item.kind==='component')return <span className="scoot-stage is-component"><Image unoptimized src={item.src} width={item.width} height={item.height} alt={label(id)} loading="lazy" /></span>;
-  return <span className={`scoot-stage is-desktop${item.crop&&context==='page'?' is-cropped':''}`}><span className="scoot-window"><Image unoptimized src={item.src} width={item.width} height={item.height} alt={label(id)} loading="lazy" /></span></span>;
+  return <span className="scoot-stage is-pair"><span className="scoot-window"><Image unoptimized src={item.desktop} width={1440} height={1024} alt={`${label(id)} (desktop)`} loading="lazy" /></span><span className="scoot-phone"><Image unoptimized src={item.mobile} width={390} height={844} alt={`${label(id)} (mobile)`} loading="lazy" /></span></span>;
  };
  const open=(id:string,ids:string[]=galleryIds)=>setSelection({ids,index:ids.indexOf(id)});
  const paragraphs=(body:string)=>body.split('\n\n').map(p=><p key={p}>{p}</p>);
@@ -66,7 +65,7 @@ export default function ScootCaseStudy(){
   <p className="case-section-label">{sectionLabel(2)}</p><div className="case-content case-process">
    <div className="case-block"><h2 id="design-title">{text.designTitle}</h2><p>{text.designIntro}</p></div>
    {text.decisions.map((decision,index)=><div className="case-block" key={decision.title}><h3 className="scoot-decision-title">{decision.title}</h3>{paragraphs(decision.body)}
-    {index===0&&figure('job-board')}
+    {index===0&&<>{figure('job-board')}{figure('job-description')}</>}
     {index===1&&figure('skills-start')}
     {index===2&&figure('skills-results')}
    </div>)}
@@ -81,7 +80,7 @@ export default function ScootCaseStudy(){
  <Dialog open={selection!==null} onOpenChange={value=>{if(!value)setSelection(null);}}><DialogContent customLayout className="maps-gallery-dialog scoot-gallery-dialog" showCloseButton={false} onKeyDown={event=>{if(!selection)return;if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();setSelection({...selection,index:(selection.index+(event.key==='ArrowRight'?1:-1)+selection.ids.length)%selection.ids.length});}}}>
  <div className="gallery-heading"><DialogTitle>{text.gallery}</DialogTitle><DialogClose className="gallery-close" aria-label={text.close}><Image unoptimized src="/assets/maps/close.svg" alt="" width="24" height="24" /></DialogClose></div>
  <DialogDescription className="sr-only">{text.galleryHelp}</DialogDescription>
- {selection&&<div className="gallery-body"><div className="gallery-stage" aria-live="polite"><figure className="gallery-selected"><div className="gallery-image">{visual(selection.ids[selection.index],'enlarged')}</div><figcaption>{caption(selection.ids[selection.index])}</figcaption></figure></div><div className="gallery-thumbnails" aria-label={text.gallery}>{selection.ids.map((id,index)=><button ref={element=>{thumbRefs.current[index]=element;}} key={id} className="gallery-thumbnail" aria-label={`${index+1}: ${label(id)}`} aria-pressed={selection.index===index} onClick={()=>setSelection({...selection,index})}>{visual(id)}</button>)}</div></div>}
+ {selection&&<div className="gallery-body"><div className="gallery-stage" aria-live="polite"><figure className="gallery-selected"><div className="gallery-image">{visual(selection.ids[selection.index])}</div><figcaption>{caption(selection.ids[selection.index])}</figcaption></figure></div><div className="gallery-thumbnails" aria-label={text.gallery}>{selection.ids.map((id,index)=><button ref={element=>{thumbRefs.current[index]=element;}} key={id} className="gallery-thumbnail" aria-label={`${index+1}: ${label(id)}`} aria-pressed={selection.index===index} onClick={()=>setSelection({...selection,index})}>{visual(id)}</button>)}</div></div>}
  </DialogContent></Dialog>
  </main>
  </>;

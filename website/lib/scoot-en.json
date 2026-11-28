@@ -56,7 +56,7 @@
   "decisions": [
     {
       "title": "Keyword search",
-      "body": "For people who know their role. Keyword search sits at the top of the homepage. Results open on the job board, where filters for location, experience, department and employment type narrow the list."
+      "body": "For people who know their role. Keyword search sits at the top of the homepage. Results open on the job board, where filters for location, experience, department and employment type narrow the list.\n\nEach job description starts with a job outline: expiry date, level and skill tags. On mobile, the outline collapses so the description comes first."
     },
     {
       "title": "Skills search",
@@ -81,18 +81,20 @@
   "visuals": {
     "homepage": "Scoot career portal homepage with keyword search and the skills search entry point",
     "job-board": "Scoot job board with keyword results and filters",
-    "skills-start": "Skills search on mobile: empty, then suggestions for “analysis”",
-    "skills-results": "Five skills selected, then the matching jobs",
+    "skills-start": "Skills search suggestions for “analysis”",
+    "skills-results": "Job results for five selected skills",
     "career-finder-old": "The previous site’s two career finder dropdowns: interests for internships, expertise for corporate roles",
-    "skills-callout": "Blue “Let us recommend you a job!” tag above the “Click here to search jobs by skills” button"
+    "skills-callout": "Blue “Let us recommend you a job!” tag above the “Click here to search jobs by skills” button",
+    "job-description": "Scoot job description with the job outline"
   },
   "captions": {
-    "homepage": "Keyword search at the top, skills search just below.",
+    "homepage": "Keyword search at the top, skills search just below, on desktop and mobile.",
     "job-board": "Keyword results open on the job board, with filters to narrow the list.",
     "skills-start": "Typing “analysis” also suggests related analytics skills.",
     "skills-results": "Five skills is the limit. The results match jobs tagged with them.",
     "career-finder-old": "The old career finders: pick an interest for internships, or an expertise for corporate roles.",
-    "skills-callout": "The callout tag bounces three times to draw attention to skills search."
+    "skills-callout": "The callout tag bounces three times to draw attention to skills search.",
+    "job-description": "The job outline sits beside the description on desktop and collapses above it on mobile."
   },
   "role": [
     [
@@ -109,5 +111,5 @@
     ]
   ],
   "finderTitle": "The career finder wasn’t useful",
-  "finder": "Management wanted to keep the old site’s career finders: two dropdowns, one for internships, one for full-time corporate roles. We asked participants about them during research. The feedback was that they weren’t useful.\n\nThe internship finder let people pick an area of interest. That suggested a matching internship existed. Being on the list didn’t mean a role was open.\n\nThe corporate finder only worked if people already knew what they wanted. Career switchers and juniors often don’t. They’re open to different things, unlike candidates who are selective about the jobs they apply for.\n\nA sizeable share of Scoot’s roles suit entry-level and junior candidates, so this mattered. Our assumption: a skills search that brings up any relevant job would be more useful."
+  "finder": "Management wanted to keep the old site’s career finders: two dropdowns, one for internships, one for full-time corporate roles. We asked participants about them during research. The feedback was that they weren’t useful.\n\nThe internship finder let people pick an area of interest. That suggested a matching internship existed, when only a few might be open. I replaced it with a dedicated internships page that lists the ones available.\n\nThe corporate finder only worked if people already knew what they wanted. Career switchers and juniors often don’t. They’re open to different things, unlike candidates who are selective about the jobs they apply for.\n\nA sizeable share of Scoot’s roles suit entry-level and junior candidates, so this mattered. Our assumption: a skills search that brings up any relevant job would be more useful."
 }

@@ -1,17 +1,17 @@
 export const sectionIds = ['overview', 'research', 'design', 'testing', 'takeaways'] as const;
-// Desktop screens sit in a window outline; mobile screens are pairs of 390 × 844 phone screens.
-type Desktop = {kind:'desktop'; src:string; width:number; height:number; crop?:boolean};
+// Pairs show the same screen on desktop (1440 × 1024 crop) and mobile (390 × 844 crop), each in a device outline.
+type Pair = {kind:'pair'; desktop:string; mobile:string};
 type Component = {kind:'component'; src:string; width:number; height:number};
-type Phones = {kind:'phones'; screens:readonly string[]};
-const phones = (id:string):Phones => ({kind:'phones', screens:[`/assets/scoot/${id}-a.png`, `/assets/scoot/${id}-b.png`]});
+const pair = (id:string):Pair => ({kind:'pair', desktop:`/assets/scoot/${id}-desk.png`, mobile:`/assets/scoot/${id}-mob.png`});
 export const scootVisuals = {
-  'job-board': {kind:'desktop', src:'/assets/scoot/job-board.png', width:1440, height:2456, crop:true} as Desktop,
-  'skills-start': phones('skills-start'),
-  'skills-results': phones('skills-results'),
-  'career-finder-old': {kind:'component', src:'/assets/scoot/career-finder-old.png', width:1210, height:330} as Component,
+  homepage: pair('homepage'),
+  'career-finder-old': {kind:'component', src:'/assets/scoot/career-finder-old.png', width:1990, height:590} as Component,
+  'job-board': pair('job-board'),
+  'job-description': pair('job-description'),
+  'skills-start': pair('skills-start'),
+  'skills-results': pair('skills-results'),
   'skills-callout': {kind:'component', src:'/assets/scoot/skills-callout.png', width:400, height:118} as Component,
-  homepage: {kind:'desktop', src:'/assets/scoot/homepage.png', width:1440, height:1040} as Desktop,
 };
 export type ScootVisualId = keyof typeof scootVisuals;
 // Gallery follows the order the images appear on the page.
-export const galleryIds = ['homepage', 'career-finder-old', 'job-board', 'skills-start', 'skills-results', 'skills-callout'] as ScootVisualId[];
+export const galleryIds = Object.keys(scootVisuals) as ScootVisualId[];

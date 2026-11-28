@@ -158,10 +158,6 @@
         [
           "Mobile first",
           "Search, results and filters were designed for phones first, where most visitors were."
-        ],
-        [
-          "No post-launch metrics",
-          "Performance data after launch isn’t available for this project."
         ]
       ]
     },
@@ -179,10 +175,6 @@
         [
           "D’abord pour le mobile",
           "Recherche, résultats et filtres ont été conçus d’abord pour le téléphone, l’appareil le plus utilisé."
-        ],
-        [
-          "Pas d’indicateurs après lancement",
-          "Les données de performance après lancement ne sont pas disponibles pour ce projet."
         ]
       ]
     }
