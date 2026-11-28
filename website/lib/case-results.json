@@ -145,36 +145,44 @@
   },
   "scoot": {
     "en": {
-      "title": "More ways for candidates to find their place",
+      "title": "More ways to find a place at Scoot",
       "items": [
         [
-          "Job discovery beyond job titles",
-          "Skills-based search created a route for candidates who knew their strengths but were unsure which opportunities matched."
+          "A route without a job title",
+          "Candidates who know their strengths but not the role can search by skills."
         ],
         [
-          "A more explicit route to vacancies",
-          "Usability testing revealed that visitors overlooked navigation, prompting a direct “See all jobs” shortcut at the point where their search began."
+          "Fewer empty results",
+          "Related-skill matching and five core skills per job keep searches from hitting dead ends."
         ],
         [
-          "A mobile-first recruitment experience",
-          "Search, browsing and filtering were designed around the devices candidates primarily used, then adapted for desktop."
+          "Mobile first",
+          "Search, results and filters were designed for phones first, where most visitors were."
+        ],
+        [
+          "No post-launch metrics",
+          "Performance data after launch isn’t available for this project."
         ]
       ]
     },
     "fr": {
-      "title": "Plusieurs façons de trouver sa place chez Scoot",
+      "title": "Plus de façons de trouver sa place chez Scoot",
       "items": [
         [
-          "Découvrir des postes à partir de ses compétences",
-          "La recherche par compétences offrait un point d’entrée aux candidats qui connaissaient leurs points forts sans savoir quels postes leur correspondaient."
+          "Un parcours sans intitulé de poste",
+          "Les candidats qui connaissent leurs points forts, mais pas le poste, peuvent chercher par compétences."
         ],
         [
-          "Un accès plus explicite aux offres",
-          "Les tests ont révélé que les visiteurs ne remarquaient pas la navigation. Un raccourci « Voir tous les postes » a donc été ajouté à l’endroit où commençait leur recherche."
+          "Moins de résultats vides",
+          "La correspondance avec les compétences proches et cinq compétences clés par offre évitent les impasses."
         ],
         [
-          "Une expérience de recrutement pensée pour le mobile",
-          "La recherche, la consultation et les filtres ont été conçus pour les appareils les plus utilisés par les candidats, puis adaptés à l’ordinateur."
+          "D’abord pour le mobile",
+          "Recherche, résultats et filtres ont été conçus d’abord pour le téléphone, l’appareil le plus utilisé."
+        ],
+        [
+          "Pas d’indicateurs après lancement",
+          "Les données de performance après lancement ne sont pas disponibles pour ce projet."
         ]
       ]
     }

@@ -1,7 +1,6 @@
 'use client';
 import { CaseProjectDetails } from '@/components/case-project-details';
 import { CaseResults } from '@/components/case-results';
-import { CaseMovie } from '@/components/case-movie';
 import { useCaseSectionStack } from '@/components/case-section-stack';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
@@ -36,7 +35,7 @@ export default function ScootCaseStudy(){
  const visual=(id:string,context:'page'|'enlarged'='page')=>{
   const item=scootVisuals[id as ScootVisualId];
   if(!item)return <span>{label(id)}</span>;
-  if(item.kind==='phones')return <span className="scoot-stage is-phones">{item.screens.map((src,index)=><span className="scoot-phone" key={src}><Image unoptimized src={src} width={375} height={812} alt={index===0?label(id):''} loading="lazy" /></span>)}</span>;
+  if(item.kind==='phones')return <span className="scoot-stage is-phones">{item.screens.map((src,index)=><span className="scoot-phone" key={src}><Image unoptimized src={src} width={390} height={844} alt={index===0?label(id):''} loading="lazy" /></span>)}</span>;
   return <span className={`scoot-stage is-desktop${item.crop&&context==='page'?' is-cropped':''}`}><span className="scoot-window"><Image unoptimized src={item.src} width={item.width} height={item.height} alt={label(id)} loading="lazy" /></span></span>;
  };
  const open=(id:string,ids:string[]=galleryIds)=>setSelection({ids,index:ids.indexOf(id)});
@@ -48,30 +47,31 @@ export default function ScootCaseStudy(){
  <section id="overview" className="case-section case-overview" tabIndex={-1} aria-labelledby="scoot-title">
   <p className="case-section-label">{sectionLabel(0)}</p>
   <div className="case-content">
-   <h1 id="scoot-title">Scoot Career Portal</h1><p className="case-lead">{text.lead}</p><figure className="case-figure case-movie-figure is-phone"><span className="scoot-stage is-phones is-movie"><span className="scoot-phone"><CaseMovie src="/assets/scoot/scoot-movie.mp4" poster="/assets/scoot/scoot-movie.webp" width={376} height={812} label={language==='fr'?'Prototype mobile : recherche d’offres par compétences, ajout de cinq compétences, puis offres correspondantes.':'Mobile prototype: searching jobs by skills, adding five skills, then the matching jobs.'} /></span></span><figcaption>{language==='fr'?'La recherche d’offres par compétences, sur mobile.':'Searching jobs by skills, on mobile.'}</figcaption></figure><p>{text.intro}</p>
-   <CaseProjectDetails language={language}><ul className="project-team">{text.team.map(([name,role])=><li key={name}><strong>{name}</strong><br />{role}</li>)}</ul></CaseProjectDetails>
+   <h1 id="scoot-title">Scoot Career Portal</h1><p className="case-lead">{text.lead}</p>{figure('homepage')}<p>{text.intro}</p>
+   <CaseProjectDetails language={language}><ul className="project-team">{text.role.map(([name,role])=><li key={name}><strong>{name}</strong><br />{role}</li>)}{text.team.map(([name,role])=><li key={name}><strong>{name}</strong><br />{role}</li>)}</ul></CaseProjectDetails>
    <div className="case-block"><h2>{text.challengeTitle}</h2>{paragraphs(text.challenge)}</div>
   </div>
  </section>
  <section id="research" className="case-section" tabIndex={-1} aria-labelledby="research-title">
   <p className="case-section-label">{sectionLabel(1)}</p><div className="case-content"><h2 id="research-title">{text.researchTitle}</h2><p>{text.researchIntro}</p>
-   {text.personas.map(persona=><article className="persona" key={persona.id} aria-labelledby={`persona-${persona.id}`}>
-    <h3 id={`persona-${persona.id}`}>{persona.title}</h3>
-    <div className="persona-grid"><div className="persona-image"><Image unoptimized src={`/assets/scoot/${persona.id}.png`} width={408} height={360} alt={persona.alt} loading="lazy" /></div><div className="persona-details"><p className="persona-goal">{persona.goal}</p>{persona.details.map(([heading,body])=><p key={heading}><strong>{heading}:</strong> {body}</p>)}</div></div><p>{persona.body}</p>
-   </article>)}
+   <div className="scoot-personas">{text.personas.map(persona=><article className="scoot-persona" key={persona.id} aria-labelledby={`persona-${persona.id}`}>
+    <div className="persona-image"><Image unoptimized src={`/assets/scoot/${persona.id}.png`} width={408} height={360} alt={persona.alt} loading="lazy" /></div>
+    <h3 id={`persona-${persona.id}`}>{persona.title}</h3><p className="scoot-persona-question">{persona.question}</p><p>{persona.need}</p>
+   </article>)}</div>
   </div>
  </section>
  <section id="design" className="case-section" tabIndex={-1} aria-labelledby="design-title">
   <p className="case-section-label">{sectionLabel(2)}</p><div className="case-content case-process">
-   <div className="case-block"><h2 id="design-title">{text.designTitle}</h2><p>{text.designIntro}</p><p>{text.mobile}</p></div>
+   <div className="case-block"><h2 id="design-title">{text.designTitle}</h2><p>{text.designIntro}</p></div>
    {text.decisions.map((decision,index)=><div className="case-block" key={decision.title}><h3 className="scoot-decision-title">{decision.title}</h3>{paragraphs(decision.body)}
     {index===0&&figure('job-board')}
-    {index===1&&<>{figure('skills-results')}<div className="case-gallery" aria-label={text.gallery}>{(['skills-start','skills-select','skills-added'] as const).map(id=><button className="gallery-preview" key={id} aria-label={`${text.open}: ${label(id)}`} onClick={()=>open(id)}>{visual(id)}</button>)}</div></>}
+    {index===1&&figure('skills-start')}
+    {index===2&&figure('skills-results')}
    </div>)}
   </div>
  </section>
  <section id="testing" className="case-section" tabIndex={-1} aria-labelledby="testing-title">
-  <p className="case-section-label">{sectionLabel(3)}</p><div className="case-content"><h2 id="testing-title">{text.testingTitle}</h2>{paragraphs(text.testing)}{figure('homepage')}</div>
+  <p className="case-section-label">{sectionLabel(3)}</p><div className="case-content"><h2 id="testing-title">{text.testingTitle}</h2>{paragraphs(text.testing)}</div>
  </section>
  <section id="takeaways" className="case-section case-takeaways" tabIndex={-1} aria-labelledby="takeaways-title">
   <p className="case-section-label">{sectionLabel(4)}</p><div className="case-content"><CaseResults project="scoot" language={language} titleId="takeaways-title" /><CaseStudyCta href="https://careers.flyscoot.com/" label={text.liveCta} newTabLabel={language==='fr'?'nouvel onglet':'opens in a new tab'} /></div>
