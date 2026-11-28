@@ -33,9 +33,11 @@ export default function ScootCaseStudy(){
  useEffect(()=>{if(selection)thumbRefs.current[selection.index]?.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'});},[selection]);
  const label=(id:string)=>text.visuals[id as keyof typeof text.visuals]??id;
  const caption=(id:string)=>text.captions[id as keyof typeof text.captions]??label(id);
- const visual=(id:string)=>{
+ const visual=(id:string,context:'page'|'enlarged'='page')=>{
   const item=scootVisuals[id as ScootVisualId];
-  return item?.src?<Image unoptimized src={item.src} width={item.width} height={item.height} alt={label(id)} loading="lazy" />:<span>{label(id)}</span>;
+  if(!item)return <span>{label(id)}</span>;
+  if(item.kind==='phones')return <span className="scoot-stage is-phones">{item.screens.map((src,index)=><span className="scoot-phone" key={src}><Image unoptimized src={src} width={375} height={812} alt={index===0?label(id):''} loading="lazy" /></span>)}</span>;
+  return <span className={`scoot-stage is-desktop${item.crop&&context==='page'?' is-cropped':''}`}><span className="scoot-window"><Image unoptimized src={item.src} width={item.width} height={item.height} alt={label(id)} loading="lazy" /></span></span>;
  };
  const open=(id:string,ids:string[]=galleryIds)=>setSelection({ids,index:ids.indexOf(id)});
  const paragraphs=(body:string)=>body.split('\n\n').map(p=><p key={p}>{p}</p>);
@@ -46,7 +48,7 @@ export default function ScootCaseStudy(){
  <section id="overview" className="case-section case-overview" tabIndex={-1} aria-labelledby="scoot-title">
   <p className="case-section-label">{sectionLabel(0)}</p>
   <div className="case-content">
-   <h1 id="scoot-title">Scoot Career Portal</h1><p className="case-lead">{text.lead}</p><figure className="case-figure case-movie-figure is-phone"><CaseMovie src="/assets/scoot/scoot-movie.mp4" poster="/assets/scoot/scoot-movie.webp" width={376} height={812} label={language==='fr'?'Prototype mobile : recherche d’offres par compétences, ajout de cinq compétences, puis offres correspondantes.':'Mobile prototype: searching jobs by skills, adding five skills, then the matching jobs.'} /><figcaption>{language==='fr'?'La recherche d’offres par compétences, sur mobile.':'Searching jobs by skills, on mobile.'}</figcaption></figure><p>{text.intro}</p>
+   <h1 id="scoot-title">Scoot Career Portal</h1><p className="case-lead">{text.lead}</p><figure className="case-figure case-movie-figure is-phone"><span className="scoot-stage is-phones is-movie"><span className="scoot-phone"><CaseMovie src="/assets/scoot/scoot-movie.mp4" poster="/assets/scoot/scoot-movie.webp" width={376} height={812} label={language==='fr'?'Prototype mobile : recherche d’offres par compétences, ajout de cinq compétences, puis offres correspondantes.':'Mobile prototype: searching jobs by skills, adding five skills, then the matching jobs.'} /></span></span><figcaption>{language==='fr'?'La recherche d’offres par compétences, sur mobile.':'Searching jobs by skills, on mobile.'}</figcaption></figure><p>{text.intro}</p>
    <CaseProjectDetails language={language}><ul className="project-team">{text.team.map(([name,role])=><li key={name}><strong>{name}</strong><br />{role}</li>)}</ul></CaseProjectDetails>
    <div className="case-block"><h2>{text.challengeTitle}</h2>{paragraphs(text.challenge)}</div>
   </div>
@@ -63,7 +65,7 @@ export default function ScootCaseStudy(){
   <p className="case-section-label">{sectionLabel(2)}</p><div className="case-content case-process">
    <div className="case-block"><h2 id="design-title">{text.designTitle}</h2><p>{text.designIntro}</p><p>{text.mobile}</p></div>
    {text.decisions.map((decision,index)=><div className="case-block" key={decision.title}><h3 className="scoot-decision-title">{decision.title}</h3>{paragraphs(decision.body)}
-    {index===0&&figure('job-board',true)}
+    {index===0&&figure('job-board')}
     {index===1&&<>{figure('skills-results')}<div className="case-gallery" aria-label={text.gallery}>{(['skills-start','skills-select','skills-added'] as const).map(id=><button className="gallery-preview" key={id} aria-label={`${text.open}: ${label(id)}`} onClick={()=>open(id)}>{visual(id)}</button>)}</div></>}
    </div>)}
   </div>
@@ -77,7 +79,7 @@ export default function ScootCaseStudy(){
  <Dialog open={selection!==null} onOpenChange={value=>{if(!value)setSelection(null);}}><DialogContent customLayout className="maps-gallery-dialog scoot-gallery-dialog" showCloseButton={false} onKeyDown={event=>{if(!selection)return;if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();setSelection({...selection,index:(selection.index+(event.key==='ArrowRight'?1:-1)+selection.ids.length)%selection.ids.length});}}}>
  <div className="gallery-heading"><DialogTitle>{text.gallery}</DialogTitle><DialogClose className="gallery-close" aria-label={text.close}><Image unoptimized src="/assets/maps/close.svg" alt="" width="24" height="24" /></DialogClose></div>
  <DialogDescription className="sr-only">{text.galleryHelp}</DialogDescription>
- {selection&&<div className="gallery-body"><div className="gallery-stage" aria-live="polite"><figure className="gallery-selected"><div className="gallery-image">{visual(selection.ids[selection.index])}</div><figcaption>{caption(selection.ids[selection.index])}</figcaption></figure></div><div className="gallery-thumbnails" aria-label={text.gallery}>{selection.ids.map((id,index)=><button ref={element=>{thumbRefs.current[index]=element;}} key={id} className="gallery-thumbnail" aria-label={`${index+1}: ${label(id)}`} aria-pressed={selection.index===index} onClick={()=>setSelection({...selection,index})}>{visual(id)}</button>)}</div></div>}
+ {selection&&<div className="gallery-body"><div className="gallery-stage" aria-live="polite"><figure className="gallery-selected"><div className="gallery-image">{visual(selection.ids[selection.index],'enlarged')}</div><figcaption>{caption(selection.ids[selection.index])}</figcaption></figure></div><div className="gallery-thumbnails" aria-label={text.gallery}>{selection.ids.map((id,index)=><button ref={element=>{thumbRefs.current[index]=element;}} key={id} className="gallery-thumbnail" aria-label={`${index+1}: ${label(id)}`} aria-pressed={selection.index===index} onClick={()=>setSelection({...selection,index})}>{visual(id)}</button>)}</div></div>}
  </DialogContent></Dialog>
  </main>
  </>;
