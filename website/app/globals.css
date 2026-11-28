@@ -683,3 +683,5 @@ html[data-theme="dark"] .scoot-gallery-dialog { --case-placeholder:#35304d; --ca
 .case-content .scoot-persona p { margin:0; font-size:16px; line-height:1.45; }
 .case-content .scoot-persona .scoot-persona-question { font-weight:700; }
 @media(max-width:900px) { .scoot-personas { grid-template-columns:minmax(0,1fr); } .scoot-case .scoot-persona .persona-image { width:min(252px,100%); } }
+.scoot-stage.is-component { padding:6%; }
+.scoot-stage.is-component img { display:block; width:100%; height:auto; border-radius:8px; }

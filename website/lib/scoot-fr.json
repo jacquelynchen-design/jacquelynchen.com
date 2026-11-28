@@ -2,8 +2,8 @@
   "sections": [
     "Présentation",
     "Recherche",
-    "Conception",
     "Tests",
+    "Conception",
     "Résultats"
   ],
   "lead": "Aider chacun à trouver sa place chez Scoot",
@@ -11,10 +11,6 @@
   "teamTitle": "Équipe",
   "liveCta": "https://careers.flyscoot.com/",
   "team": [
-    [
-      "Jolyn",
-      "UX lead"
-    ],
     [
       "Jacquelyn",
       "Product designer"
@@ -56,7 +52,7 @@
     }
   ],
   "designTitle": "Chercher par poste, ou par compétences",
-  "designIntro": "La plupart des visiteurs étaient sur leur téléphone : j’ai donc conçu d’abord pour le mobile, puis adapté à l’ordinateur. La recherche propose deux parcours, selon ce que les visiteurs savent déjà de ce qu’ils veulent.",
+  "designIntro": "La plupart des visiteurs étaient sur leur téléphone : j’ai donc conçu d’abord pour le mobile, puis adapté à l’ordinateur. La recherche propose deux parcours : les mots-clés pour ceux qui connaissent leur poste, les compétences pour ceux qui ne le savent pas encore.",
   "decisions": [
     {
       "title": "La recherche par mots-clés",
@@ -75,8 +71,8 @@
       "body": "La recherche comprend les compétences proches : taper « analysis » propose aussi des compétences en analytique. Cela limite les recherches qui ne renvoient que peu d’offres, voire aucune."
     }
   ],
-  "testingTitle": "Tester la recherche par compétences",
-  "testing": "J’ai testé la recherche par compétences avec 5 participants.\n\n[Résultats à venir]",
+  "testingTitle": "Pourquoi l’ancien outil de recherche ne fonctionnait pas",
+  "testing": "L’ancien site proposait deux menus déroulants, appelés « career finders » : l’un pour les stages, l’autre pour les postes en CDI au siège. Les retours étaient clairs : ils n’étaient pas utiles.\n\nPour les stages, on choisissait un domaine d’intérêt. Cela laissait penser qu’un stage correspondant existait. Or, figurer dans la liste ne voulait pas dire qu’un poste était ouvert.\n\nPour les postes au siège, il fallait déjà savoir ce que l’on cherchait. Cela écartait les candidats en début de carrière, qui pouvaient convenir à des postes très différents.\n\nScoot grandit vite, et une part importante de ses postes conviennent à des profils débutants ou juniors. La recherche a montré qu’il fallait plus de souplesse pour les jeunes en quête d’une opportunité. La recherche par compétences est née de ces deux outils pour combler ce manque.",
   "outcomeNote": "Les indicateurs de performance après lancement ne sont pas disponibles pour cette étude de cas.",
   "gallery": "Galerie des interfaces Scoot",
   "open": "Agrandir l’image",
@@ -86,13 +82,15 @@
     "homepage": "Page d’accueil du portail carrière Scoot avec la recherche par mots-clés et l’accès à la recherche par compétences",
     "job-board": "Tableau des offres Scoot avec les résultats par mots-clés et les filtres",
     "skills-start": "Recherche par compétences sur mobile : vide, puis suggestions pour « analysis »",
-    "skills-results": "Cinq compétences sélectionnées, puis les offres correspondantes"
+    "skills-results": "Cinq compétences sélectionnées, puis les offres correspondantes",
+    "career-finder-old": "Les deux menus déroulants de l’ancien site : domaines d’intérêt pour les stages, expertise pour les postes au siège"
   },
   "captions": {
     "homepage": "La recherche par mots-clés en haut, la recherche par compétences juste en dessous.",
     "job-board": "Les résultats s’ouvrent sur le tableau des offres, avec des filtres pour affiner la liste.",
     "skills-start": "Taper « analysis » propose aussi des compétences proches en analytique.",
-    "skills-results": "Cinq compétences au maximum. Les résultats correspondent aux offres qui y sont associées."
+    "skills-results": "Cinq compétences au maximum. Les résultats correspondent aux offres qui y sont associées.",
+    "career-finder-old": "Les anciens outils : un domaine d’intérêt pour les stages, une expertise pour les postes au siège."
   },
   "role": [
     [

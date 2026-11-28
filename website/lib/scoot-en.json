@@ -2,8 +2,8 @@
   "sections": [
     "Overview",
     "Research",
-    "Design",
     "Testing",
+    "Design",
     "Results"
   ],
   "lead": "Helping people find their place at Scoot",
@@ -11,10 +11,6 @@
   "teamTitle": "Team",
   "liveCta": "https://careers.flyscoot.com/",
   "team": [
-    [
-      "Jolyn",
-      "UX lead"
-    ],
     [
       "Jacquelyn",
       "Product designer"
@@ -56,7 +52,7 @@
     }
   ],
   "designTitle": "Search by role, or by skills",
-  "designIntro": "Most visitors were on their phones, so I designed mobile first, then adapted for desktop. Search has two routes, depending on how sure people are of what they want.",
+  "designIntro": "Most visitors were on their phones, so I designed mobile first, then adapted for desktop. Search has two routes: keywords for people who know their role, skills for people who don’t yet.",
   "decisions": [
     {
       "title": "Keyword search",
@@ -75,8 +71,8 @@
       "body": "Search understands related skills: typing “analysis” also suggests analytics skills. This cuts down searches that return few or no jobs."
     }
   ],
-  "testingTitle": "Testing the skills search",
-  "testing": "I tested the skills search with 5 participants.\n\n[Findings to come]",
+  "testingTitle": "Why the old career finder didn’t work",
+  "testing": "The previous site had two dropdowns, called career finders: one for internships, one for full-time corporate roles. Feedback was that they weren’t useful.\n\nThe internship finder let people pick an area of interest. That suggested a matching internship existed. Being on the list didn’t mean a role was open.\n\nThe corporate finder only worked if people already knew what they were looking for. That shut out candidates early in their careers, who could fit a range of roles.\n\nScoot is growing fast, and a sizeable share of its roles suit entry-level and junior candidates. Research showed we needed more room for younger people looking for an opportunity. Skills search grew out of the career finders to fill that gap.",
   "outcomeNote": "Post-launch performance metrics are not available for this case study.",
   "gallery": "Scoot design gallery",
   "open": "Enlarge image",
@@ -86,13 +82,15 @@
     "homepage": "Scoot career portal homepage with keyword search and the skills search entry point",
     "job-board": "Scoot job board with keyword results and filters",
     "skills-start": "Skills search on mobile: empty, then suggestions for “analysis”",
-    "skills-results": "Five skills selected, then the matching jobs"
+    "skills-results": "Five skills selected, then the matching jobs",
+    "career-finder-old": "The previous site’s two career finder dropdowns: interests for internships, expertise for corporate roles"
   },
   "captions": {
     "homepage": "Keyword search at the top, skills search just below.",
     "job-board": "Keyword results open on the job board, with filters to narrow the list.",
     "skills-start": "Typing “analysis” also suggests related analytics skills.",
-    "skills-results": "Five skills is the limit. The results match jobs tagged with them."
+    "skills-results": "Five skills is the limit. The results match jobs tagged with them.",
+    "career-finder-old": "The old career finders: pick an interest for internships, or an expertise for corporate roles."
   },
   "role": [
     [

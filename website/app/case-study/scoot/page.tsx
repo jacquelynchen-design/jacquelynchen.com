@@ -36,6 +36,7 @@ export default function ScootCaseStudy(){
   const item=scootVisuals[id as ScootVisualId];
   if(!item)return <span>{label(id)}</span>;
   if(item.kind==='phones')return <span className="scoot-stage is-phones">{item.screens.map((src,index)=><span className="scoot-phone" key={src}><Image unoptimized src={src} width={390} height={844} alt={index===0?label(id):''} loading="lazy" /></span>)}</span>;
+  if(item.kind==='component')return <span className="scoot-stage is-component"><Image unoptimized src={item.src} width={item.width} height={item.height} alt={label(id)} loading="lazy" /></span>;
   return <span className={`scoot-stage is-desktop${item.crop&&context==='page'?' is-cropped':''}`}><span className="scoot-window"><Image unoptimized src={item.src} width={item.width} height={item.height} alt={label(id)} loading="lazy" /></span></span>;
  };
  const open=(id:string,ids:string[]=galleryIds)=>setSelection({ids,index:ids.indexOf(id)});
@@ -60,8 +61,11 @@ export default function ScootCaseStudy(){
    </article>)}</div>
   </div>
  </section>
+ <section id="testing" className="case-section" tabIndex={-1} aria-labelledby="testing-title">
+  <p className="case-section-label">{sectionLabel(2)}</p><div className="case-content"><h2 id="testing-title">{text.testingTitle}</h2>{paragraphs(text.testing)}{figure('career-finder-old')}</div>
+ </section>
  <section id="design" className="case-section" tabIndex={-1} aria-labelledby="design-title">
-  <p className="case-section-label">{sectionLabel(2)}</p><div className="case-content case-process">
+  <p className="case-section-label">{sectionLabel(3)}</p><div className="case-content case-process">
    <div className="case-block"><h2 id="design-title">{text.designTitle}</h2><p>{text.designIntro}</p></div>
    {text.decisions.map((decision,index)=><div className="case-block" key={decision.title}><h3 className="scoot-decision-title">{decision.title}</h3>{paragraphs(decision.body)}
     {index===0&&figure('job-board')}
@@ -69,9 +73,6 @@ export default function ScootCaseStudy(){
     {index===2&&figure('skills-results')}
    </div>)}
   </div>
- </section>
- <section id="testing" className="case-section" tabIndex={-1} aria-labelledby="testing-title">
-  <p className="case-section-label">{sectionLabel(3)}</p><div className="case-content"><h2 id="testing-title">{text.testingTitle}</h2>{paragraphs(text.testing)}</div>
  </section>
  <section id="takeaways" className="case-section case-takeaways" tabIndex={-1} aria-labelledby="takeaways-title">
   <p className="case-section-label">{sectionLabel(4)}</p><div className="case-content"><CaseResults project="scoot" language={language} titleId="takeaways-title" /><CaseStudyCta href="https://careers.flyscoot.com/" label={text.liveCta} newTabLabel={language==='fr'?'nouvel onglet':'opens in a new tab'} /></div>
