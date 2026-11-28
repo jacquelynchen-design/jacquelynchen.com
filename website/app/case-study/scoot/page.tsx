@@ -59,13 +59,11 @@ export default function ScootCaseStudy(){
     <div className="persona-image"><Image unoptimized src={`/assets/scoot/${persona.id}.png`} width={408} height={360} alt={persona.alt} loading="lazy" /></div>
     <h3 id={`persona-${persona.id}`}>{persona.title}</h3><p className="scoot-persona-question">{persona.question}</p><p>{persona.need}</p>
    </article>)}</div>
+   <div className="case-block"><h3 className="scoot-decision-title">{text.finderTitle}</h3>{paragraphs(text.finder)}{figure('career-finder-old')}</div>
   </div>
  </section>
- <section id="testing" className="case-section" tabIndex={-1} aria-labelledby="testing-title">
-  <p className="case-section-label">{sectionLabel(2)}</p><div className="case-content"><h2 id="testing-title">{text.testingTitle}</h2>{paragraphs(text.testing)}{figure('career-finder-old')}</div>
- </section>
  <section id="design" className="case-section" tabIndex={-1} aria-labelledby="design-title">
-  <p className="case-section-label">{sectionLabel(3)}</p><div className="case-content case-process">
+  <p className="case-section-label">{sectionLabel(2)}</p><div className="case-content case-process">
    <div className="case-block"><h2 id="design-title">{text.designTitle}</h2><p>{text.designIntro}</p></div>
    {text.decisions.map((decision,index)=><div className="case-block" key={decision.title}><h3 className="scoot-decision-title">{decision.title}</h3>{paragraphs(decision.body)}
     {index===0&&figure('job-board')}
@@ -73,6 +71,9 @@ export default function ScootCaseStudy(){
     {index===2&&figure('skills-results')}
    </div>)}
   </div>
+ </section>
+ <section id="testing" className="case-section" tabIndex={-1} aria-labelledby="testing-title">
+  <p className="case-section-label">{sectionLabel(3)}</p><div className="case-content"><h2 id="testing-title">{text.testingTitle}</h2>{paragraphs(text.testing)}{figure('skills-callout')}</div>
  </section>
  <section id="takeaways" className="case-section case-takeaways" tabIndex={-1} aria-labelledby="takeaways-title">
   <p className="case-section-label">{sectionLabel(4)}</p><div className="case-content"><CaseResults project="scoot" language={language} titleId="takeaways-title" /><CaseStudyCta href="https://careers.flyscoot.com/" label={text.liveCta} newTabLabel={language==='fr'?'nouvel onglet':'opens in a new tab'} /></div>

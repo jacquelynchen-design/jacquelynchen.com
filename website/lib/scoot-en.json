@@ -2,8 +2,8 @@
   "sections": [
     "Overview",
     "Research",
-    "Testing",
     "Design",
+    "Testing",
     "Results"
   ],
   "lead": "Helping people find their place at Scoot",
@@ -71,8 +71,8 @@
       "body": "Search understands related skills: typing “analysis” also suggests analytics skills. This cuts down searches that return few or no jobs."
     }
   ],
-  "testingTitle": "Why the old career finder didn’t work",
-  "testing": "The previous site had two dropdowns, called career finders: one for internships, one for full-time corporate roles. Feedback was that they weren’t useful.\n\nThe internship finder let people pick an area of interest. That suggested a matching internship existed. Being on the list didn’t mean a role was open.\n\nThe corporate finder only worked if people already knew what they were looking for. That shut out candidates early in their careers, who could fit a range of roles.\n\nScoot is growing fast, and a sizeable share of its roles suit entry-level and junior candidates. Research showed we needed more room for younger people looking for an opportunity. Skills search grew out of the career finders to fill that gap.",
+  "testingTitle": "Testing the skills search",
+  "testing": "I tested the skills search with 5 participants. I framed the tasks openly, so participants weren’t pushed towards skills search and could pick whichever route felt natural.\n\nWhen participants wanted a flexible search, to see as many suitable jobs as possible without a specific keyword, they found skills search helpful.\n\nTo make it easier to spot, I added a blue callout tag above the skills search button. It bounces three times when the page loads, which piqued new users’ curiosity.",
   "outcomeNote": "Post-launch performance metrics are not available for this case study.",
   "gallery": "Scoot design gallery",
   "open": "Enlarge image",
@@ -83,14 +83,16 @@
     "job-board": "Scoot job board with keyword results and filters",
     "skills-start": "Skills search on mobile: empty, then suggestions for “analysis”",
     "skills-results": "Five skills selected, then the matching jobs",
-    "career-finder-old": "The previous site’s two career finder dropdowns: interests for internships, expertise for corporate roles"
+    "career-finder-old": "The previous site’s two career finder dropdowns: interests for internships, expertise for corporate roles",
+    "skills-callout": "Blue “Let us recommend you a job!” tag above the “Click here to search jobs by skills” button"
   },
   "captions": {
     "homepage": "Keyword search at the top, skills search just below.",
     "job-board": "Keyword results open on the job board, with filters to narrow the list.",
     "skills-start": "Typing “analysis” also suggests related analytics skills.",
     "skills-results": "Five skills is the limit. The results match jobs tagged with them.",
-    "career-finder-old": "The old career finders: pick an interest for internships, or an expertise for corporate roles."
+    "career-finder-old": "The old career finders: pick an interest for internships, or an expertise for corporate roles.",
+    "skills-callout": "The callout tag bounces three times to draw attention to skills search."
   },
   "role": [
     [
@@ -105,5 +107,7 @@
       "Platforms",
       "Mobile and desktop"
     ]
-  ]
+  ],
+  "finderTitle": "The career finder wasn’t useful",
+  "finder": "Management wanted to keep the old site’s career finders: two dropdowns, one for internships, one for full-time corporate roles. We asked participants about them during research. The feedback was that they weren’t useful.\n\nThe internship finder let people pick an area of interest. That suggested a matching internship existed. Being on the list didn’t mean a role was open.\n\nThe corporate finder only worked if people already knew what they wanted. Career switchers and juniors often don’t. They’re open to different things, unlike candidates who are selective about the jobs they apply for.\n\nA sizeable share of Scoot’s roles suit entry-level and junior candidates, so this mattered. Our assumption: a skills search that brings up any relevant job would be more useful."
 }

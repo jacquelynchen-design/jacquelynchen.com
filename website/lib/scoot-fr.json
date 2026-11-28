@@ -2,8 +2,8 @@
   "sections": [
     "Présentation",
     "Recherche",
-    "Tests",
     "Conception",
+    "Tests",
     "Résultats"
   ],
   "lead": "Aider chacun à trouver sa place chez Scoot",
@@ -71,8 +71,8 @@
       "body": "La recherche comprend les compétences proches : taper « analysis » propose aussi des compétences en analytique. Cela limite les recherches qui ne renvoient que peu d’offres, voire aucune."
     }
   ],
-  "testingTitle": "Pourquoi l’ancien outil de recherche ne fonctionnait pas",
-  "testing": "L’ancien site proposait deux menus déroulants, appelés « career finders » : l’un pour les stages, l’autre pour les postes en CDI au siège. Les retours étaient clairs : ils n’étaient pas utiles.\n\nPour les stages, on choisissait un domaine d’intérêt. Cela laissait penser qu’un stage correspondant existait. Or, figurer dans la liste ne voulait pas dire qu’un poste était ouvert.\n\nPour les postes au siège, il fallait déjà savoir ce que l’on cherchait. Cela écartait les candidats en début de carrière, qui pouvaient convenir à des postes très différents.\n\nScoot grandit vite, et une part importante de ses postes conviennent à des profils débutants ou juniors. La recherche a montré qu’il fallait plus de souplesse pour les jeunes en quête d’une opportunité. La recherche par compétences est née de ces deux outils pour combler ce manque.",
+  "testingTitle": "Tester la recherche par compétences",
+  "testing": "J’ai testé la recherche par compétences avec 5 participants. Les consignes étaient ouvertes, pour ne pas pousser les participants vers la recherche par compétences et les laisser choisir le parcours qui leur semblait naturel.\n\nQuand ils voulaient une recherche plus souple, pour voir un maximum d’offres adaptées sans mot-clé précis, les participants ont trouvé la recherche par compétences utile.\n\nPour la rendre plus visible, j’ai ajouté une étiquette bleue au-dessus du bouton de recherche par compétences. Elle rebondit trois fois au chargement de la page, ce qui a éveillé la curiosité des nouveaux utilisateurs.",
   "outcomeNote": "Les indicateurs de performance après lancement ne sont pas disponibles pour cette étude de cas.",
   "gallery": "Galerie des interfaces Scoot",
   "open": "Agrandir l’image",
@@ -83,14 +83,16 @@
     "job-board": "Tableau des offres Scoot avec les résultats par mots-clés et les filtres",
     "skills-start": "Recherche par compétences sur mobile : vide, puis suggestions pour « analysis »",
     "skills-results": "Cinq compétences sélectionnées, puis les offres correspondantes",
-    "career-finder-old": "Les deux menus déroulants de l’ancien site : domaines d’intérêt pour les stages, expertise pour les postes au siège"
+    "career-finder-old": "Les deux menus déroulants de l’ancien site : domaines d’intérêt pour les stages, expertise pour les postes au siège",
+    "skills-callout": "Étiquette bleue « Let us recommend you a job! » au-dessus du bouton « Click here to search jobs by skills »"
   },
   "captions": {
     "homepage": "La recherche par mots-clés en haut, la recherche par compétences juste en dessous.",
     "job-board": "Les résultats s’ouvrent sur le tableau des offres, avec des filtres pour affiner la liste.",
     "skills-start": "Taper « analysis » propose aussi des compétences proches en analytique.",
     "skills-results": "Cinq compétences au maximum. Les résultats correspondent aux offres qui y sont associées.",
-    "career-finder-old": "Les anciens outils : un domaine d’intérêt pour les stages, une expertise pour les postes au siège."
+    "career-finder-old": "Les anciens outils : un domaine d’intérêt pour les stages, une expertise pour les postes au siège.",
+    "skills-callout": "L’étiquette rebondit trois fois pour attirer l’attention sur la recherche par compétences."
   },
   "role": [
     [
@@ -105,5 +107,7 @@
       "Supports",
       "Mobile et ordinateur"
     ]
-  ]
+  ],
+  "finderTitle": "L’ancien outil n’était pas utile",
+  "finder": "La direction tenait à conserver les « career finders » de l’ancien site : deux menus déroulants, l’un pour les stages, l’autre pour les postes en CDI au siège. Nous avons interrogé les participants à leur sujet pendant la recherche. Leur avis : ils n’étaient pas utiles.\n\nPour les stages, on choisissait un domaine d’intérêt. Cela laissait penser qu’un stage correspondant existait. Or, figurer dans la liste ne voulait pas dire qu’un poste était ouvert.\n\nPour les postes au siège, il fallait déjà savoir ce que l’on cherchait. Les personnes en reconversion et les juniors ne le savent pas toujours. Ils sont ouverts à différentes pistes, contrairement aux candidats qui choisissent précisément les offres auxquelles ils postulent.\n\nUne part importante des postes chez Scoot conviennent à des profils débutants ou juniors : l’enjeu était réel. Notre hypothèse : une recherche par compétences, qui fait remonter toutes les offres pertinentes, serait plus utile."
 }
