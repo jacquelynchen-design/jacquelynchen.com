@@ -280,8 +280,6 @@ body:has(.maps-gallery-dialog) [data-slot=dialog-overlay] { background:rgba(12,0
 .scoot-decision-title { margin:0; font:700 clamp(22px,2vw,28px)/1.25 var(--body); }
 .scoot-enlarge { padding:0; cursor:zoom-in; transition:border-color .25s; }
 .scoot-enlarge:hover { border-color:var(--ink); }
-.scoot-case .scoot-compact-figure .case-visual img { max-height:640px; width:100%; object-fit:contain; }
-.scoot-case .gallery-preview img,.scoot-gallery-dialog .gallery-thumbnail img { object-fit:contain; }
 .scoot-gallery-dialog .gallery-selected { width:100%; }
 .scoot-gallery-dialog .gallery-selected figcaption { font-size:16px; }
 @media(max-width:1100px) {
@@ -644,3 +642,50 @@ html[data-theme="dark"] .site-header .menu-toggle .icon { filter:brightness(0) i
 @media (min-width:701px) and (max-width:1100px) {
  .case-site :is(.footer,.project-navigation) { --gutter:40px; }
 }
+
+/* Scoot screens: beige stage, devices drawn with a thick rounded outline (matches Dr Presence). */
+.scoot-stage { container-type:inline-size; display:flex; align-items:center; justify-content:center; gap:6%; width:100%; padding:7% 8%; border-radius:8px; background:var(--case-panel); }
+.scoot-stage.is-desktop { padding:5% 6%; }
+.scoot-phone,.scoot-window { display:block; overflow:hidden; background:#fff; border:solid var(--case-placeholder); }
+.scoot-phone { flex:0 1 31%; border-width:max(3px,1.6cqi); border-radius:max(10px,4.4cqi); }
+.scoot-window { width:100%; border-width:max(3px,1.2cqi); border-radius:max(8px,2.2cqi); }
+.scoot-phone img,.scoot-phone video,.scoot-window img { display:block; width:100%; height:auto; border:0; border-radius:0; }
+.scoot-stage.is-cropped .scoot-window img { aspect-ratio:1440/1100; object-fit:cover; object-position:top; }
+.scoot-stage.is-movie .scoot-phone { flex-basis:min(42%,340px); }
+.scoot-case .case-movie-figure.is-phone video { width:100%; border-radius:0; }
+.scoot-case .scoot-enlarge,.scoot-case .gallery-preview { border:0; border-radius:8px; height:auto; overflow:visible; }
+.scoot-case .scoot-enlarge:hover,.scoot-case .gallery-preview:hover { outline:1px solid var(--line); outline-offset:4px; }
+.scoot-case .case-gallery { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; overflow:visible; padding:4px; }
+.scoot-case .gallery-preview .scoot-stage { padding:10% 10%; }
+.scoot-case .gallery-preview .scoot-phone,.scoot-gallery-dialog .gallery-thumbnail .scoot-phone { border-width:3px; border-radius:8px; }
+.scoot-gallery-dialog .gallery-thumbnail { display:flex; align-items:stretch; }
+.scoot-gallery-dialog .gallery-thumbnail .scoot-stage { padding:8px 12px; border-radius:0; }
+.scoot-gallery-dialog .gallery-image { width:100%; }
+@media(max-width:700px) {
+ .scoot-case .case-gallery { grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:72%; overflow-x:auto; }
+}
+/* The gallery dialog renders outside .case-site, so it needs the stage colours itself. */
+.scoot-gallery-dialog { --case-placeholder:#dfe1cb; --case-panel:#f5f8e6; }
+html[data-theme="dark"] .scoot-gallery-dialog { --case-placeholder:#35304d; --case-panel:#24213e; }
+/* Scoot audiences: one compact comparison instead of three long persona cards. */
+.scoot-personas { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.scoot-persona { display:flex; flex-direction:column; gap:12px; padding:20px; border-radius:8px; background:var(--case-panel); }
+.scoot-case .scoot-persona .persona-image { width:100%; border-radius:4px; overflow:hidden; }
+.scoot-case .scoot-persona h3 { margin:4px 0 0; font:700 18px/1.3 var(--body); }
+.case-content .scoot-persona p { margin:0; font-size:16px; line-height:1.45; }
+.case-content .scoot-persona .scoot-persona-question { font-weight:700; }
+@media(max-width:900px) { .scoot-personas { grid-template-columns:minmax(0,1fr); } .scoot-case .scoot-persona .persona-image { width:min(252px,100%); } }
+.scoot-stage.is-component { padding:6%; }
+.scoot-stage.is-component img { display:block; width:100%; height:auto; border-radius:8px; }
+.scoot-stage.is-component:has(img[src$="skills-callout.png"]) img { width:min(100%,420px); margin-inline:auto; border-radius:0; }
+/* Scoot desktop + mobile pairs, after the Figma case-study image (854 × 602 thumbnail: 543 + 178 screens, 48 gap).
+   Both screens share one height (--h, in stage widths) so the devices line up. */
+.scoot-stage.is-pair { --h:40cqi; --b:max(2px,1.3cqi); gap:5.6cqi; padding:8cqi 4cqi; align-items:center; }
+.scoot-stage.is-pair :is(.scoot-window,.scoot-phone) { flex:0 0 auto; width:auto; border-width:var(--b); border-radius:max(6px,3.2cqi); }
+.scoot-stage.is-pair img { height:var(--h); width:auto; max-width:none; object-fit:cover; object-position:top; }
+.scoot-stage.is-pair .scoot-window img { aspect-ratio:1440/1024; }
+.scoot-stage.is-pair .scoot-phone img { aspect-ratio:390/844; }
+.scoot-gallery-dialog .gallery-thumbnail .scoot-stage.is-pair { padding:0; height:100%; border-radius:0; }
+.scoot-gallery-dialog .gallery-image { align-items:center; }
+.scoot-gallery-dialog .gallery-image .scoot-stage { width:100%; height:auto; }
+.scoot-gallery-dialog .gallery-image .scoot-stage img { border:0; }
